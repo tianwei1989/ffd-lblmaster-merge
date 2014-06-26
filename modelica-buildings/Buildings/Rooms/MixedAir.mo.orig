@@ -1,0 +1,239 @@
+within Buildings.Rooms;
+model MixedAir "Model of a room in which the air is completely mixed"
+<<<<<<< HEAD
+  extends Buildings.Rooms.BaseClasses.RoomHeatMassBalance(
+  redeclare Buildings.Rooms.BaseClasses.MixedAirHeatMassBalance air(
+=======
+  extends Buildings.Fluid.Interfaces.LumpedVolumeDeclarations;
+  extends Buildings.Rooms.BaseClasses.ConstructionRecords;
+  parameter Integer nPorts=0 "Number of ports" annotation (Evaluate=true,
+      Dialog(
+      connectorSizing=true,
+      tab="General",
+      group="Ports"));
+
+  parameter Modelica.SIunits.Angle lat "Latitude";
+  final parameter Modelica.SIunits.Volume V=AFlo*hRoo "Volume";
+  parameter Modelica.SIunits.Area AFlo "Floor area";
+  parameter Modelica.SIunits.Length hRoo "Average room height";
+
+  ////////////////////////////////////////////////////////////////////////
+  // Fluid and heat ports
+  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
+      redeclare each package Medium = Medium) "Fluid inlets and outlets"
+    annotation (Placement(transformation(
+        extent={{-40,-10},{40,10}},
+        origin={-260,-60},
+        rotation=90), iconTransformation(
+        extent={{-40,-10},{40,10}},
+        rotation=90,
+        origin={-150,-100})));
+
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heaPorAir
+    "Heat port to air volume" annotation (Placement(transformation(extent={{-270,30},
+            {-250,50}}),   iconTransformation(extent={{-20,-10},{0,10}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heaPorRad
+    "Heat port for radiative heat gain and radiative temperature" annotation (
+      Placement(transformation(extent={{-270,-10},{-250,10}}),
+                                                           iconTransformation(
+          extent={{-20,-48},{0,-28}})));
+  ////////////////////////////////////////////////////////////////////////
+  // Constructions
+  Constructions.Construction conExt[NConExt](
+    A=datConExt.A,
+    til=datConExt.til,
+    final layers={datConExt[i].layers for i in 1:NConExt},
+    steadyStateInitial=datConExt.steadyStateInitial,
+    T_a_start=datConExt.T_a_start,
+    T_b_start=datConExt.T_b_start) if haveConExt
+    "Heat conduction through exterior construction that have no window"
+    annotation (Placement(transformation(extent={{288,100},{242,146}})));
+  Constructions.ConstructionWithWindow conExtWin[NConExtWin](
+    A=datConExtWin.A,
+    til=datConExtWin.til,
+    final layers={datConExtWin[i].layers for i in 1:NConExtWin},
+    steadyStateInitial=datConExtWin.steadyStateInitial,
+    T_a_start=datConExtWin.T_a_start,
+    T_b_start=datConExtWin.T_b_start,
+    AWin=datConExtWin.AWin,
+    fFra=datConExtWin.fFra,
+    glaSys=datConExtWin.glaSys) if haveConExtWin
+    "Heat conduction through exterior construction that have a window"
+    annotation (Placement(transformation(extent={{280,44},{250,74}})));
+  Constructions.Construction conPar[NConPar](
+    A=datConPar.A,
+    til=datConPar.til,
+    final layers={datConPar[i].layers for i in 1:NConPar},
+    steadyStateInitial=datConPar.steadyStateInitial,
+    T_a_start=datConPar.T_a_start,
+    T_b_start=datConPar.T_b_start) if haveConPar
+    "Heat conduction through partitions that have both sides inside the thermal zone"
+    annotation (Placement(transformation(extent={{282,-122},{244,-84}})));
+  Constructions.Construction conBou[NConBou](
+    A=datConBou.A,
+    til=datConBou.til,
+    final layers={datConBou[i].layers for i in 1:NConBou},
+    steadyStateInitial=datConBou.steadyStateInitial,
+    T_a_start=datConBou.T_a_start,
+    T_b_start=datConBou.T_b_start) if haveConBou
+    "Heat conduction through opaque constructions that have the boundary conditions of the other side exposed"
+    annotation (Placement(transformation(extent={{282,-156},{242,-116}})));
+  parameter Boolean linearizeRadiation=true
+    "Set to true to linearize emissive power";
+  ////////////////////////////////////////////////////////////////////////
+  // Convection
+  parameter Buildings.HeatTransfer.Types.InteriorConvection intConMod=Buildings.HeatTransfer.Types.InteriorConvection.Temperature
+    "Convective heat transfer model for room-facing surfaces of opaque constructions"
+    annotation (Dialog(group="Convective heat transfer"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hIntFixed=3.0
+    "Constant convection coefficient for room-facing surfaces of opaque constructions"
+    annotation (Dialog(group="Convective heat transfer", enable=(conMod ==
+          Buildings.HeatTransfer.Types.InteriorConvection.Fixed)));
+  parameter Buildings.HeatTransfer.Types.ExteriorConvection extConMod=Buildings.HeatTransfer.Types.ExteriorConvection.TemperatureWind
+    "Convective heat transfer model for exterior facing surfaces of opaque constructions"
+    annotation (Dialog(group="Convective heat transfer"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hExtFixed=10.0
+    "Constant convection coefficient for exterior facing surfaces of opaque constructions"
+    annotation (Dialog(group="Convective heat transfer", enable=(conMod ==
+          Buildings.HeatTransfer.Types.ExteriorConvection.Fixed)));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0) = V*1.2/3600
+    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+  parameter Boolean homotopyInitialization "= true, use homotopy method"
+    annotation(Evaluate=true, Dialog(tab="Advanced"));
+  ////////////////////////////////////////////////////////////////////////
+  // Models for boundary conditions
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a surf_conBou[nConBou] if
+    haveConBou "Heat port at surface b of construction conBou" annotation (
+      Placement(transformation(extent={{-270,-190},{-250,-170}}),
+        iconTransformation(extent={{50,-170},{70,-150}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a surf_surBou[nSurBou] if
+    haveSurBou "Heat port of surface that is connected to the room air"
+    annotation (Placement(transformation(extent={{-270,-150},{-250,-130}}),
+        iconTransformation(extent={{-48,-150},{-28,-130}})));
+  Modelica.Blocks.Interfaces.RealInput uSha[nConExtWin](each min=0, each max=1) if
+       haveShade
+    "Control signal for the shading device (removed if no shade is present)"
+    annotation (Placement(transformation(extent={{-300,160},{-260,200}}),
+        iconTransformation(extent={{-240,140},{-200,180}})));
+  Modelica.Blocks.Interfaces.RealInput qGai_flow[3](each unit="W/m2")
+    "Radiant, convective and latent heat input into room (positive if heat gain)"
+    annotation (Placement(transformation(extent={{-300,80},{-260,120}})));
+  // Reassign the tilt since a construction that is declared as a ceiling of the
+  // room model has an exterior-facing surface that is a floor
+  BaseClasses.ExteriorBoundaryConditions bouConExt(
+    final nCon=nConExt,
+    final lat=lat,
+    linearizeRadiation=linearizeRadiation,
+    final conMod=extConMod,
+    final conPar=datConExt,
+    final hFixed=hExtFixed) if haveConExt
+    "Exterior boundary conditions for constructions without a window"
+    annotation (Placement(transformation(extent={{352,114},{382,144}})));
+  // Reassign the tilt since a construction that is declared as a ceiling of the
+  // room model has an exterior-facing surface that is a floor
+  BaseClasses.ExteriorBoundaryConditionsWithWindow bouConExtWin(
+    final nCon=nConExtWin,
+    final lat=lat,
+    final conPar=datConExtWin,
+    linearizeRadiation=linearizeRadiation,
+    final conMod=extConMod,
+    final hFixed=hExtFixed) if haveConExtWin
+    "Exterior boundary conditions for constructions with a window"
+    annotation (Placement(transformation(extent={{352,44},{382,74}})));
+
+  HeatTransfer.Windows.BaseClasses.WindowRadiation conExtWinRad[NConExtWin](
+    final AWin=(1 .- datConExtWin.fFra) .* datConExtWin.AWin,
+    final N=datConExtWin.glaSys.nLay,
+    final tauGlaSol=datConExtWin.glaSys.glass.tauSol,
+    final rhoGlaSol_a=datConExtWin.glaSys.glass.rhoSol_a,
+    final rhoGlaSol_b=datConExtWin.glaSys.glass.rhoSol_b,
+    final xGla=datConExtWin.glaSys.glass.x,
+    final tauShaSol_a=datConExtWin.glaSys.shade.tauSol_a,
+    final tauShaSol_b=datConExtWin.glaSys.shade.tauSol_b,
+    final rhoShaSol_a=datConExtWin.glaSys.shade.rhoSol_a,
+    final rhoShaSol_b=datConExtWin.glaSys.shade.rhoSol_b,
+    final haveExteriorShade=datConExtWin.glaSys.haveExteriorShade,
+    final haveInteriorShade=datConExtWin.glaSys.haveInteriorShade) if
+    haveConExtWin "Model for solar radiation through shades and window"
+    annotation (Placement(transformation(extent={{320,-24},{300,-4}})));
+  BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
+        transformation(extent={{170,150},{190,170}}), iconTransformation(extent=
+           {{166,166},{192,192}})));
+
+  Buildings.Rooms.BaseClasses.AirHeatMassBalanceMixed air(
+    redeclare final package Medium = Medium,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
+    nPorts=nPorts + 1,
+    final V=V,
+    final nConExt=nConExt,
+    final nConExtWin=nConExtWin,
+    final nConPar=nConPar,
+    final nConBou=nConBou,
+    final nSurBou=nSurBou,
+    final datConExt=datConExt,
+    final datConExtWin=datConExtWin,
+    final datConPar=datConPar,
+    final datConBou=datConBou,
+    final surBou=surBou,
+    final homotopyInitialization=homotopyInitialization,
+    final p_start=p_start,
+    final T_start=T_start,
+    final X_start=X_start,
+    final C_start=C_start,
+    final C_nominal=C_nominal,
+>>>>>>> 8e02e9e32f6f20bc746ebaeb1bf4aa217a2ebf2e
+    final m_flow_nominal=m_flow_nominal,
+    final homotopyInitialization=homotopyInitialization,
+    final conMod=intConMod,
+    final hFixed=hIntFixed));
+
+protected
+  Buildings.Rooms.BaseClasses.MixedAirHeatGain heaGai(
+    redeclare package Medium = Medium, final AFlo=AFlo)
+    "Model to convert internal heat gains"
+    annotation (Placement(transformation(extent={{-220,90},{-200,110}})));
+
+equation
+  connect(heaGai.qGai_flow, qGai_flow) annotation (Line(
+      points={{-222,100},{-280,100}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(heaGai.QRad_flow, add.u2) annotation (Line(
+      points={{-199,106},{-160,106},{-160,114},{-142,114}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(heaGai.QLat_flow, air.QLat_flow)       annotation (Line(
+      points={{-200,94},{-186,94},{-186,-96},{-18,-96},{-18,-134},{40,-134},{40,
+          -133}},
+      color={0,127,255},
+      smooth=Smooth.None));
+
+  connect(air.heaPorAir, heaGai.QCon_flow) annotation (Line(
+      points={{40,-130},{-10,-130},{-10,-88},{-180,-88},{-180,100},{-200,100}},
+      color={191,0,0},
+      smooth=Smooth.None));
+
+  annotation (
+    Documentation(info="<html>
+<p>
+Room model that assumes the air to be completely mixed. 
+</p>
+<p>
+See 
+<a href=\"modelica://Buildings.Rooms.UsersGuide\">Buildings.Rooms.UsersGuide</a>
+for detailed explanations.
+</p>
+</html>",
+revisions="<html>
+<ul>
+<li>
+August 1, 2013, by Michael Wetter:<br/>
+Introduced base class
+<a href=\"modelica://Buildings.Rooms.BaseClasses.RoomHeatMassBalance\">
+Buildings.Rooms.BaseClasses.RoomHeatMassBalance</a>
+as the latent heat gains are treated differently in the mixed air and in the CFD model.
+</li>
+</ul>
+</html>"));
+end MixedAir;
