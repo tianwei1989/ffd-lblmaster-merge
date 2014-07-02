@@ -52,8 +52,8 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   }
 
   printf("cfdExchangeData(): Start to write data");
-  cosim->modelica->t = (float) t0;
-  cosim->modelica->dt = (float) dt;
+  cosim->modelica->t = (REAL) t0;
+  cosim->modelica->dt = (REAL) dt;
 
   printf("cfdExchangeData(): wrtie data at %f with dt=%f\n", 
          cosim->modelica->t, cosim->modelica->dt);
@@ -63,7 +63,7 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
 
   // Copy the modelica data to shared memory
   for(i=0; i<cosim->para->nSur; i++) {
-    cosim->modelica->temHea[i] = (float) u[i];
+    cosim->modelica->temHea[i] = (REAL) u[i];
     if(verbose==1)
       printf("temHea[%d] = %f\n", i, cosim->modelica->temHea[i]); 
   }
@@ -71,8 +71,8 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   if(cosim->para->sha==1) {
     printf("Set shade conditions for %d windows\n", cosim->para->nConExtWin);
     for(j=0; j<cosim->para->nConExtWin; j++) {
-      cosim->modelica->shaConSig[j] = (float) u[i+j];
-      cosim->modelica->shaAbsRad[j] = (float) u[i+j+cosim->para->nConExtWin];
+      cosim->modelica->shaConSig[j] = (REAL) u[i+j];
+      cosim->modelica->shaAbsRad[j] = (REAL) u[i+j+cosim->para->nConExtWin];
       if(verbose==1)
         printf("shaConSig[%d] = %f, shaAbsRad[%d] = %f\n", 
                j, cosim->modelica->shaConSig[j],
@@ -81,23 +81,23 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
     i = i + 2*cosim->para->nConExtWin;
   }
 
-  cosim->modelica->sensibleHeat = (float) u[i]; 
+  cosim->modelica->sensibleHeat = (REAL) u[i]; 
   if(verbose==1) printf("sensibleHeat = %f\n", cosim->modelica->sensibleHeat);
   i++;
   
-  cosim->modelica->latentHeat = (float) u[i];
+  cosim->modelica->latentHeat = (REAL) u[i];
   if(verbose==1) printf("latentHeat = %f\n", cosim->modelica->latentHeat);
   i++;
 
-  cosim->modelica->p = (float) u[i];
+  cosim->modelica->p = (REAL) u[i];
   if(verbose==1) printf("p = %f\n", cosim->modelica->p);
   i++;
  
   for(j=0; j<cosim->para->nPorts; j++) {
-    cosim->modelica->mFloRatPor[j] = (float) u[i+j];
+    cosim->modelica->mFloRatPor[j] = (REAL) u[i+j];
     if(verbose==1) 
       printf("mFloRatPor[%d] = %f\n", j, cosim->modelica->mFloRatPor[j]);
-    cosim->modelica->TPor[j] = (float) u[i+j+cosim->para->nPorts];
+    cosim->modelica->TPor[j] = (REAL) u[i+j+cosim->para->nPorts];
     if(verbose==1) 
       printf("TPor[%d] = %f\n", j, cosim->modelica->TPor[j]);
   }
@@ -105,7 +105,7 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   i = i + 2*cosim->para->nPorts;
   for(j=0; j<cosim->para->nPorts; j++)
     for(k=0; k<cosim->para->nXi; k++) {
-      cosim->modelica->XiPor[j][k] = (float) u[i+j*cosim->para->nXi+k];
+      cosim->modelica->XiPor[j][k] = (REAL) u[i+j*cosim->para->nXi+k];
       if(verbose==1) 
         printf("XiPor[%d][%d] = %f\n", j, k, cosim->modelica->XiPor[j][k]);
     }
@@ -113,7 +113,7 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   i = i + cosim->para->nPorts*cosim->para->nXi;
   for(j=0; j<cosim->para->nPorts; j++)
     for(k=0; k<cosim->para->nC; k++) {
-      cosim->modelica->CPor[j][k] = (float) u[i+j*cosim->para->nC+k];
+      cosim->modelica->CPor[j][k] = (REAL) u[i+j*cosim->para->nC+k];
       if(verbose==1) 
         printf("CPor[%d][%d] = %f\n", j, k, cosim->modelica->CPor[j][k]);
     }

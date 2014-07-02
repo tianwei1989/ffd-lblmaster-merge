@@ -81,8 +81,8 @@ int cfdStartCosimulation(char *cfdFilNam, char **name, double *A, double *til,
   nBou = nSur + nPorts;
 
   cosim->para->name = (char**) malloc(nSur*sizeof(char *));
-  cosim->para->are = (float *) malloc(nSur*sizeof(float));
-  cosim->para->til = (float *) malloc(nSur*sizeof(float));
+  cosim->para->are = (REAL *) malloc(nSur*sizeof(REAL));
+  cosim->para->til = (REAL *) malloc(nSur*sizeof(REAL));
   cosim->para->bouCon = (int *) malloc(nSur*sizeof(int));
 
   for(i=0; i<nSur; i++) { 
@@ -90,10 +90,10 @@ int cfdStartCosimulation(char *cfdFilNam, char **name, double *A, double *til,
     strcpy(cosim->para->name[i], name[i]);
     printf("Boundary name:%s\n", cosim->para->name[i]);
 
-    cosim->para->are[i] = (float) A[i];
+    cosim->para->are[i] = (REAL) A[i];
     printf("\tA->Area:%f->%f [m2]\n", A[i], cosim->para->are[i]);
 
-    cosim->para->til[i] = (float) til[i];
+    cosim->para->til[i] = (REAL) til[i];
     printf("\tTilt->Tilt:%f->%f [deg]\n", til[i], cosim->para->til[i]);
 
     cosim->para->bouCon[i] = bouCon[i];
@@ -110,7 +110,7 @@ int cfdStartCosimulation(char *cfdFilNam, char **name, double *A, double *til,
 
   if(haveSensor) {
     cosim->para->sensorName = (char **) malloc(nSen*sizeof(char *));
-    cosim->ffd->senVal = (float *) malloc(nSen*sizeof(float));
+    cosim->ffd->senVal = (REAL *) malloc(nSen*sizeof(REAL));
     for(i=0; i<nSen; i++) {
       cosim->para->sensorName[i] = (char *)malloc(sizeof(char)*(strlen(sensorName[i])+1));
       strcpy(cosim->para->sensorName[i], sensorName[i]);
@@ -123,32 +123,32 @@ int cfdStartCosimulation(char *cfdFilNam, char **name, double *A, double *til,
   cosim->ffd->flag = 0;
   cosim->para->flag = 1;
 
-  cosim->modelica->temHea = (float *) malloc(nSur*sizeof(float));
+  cosim->modelica->temHea = (REAL *) malloc(nSur*sizeof(REAL));
   // Having a shade for window
   if(haveShade==1) {
-    cosim->modelica->shaConSig = (float *) malloc(nConExtWin*sizeof(float));
-    cosim->modelica->shaAbsRad = (float *) malloc(nConExtWin*sizeof(float));
+    cosim->modelica->shaConSig = (REAL *) malloc(nConExtWin*sizeof(REAL));
+    cosim->modelica->shaAbsRad = (REAL *) malloc(nConExtWin*sizeof(REAL));
   }
-  cosim->modelica->mFloRatPor = (float *) malloc(nPorts*sizeof(float));
-  cosim->modelica->TPor = (float *) malloc(nPorts*sizeof(float));
+  cosim->modelica->mFloRatPor = (REAL *) malloc(nPorts*sizeof(REAL));
+  cosim->modelica->TPor = (REAL *) malloc(nPorts*sizeof(REAL));
 
-  cosim->modelica->XiPor = (float **) malloc(nPorts*sizeof(float *));
-  cosim->ffd->XiPor = (float **) malloc(nPorts*sizeof(float *));
+  cosim->modelica->XiPor = (REAL **) malloc(nPorts*sizeof(REAL *));
+  cosim->ffd->XiPor = (REAL **) malloc(nPorts*sizeof(REAL *));
   for(i=0; i<nPorts; i++) {
-    cosim->modelica->XiPor[i] = (float *) malloc(cosim->para->nXi*sizeof(float));
-    cosim->ffd->XiPor[i] = (float *) malloc(cosim->para->nXi*sizeof(float));
+    cosim->modelica->XiPor[i] = (REAL *) malloc(cosim->para->nXi*sizeof(REAL));
+    cosim->ffd->XiPor[i] = (REAL *) malloc(cosim->para->nXi*sizeof(REAL));
   }
 
-  cosim->modelica->CPor = (float **) malloc(nPorts*sizeof(float *));
-  cosim->ffd->CPor = (float **) malloc(nPorts*sizeof(float *));
+  cosim->modelica->CPor = (REAL **) malloc(nPorts*sizeof(REAL *));
+  cosim->ffd->CPor = (REAL **) malloc(nPorts*sizeof(REAL *));
   for(i=0; i<nPorts; i++) {
-    cosim->modelica->CPor[i] = (float *) malloc(cosim->para->nC*sizeof(float));
-    cosim->ffd->CPor[i] = (float *) malloc(cosim->para->nC*sizeof(float));
+    cosim->modelica->CPor[i] = (REAL *) malloc(cosim->para->nC*sizeof(REAL));
+    cosim->ffd->CPor[i] = (REAL *) malloc(cosim->para->nC*sizeof(REAL));
   }
 
-  cosim->ffd->temHea = (float *) malloc(nSur*sizeof(float));
-  if(haveShade==1) cosim->ffd->TSha = (float *) malloc(nConExtWin*sizeof(float));
-  cosim->ffd->TPor = (float *) malloc(nPorts*sizeof(float));
+  cosim->ffd->temHea = (REAL *) malloc(nSur*sizeof(REAL));
+  if(haveShade==1) cosim->ffd->TSha = (REAL *) malloc(nConExtWin*sizeof(REAL));
+  cosim->ffd->TPor = (REAL *) malloc(nPorts*sizeof(REAL));
   
   printf("Allocated memory for cosimulation data.\n");
 
