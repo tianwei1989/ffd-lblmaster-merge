@@ -40,17 +40,17 @@ int assign_parameter(PARA_DATA *para, char *string) {
   }
 
   if(!strcmp(tmp, "geom.Lx")) {
-    sscanf(string, "%s%f", tmp, &para->geom->Lx);
+    sscanf(string, "%s%lf", tmp, &para->geom->Lx);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->geom->Lx);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "geom.Ly")) {
-    sscanf(string, "%s%f", tmp, &para->geom->Ly);
+    sscanf(string, "%s%lf", tmp, &para->geom->Ly);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->geom->Ly);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "geom.Lz")) {
-    sscanf(string, "%s%f", tmp, &para->geom->Lz);
+    sscanf(string, "%s%lf", tmp, &para->geom->Lz);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->geom->Lz);
     ffd_log(msg, FFD_NORMAL);
   }
@@ -75,17 +75,17 @@ int assign_parameter(PARA_DATA *para, char *string) {
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "geom.dx")) {
-    sscanf(string, "%s%f", tmp, &para->geom->dx);
+    sscanf(string, "%s%lf", tmp, &para->geom->dx);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->geom->dx);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "geom.dy")) {
-    sscanf(string, "%s%f", tmp, &para->geom->dy);
+    sscanf(string, "%s%lf", tmp, &para->geom->dy);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->geom->dy);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "geom.dz")) {
-    sscanf(string, "%s%f", tmp, &para->geom->dz);
+    sscanf(string, "%s%lf", tmp, &para->geom->dz);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->geom->dz);
     ffd_log(msg, FFD_NORMAL);
   }
@@ -100,17 +100,17 @@ int assign_parameter(PARA_DATA *para, char *string) {
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "outp.v_ref")) {
-    sscanf(string, "%s%f", tmp, &para->outp->v_ref);
+    sscanf(string, "%s%lf", tmp, &para->outp->v_ref);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->outp->v_ref);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "outp.Temp_ref")) {
-    sscanf(string, "%s%f", tmp, &para->outp->Temp_ref);
+    sscanf(string, "%s%lf", tmp, &para->outp->Temp_ref);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->outp->Temp_ref);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "outp.v_length")) {
-    sscanf(string, "%s%f", tmp, &para->outp->v_length);
+    sscanf(string, "%s%lf", tmp, &para->outp->v_length);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->outp->v_length);
     ffd_log(msg, FFD_NORMAL);
   }
@@ -183,62 +183,62 @@ int assign_parameter(PARA_DATA *para, char *string) {
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.nu")) {
-    sscanf(string, "%s%f", tmp, &para->prob->nu);
+    sscanf(string, "%s%lf", tmp, &para->prob->nu);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->nu);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.rho")) {
-    sscanf(string, "%s%f", tmp, &para->prob->rho);
+    sscanf(string, "%s%lf", tmp, &para->prob->rho);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->rho);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.beta")) {
-    sscanf(string, "%s%f", tmp, &para->prob->beta);
+    sscanf(string, "%s%lf", tmp, &para->prob->beta);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->beta);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.diff")) {
-    sscanf(string, "%s%f", tmp, &para->prob->diff);
+    sscanf(string, "%s%lf", tmp, &para->prob->diff);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->diff);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.coeff_h")) {
-    sscanf(string, "%s%f", tmp, &para->prob->coeff_h);
+    sscanf(string, "%s%lf", tmp, &para->prob->coeff_h);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->coeff_h);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.gravx")) {
-    sscanf(string, "%s%f", tmp, &para->prob->gravx);
+    sscanf(string, "%s%lf", tmp, &para->prob->gravx);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->gravx);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.gravy")) {
-    sscanf(string, "%s%f", tmp, &para->prob->gravy);
+    sscanf(string, "%s%lf", tmp, &para->prob->gravy);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->gravy);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.gravz")) {
-    sscanf(string, "%s%f", tmp, &para->prob->gravz);
+    sscanf(string, "%s%lf", tmp, &para->prob->gravz);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->gravz);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.cond")) {
-    sscanf(string, "%s%f", tmp, &para->prob->cond);
+    sscanf(string, "%s%lf", tmp, &para->prob->cond);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->cond);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.force")) {
-    sscanf(string, "%s%f", tmp, &para->prob->force);
+    sscanf(string, "%s%lf", tmp, &para->prob->force);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->force);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.source")) {
-    sscanf(string, "%s%f", tmp, &para->prob->source);
+    sscanf(string, "%s%lf", tmp, &para->prob->source);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->source);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.Cp")) {
-    sscanf(string, "%s%f", tmp, &para->prob->Cp);
+    sscanf(string, "%s%lf", tmp, &para->prob->Cp);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->Cp);
     ffd_log(msg, FFD_NORMAL);
   }
@@ -264,22 +264,22 @@ int assign_parameter(PARA_DATA *para, char *string) {
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.chen_a")) {
-    sscanf(string, "%s%f", tmp, &para->prob->chen_a);
+    sscanf(string, "%s%lf", tmp, &para->prob->chen_a);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->chen_a);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.Prt")) {
-    sscanf(string, "%s%f", tmp, &para->prob->Prt);
+    sscanf(string, "%s%lf", tmp, &para->prob->Prt);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->Prt);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "prob.Temp_Buoyancy")) {
-    sscanf(string, "%s%f", tmp, &para->prob->Temp_Buoyancy);
+    sscanf(string, "%s%lf", tmp, &para->prob->Temp_Buoyancy);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->prob->Temp_Buoyancy);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "mytime.t_steady")) {
-    sscanf(string, "%s%f", tmp, &para->mytime->t_steady);
+    sscanf(string, "%s%lf", tmp, &para->mytime->t_steady);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->mytime->t_steady);
     ffd_log(msg, FFD_NORMAL);
   }
@@ -345,22 +345,22 @@ int assign_parameter(PARA_DATA *para, char *string) {
   | get the initial condition
   ****************************************************************************/
   else if(!strcmp(tmp, "init.T")) {
-    sscanf(string, "%s%f", tmp, &para->init->T);
+    sscanf(string, "%s%lf", tmp, &para->init->T);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->init->T);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "init.u")) {
-    sscanf(string, "%s%f", tmp, &para->init->u);
+    sscanf(string, "%s%lf", tmp, &para->init->u);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->init->u);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "init.v")) {
-    sscanf(string, "%s%f", tmp, &para->init->v);
+    sscanf(string, "%s%lf", tmp, &para->init->v);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->init->v);
     ffd_log(msg, FFD_NORMAL);
   }
   else if(!strcmp(tmp, "init.w")) {
-    sscanf(string, "%s%f", tmp, &para->init->w);
+    sscanf(string, "%s%lf", tmp, &para->init->w);
     sprintf(msg, "assign_parameter(): %s=%f", tmp, para->init->w);
     ffd_log(msg, FFD_NORMAL);
   }

@@ -709,7 +709,8 @@ int set_bnd_pressure(PARA_DATA *para, REAL **var, REAL *p, int **BINDEX) {
   REAL *af = var[AF], *ab = var[AB];
 
   REAL *flagp = var[FLAGP];
-
+  // tianwei revise: add the pressure boundary for (imax,jmax,kmax)
+  //p[IX(imax,jmax,kmax)]=0;
   for(it=0;it<index;it++) {
     i = BINDEX[0][it];
     j = BINDEX[1][it];

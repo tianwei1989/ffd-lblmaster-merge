@@ -142,7 +142,7 @@ int coef_diff(PARA_DATA *para, REAL **var, REAL *psi, REAL *psi0,
       if(para->prob->tur_model==LAM)
         kapa = para->prob->nu; 
       else if(para->prob->tur_model==CONSTANT) 
-        kapa = 101.0f * para->prob->nu;
+        kapa = (REAL) 101.0 * para->prob->nu;
 
       FOR_U_CELL
         dxe = gx[IX(i+1,j  ,k)] - gx[IX(i  ,j,k)];
@@ -169,7 +169,7 @@ int coef_diff(PARA_DATA *para, REAL **var, REAL *psi, REAL *psi0,
                      - beta*gravx*(Temp[IX(i,j,k)]-Temp_Buoyancy)*Dx*Dy*Dz
                      + (pp[IX(i,j,k)]-pp[IX(i+1,j,k)])*Dy*Dz;
       END_FOR
-
+      set_bnd(para, var, var_type, index, psi, BINDEX);
       //set_bnd(para, var, var_type, psi, BINDEX);
       FOR_U_CELL
           ap[IX(i,j,k)] = ap0[IX(i,j,k)] + ae[IX(i,j,k)] + aw[IX(i,j,k)] 
@@ -211,7 +211,7 @@ int coef_diff(PARA_DATA *para, REAL **var, REAL *psi, REAL *psi0,
                      - beta*gravy*(Temp[IX(i,j,k)]-Temp_Buoyancy)*Dx*Dy*Dz
                      + (pp[IX(i,j,k)]-pp[IX(i ,j+1,k)])*Dx*Dz;
       END_FOR
-
+      set_bnd(para, var, var_type, index, psi, BINDEX);
       //set_bnd(para, var, var_type, psi,BINDEX);
       FOR_V_CELL
         ap[IX(i,j,k)] = ap0[IX(i,j,k)] + ae[IX(i,j,k)] + aw[IX(i,j,k)] 
@@ -253,7 +253,7 @@ int coef_diff(PARA_DATA *para, REAL **var, REAL *psi, REAL *psi0,
                      - beta*gravz*(Temp[IX(i,j,k)]-Temp_Buoyancy)*Dx*Dy*Dz
                      + (pp[IX(i,j,k)]-pp[IX(i ,j,k+1)])*Dy*Dx;
       END_FOR
-
+      set_bnd(para, var, var_type, index, psi, BINDEX);
       //set_bnd(para, var, var_type, psi, BINDEX);
 
       FOR_W_CELL

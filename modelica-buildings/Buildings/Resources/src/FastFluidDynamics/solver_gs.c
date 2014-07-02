@@ -34,7 +34,7 @@ REAL GS_P(PARA_DATA *para, REAL **var, int Type, REAL *x) {
   int kmax = para->geom->kmax;
   int IMAX = imax+2, IJMAX = (imax+2)*(jmax+2);  
   int i, j, k, it;
-  float tmp1, tmp2, residual;
+  REAL tmp1, tmp2, residual;
   REAL *flagp = var[FLAGP];
 
   /****************************************************************************
@@ -44,10 +44,12 @@ REAL GS_P(PARA_DATA *para, REAL **var, int Type, REAL *x) {
     /*-------------------------------------------------------------------------
     | Solve in X(1->imax), Y(1->jmax), Z(1->kmax)
     -------------------------------------------------------------------------*/
+    it++;
     for(i=1; i<=imax; i++)
       for(j=1; j<=jmax; j++)
         for(k=1; k<=kmax; k++) {
           if (flagp[IX(i,j,k)]>=0) continue;
+          //if (i==imax && j==jmax && k==kmax) continue;
 
           x[IX(i,j,k)] = (  ae[IX(i,j,k)]*x[IX(i+1,j,k)] 
                           + aw[IX(i,j,k)]*x[IX(i-1,j,k)]
@@ -65,6 +67,7 @@ REAL GS_P(PARA_DATA *para, REAL **var, int Type, REAL *x) {
       for(i=1; i<=imax; i++)
         for(k=1; k<=kmax; k++) {
           if (flagp[IX(i,j,k)]>=0) continue;
+          //if (i==imax && j==jmax && k==kmax) continue;
 
           x[IX(i,j,k)] = (  ae[IX(i,j,k)]*x[IX(i+1,j,k)] 
                           + aw[IX(i,j,k)]*x[IX(i-1,j,k)]
@@ -81,6 +84,7 @@ REAL GS_P(PARA_DATA *para, REAL **var, int Type, REAL *x) {
       for(j=jmax; j>=1; j--)
         for(k=1; k<=kmax; k++) {
           if (flagp[IX(i,j,k)]>=0) continue;
+          //if (i==imax && j==jmax && k==kmax) continue;
 
           x[IX(i,j,k)] = (  ae[IX(i,j,k)]*x[IX(i+1,j,k)] 
                           + aw[IX(i,j,k)]*x[IX(i-1,j,k)]
@@ -97,6 +101,7 @@ REAL GS_P(PARA_DATA *para, REAL **var, int Type, REAL *x) {
       for(i=imax; i>=1; i--)
         for(k=1; k<=kmax; k++) {
           if (flagp[IX(i,j,k)]>=0) continue;
+          //if (i==imax && j==jmax && k==kmax) continue;
 
           x[IX(i,j,k)] = (  ae[IX(i,j,k)]*x[IX(i+1,j,k)] 
                           + aw[IX(i,j,k)]*x[IX(i-1,j,k)]
@@ -116,6 +121,7 @@ REAL GS_P(PARA_DATA *para, REAL **var, int Type, REAL *x) {
 
   FOR_EACH_CELL
     if (flagp[IX(i,j,k)]>=0) continue;
+    //if (i==imax && j==jmax && k==kmax) continue;
     tmp1 += (REAL) fabs(ap[IX(i,j,k)]*x[IX(i,j,k)] 
         - ae[IX(i,j,k)]*x[IX(i+1,j,k)] - aw[IX(i,j,k)]*x[IX(i-1,j,k)]
         - an[IX(i,j,k)]*x[IX(i,j+1,k)] - as[IX(i,j,k)]*x[IX(i,j-1,k)]
@@ -125,8 +131,12 @@ REAL GS_P(PARA_DATA *para, REAL **var, int Type, REAL *x) {
   END_FOR
 
   residual = tmp1 /tmp2;
-
+  //printf ("the pressure of cell[imax,jmax,kmax] is %f\n", x[IX(imax,jmax,kmax)]);
+  //printf ("the average pressure residual is %.12f\n", residual);
+  //printf ("it is %d \n", it);
+  //}
   return residual;
+
 } // End of GS_P()
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -146,16 +156,17 @@ REAL Gauss_Seidel(PARA_DATA *para, REAL **var, REAL *flag, REAL *x) {
   int kmax = para->geom->kmax;
   int IMAX = imax+2, IJMAX = (imax+2)*(jmax+2);  
   int i, j, k, it=0;
-  float tmp1, tmp2, residual;
+  REAL tmp1, tmp2, residual;
 
   /****************************************************************************
   | Gauss-Seidel solver
   ****************************************************************************/
-  for(it=0; it<1; it++) {
+  for(it=0; it<20; it++) {
     for(i=1; i<=imax; i++)
       for(j=1; j<=jmax; j++)
         for(k=1; k<=kmax; k++) {
           if (flag[IX(i,j,k)]>=0) continue;
+          
 
           x[IX(i,j,k)] = (  ae[IX(i,j,k)]*x[IX(i+1,j,k)] 
                           + aw[IX(i,j,k)]*x[IX(i-1,j,k)]
@@ -169,7 +180,7 @@ REAL Gauss_Seidel(PARA_DATA *para, REAL **var, REAL *flag, REAL *x) {
     
     for(i=imax; i>=1; i--)
       for(j=jmax; j>=1; j--)
-        for(k=1; k<=kmax; k++) {
+        for(k=kmax; k>=1; k--) {
           if (flag[IX(i,j,k)]>=0) continue;
 
           x[IX(i,j,k)] = (  ae[IX(i,j,k)]*x[IX(i+1,j,k)] 
@@ -199,7 +210,8 @@ REAL Gauss_Seidel(PARA_DATA *para, REAL **var, REAL *flag, REAL *x) {
   END_FOR
 
   residual = tmp1 /tmp2;
-
+  //printf ("the average residual for velocity/T is %.12f\n", tmp1/(imax*jmax*kmax));
   return residual;
+
 } // End of Gauss-Seidel( )
 

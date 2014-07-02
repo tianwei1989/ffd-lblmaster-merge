@@ -40,7 +40,7 @@ int read_sci_max(PARA_DATA *para, REAL **var) {
 
   // Get the first line for the length in X, Y and Z directions
   fgets(string, 400, file_params);
-  sscanf(string,"%f %f %f", &para->geom->Lx, &para->geom->Ly, &para->geom->Lz);
+  sscanf(string,"%lf %lf %lf", &para->geom->Lx, &para->geom->Ly, &para->geom->Lz);
 
   // Get the second line for the number of cells in X, Y and Z directions
   fgets(string, 400, file_params);
@@ -120,11 +120,11 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
   delz[0]=0;
 
   // Read cell dimensions in X, Y, Z directions
-  for(i=1; i<=imax; i++) fscanf(file_params, "%f", &delx[i]); 
+  for(i=1; i<=imax; i++) fscanf(file_params, "%lf", &delx[i]); 
   fscanf(file_params,"\n");
-  for(j=1; j<=jmax; j++) fscanf(file_params, "%f", &dely[j]); 
+  for(j=1; j<=jmax; j++) fscanf(file_params, "%lf", &dely[j]); 
   fscanf(file_params,"\n");
-  for(k=1; k<=kmax; k++) fscanf(file_params, "%f", &delz[k]); 
+  for(k=1; k<=kmax; k++) fscanf(file_params, "%lf", &delz[k]); 
   fscanf(file_params,"\n");
 
   // Store the locations of grid cell surfaces
@@ -243,7 +243,7 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
       | Get the boundary conditions
       .......................................................................*/
       fgets(string, 400, file_params);
-      sscanf(string,"%d%d%d%d%d%d%f%f%f%f%f", &SI, &SJ, &SK, &EI, 
+      sscanf(string,"%d%d%d%d%d%d%lf%lf%lf%lf%lf", &SI, &SJ, &SK, &EI, 
              &EJ, &EK, &TMP, &MASS, &U, &V, &W);
       sprintf(msg, "read_sci_input(): VX=%f, VY=%f, VZ=%f, T=%f, Xi=%f", 
               U, V, W, TMP, MASS);
@@ -342,7 +342,7 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
       | Get the boundary conditions
       .......................................................................*/
       fgets(string, 400, file_params);
-      sscanf(string,"%d%d%d%d%d%d%f%f%f%f%f", 
+      sscanf(string,"%d%d%d%d%d%d%lf%lf%lf%lf%lf", 
              &SI, &SJ, &SK, &EI, 
              &EJ, &EK, &TMP, &MASS, &U, &V, &W);
 
@@ -583,7 +583,7 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
       // X_index_start, Y_index_Start, Z_index_Start, 
       // X_index_End, Y_index_End, Z_index_End, 
       // Thermal Codition (0: Flux; 1:Temperature), Value of thermal conditon
-      sscanf(string,"%d%d%d%d%d%d%d%f", &SI, &SJ, &SK, &EI, &EJ, &EK, 
+      sscanf(string,"%d%d%d%d%d%d%d%lf", &SI, &SJ, &SK, &EI, &EJ, &EK, 
                                         &FLTMP, &TMP);
       sprintf(msg, "read_sci_input(): VX=%f, VY=%f, VX=%f, ThermalBC=%d, T/q_dot=%f, Xi=%f", 
               U, V, W, FLTMP, TMP, MASS);
@@ -734,7 +734,7 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
       // X_index_End, Y_index_End, Z_index_End, 
       // Thermal Codition (0: Flux; 1:Temperature), Value of thermal conditon
       fgets(string, 400, file_params);
-      sscanf(string,"%d%d%d%d%d%d%d%f", &SI, &SJ, &SK, &EI, 
+      sscanf(string,"%d%d%d%d%d%d%d%lf", &SI, &SJ, &SK, &EI, 
              &EJ, &EK, &FLTMP, &TMP);
       sprintf(msg, "read_sci_input(): ThermalBC=%d, T/q_dot=%f", 
               FLTMP, TMP);
@@ -802,7 +802,7 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
   ffd_log(msg, FFD_NORMAL);
   
   if(para->bc->nb_source!=0) {
-    sscanf(string,"%s%d%d%d%d%d%d%f", 
+    sscanf(string,"%s%d%d%d%d%d%d%lf", 
            name, &SI, &SJ, &SK, &EI, &EJ, &EK, &MASS);
     bcnameid++;
  
