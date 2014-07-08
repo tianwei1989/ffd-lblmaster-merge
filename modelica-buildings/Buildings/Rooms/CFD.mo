@@ -111,7 +111,7 @@ Currently, the supported CFD program is:
 </p>
 <ul>
 <li>
-Fast Fluid Dynamics (FFD) programs <a href=\"#ZUO2009\">(Zuo 2010)</a>. 
+Fast Fluid Dynamics (FFD) programs <a href=\"#ZUO2010\">(Zuo 2010)</a>. 
 </li>
 </ul>
 <p>
