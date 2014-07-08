@@ -116,7 +116,7 @@ Fast Fluid Dynamics (FFD) programs <a href=\"#ZUO2010\">(Zuo 2010)</a>.
 </ul>
 <p>
 See 
-<a href=\"modelica://Buildings.Rooms.UsersGuide\">Buildings.Rooms.UsersGuide</a>
+<a href=\"modelica://Buildings.Rooms.UsersGuide.CFD\">Buildings.Rooms.UsersGuide.CFD</a>
 for detailed explanations.
 </p>
 <h4>References</h4>
