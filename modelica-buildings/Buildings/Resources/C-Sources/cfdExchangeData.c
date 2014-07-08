@@ -30,7 +30,6 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   int i, j, k, imax = 10000;
   int verbose = 0;
   printf("---------------------------------------------------\n");
-  printf("exchangeData(): start to exchagne data at t=%f\n", t0);
 
   /*--------------------------------------------------------------------------
   | Write data to FFD
@@ -46,20 +45,23 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
       return -1;
     }
     else {
-      printf("cfdExchangeData(): Waiting for the FFD to read my data.\n");
+      if(verbose==1)
+        printf("cfdExchangeData(): Waiting for the FFD to read my data.\n");
       Sleep(1000);
     }
   }
 
-  printf("cfdExchangeData(): Start to write data");
+  if(verbose==1) printf("cfdExchangeData(): Start to write data");
   cosim->modelica->t = (REAL) t0;
   cosim->modelica->dt = (REAL) dt;
 
+
   printf("cfdExchangeData(): wrtie data at %f with dt=%f\n", 
          cosim->modelica->t, cosim->modelica->dt);
-
-  printf("cfdExchangeData(): number of input variables nU=%d\n", nU);
-  printf("cfdExchangeData(): number of output variables nY=%d\n", nY);
+  if(verbose==1) {
+    printf("cfdExchangeData(): number of input variables nU=%d\n", nU);
+    printf("cfdExchangeData(): number of output variables nY=%d\n", nY);
+  }
 
   // Copy the modelica data to shared memory
   for(i=0; i<cosim->para->nSur; i++) {
@@ -69,7 +71,9 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   }
 
   if(cosim->para->sha==1) {
-    printf("Set shade conditions for %d windows\n", cosim->para->nConExtWin);
+    if(verbose==1) {
+      printf("Set shade conditions for %d windows\n", cosim->para->nConExtWin);
+    }
     for(j=0; j<cosim->para->nConExtWin; j++) {
       cosim->modelica->shaConSig[j] = (REAL) u[i+j];
       cosim->modelica->shaAbsRad[j] = (REAL) u[i+j+cosim->para->nConExtWin];
@@ -95,11 +99,11 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
  
   for(j=0; j<cosim->para->nPorts; j++) {
     cosim->modelica->mFloRatPor[j] = (REAL) u[i+j];
-    if(verbose==1) 
+    if(verbose==1) {
       printf("mFloRatPor[%d] = %f\n", j, cosim->modelica->mFloRatPor[j]);
+    }
     cosim->modelica->TPor[j] = (REAL) u[i+j+cosim->para->nPorts];
-    if(verbose==1) 
-      printf("TPor[%d] = %f\n", j, cosim->modelica->TPor[j]);
+    if(verbose==1) printf("TPor[%d] = %f\n", j, cosim->modelica->TPor[j]);
   }
 
   i = i + 2*cosim->para->nPorts;
@@ -187,8 +191,10 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
     printf("y[%d]=%f\n", i, y[i]);
   }
 
-  printf("\n FFD: \t\ttime=%f, status=%d\n", cosim->ffd->t, cosim->ffd->flag);
-  printf("Modelica: \ttime=%f, status=%d\n", cosim->modelica->t, cosim->modelica->flag);
+  if(verbose==1) {
+    printf("\n FFD: \t\ttime=%f, status=%d\n", cosim->ffd->t, cosim->ffd->flag);
+    printf("Modelica: \ttime=%f, status=%d\n", cosim->modelica->t, cosim->modelica->flag);
+  }
 
   // Update the data status
   cosim->ffd->flag = 0;
