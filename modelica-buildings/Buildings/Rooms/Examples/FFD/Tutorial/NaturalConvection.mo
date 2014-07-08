@@ -1,5 +1,5 @@
-within Buildings.Rooms.Examples.FFD;
-model NaturalConvectionTutorial "Tutorial for NaturalConvection case"
+within Buildings.Rooms.Examples.FFD.Tutorial;
+model NaturalConvection "Tutorial for Natural Convection case"
   extends Modelica.Icons.Example;
   package MediumA =
       Buildings.Media.GasesConstantDensity.MoistAirUnsaturated (
@@ -33,7 +33,7 @@ model NaturalConvectionTutorial "Tutorial for NaturalConvection case"
   Buildings.Rooms.CFD roo(
    redeclare package Medium = MediumA,
    surBou(
-   name={"East Wall","West Wall","North Wall","South Wall","Floor","Ceiling"},
+   name={"East Wall","West Wall","North Wall","South Wall","Ceiling","Floor"},
    each A=1*1,
    til={Buildings.HeatTransfer.Types.Tilt.Wall,Buildings.HeatTransfer.Types.Tilt.Wall,
         Buildings.HeatTransfer.Types.Tilt.Wall,Buildings.HeatTransfer.Types.Tilt.Wall,
@@ -63,12 +63,12 @@ model NaturalConvectionTutorial "Tutorial for NaturalConvection case"
   HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow[nSurBou - 2](each Q_flow=0)
     annotation (Placement(transformation(extent={{26,-102},
             {46,-82}})));
-  HeatTransfer.Sources.FixedTemperature           TWesWal(each T=283.15)
+  HeatTransfer.Sources.FixedTemperature           TWesWal(T=274.15)
     "Boundary condition for the west wall" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
-        origin={130,-108})));
-  HeatTransfer.Sources.FixedTemperature           TEasWal(each T=313.15)
+        origin={130,-110})));
+  HeatTransfer.Sources.FixedTemperature           TEasWal(T=273.15)
     "Temperature of east wall"            annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -103,7 +103,7 @@ equation
       smooth=Smooth.None));
   connect(TWesWal.port, roo.surf_surBou[2])
     annotation (Line(
-      points={{120,-108},{76.2,-108},{76.2,-52}},
+      points={{120,-110},{76.2,-110},{76.2,-52}},
       color={191,0,0},
       smooth=Smooth.None));
 
@@ -129,7 +129,7 @@ equation
       smooth=Smooth.None));
   annotation (Documentation(info="<html>
 <p>
-Please refer to 
+For the case description, please refer to 
 <a href=\"modelica://Buildings.Rooms.Examples.FFD.NaturalConvection\">Buildings.Rooms.Examples.FFD.NaturalConvection</a>.
 </p>
 <h4>Implementation</h4>
@@ -139,47 +139,50 @@ This section describes step by step how we implemented the model.
 <ol>
 <li>
 <p> 
-First, add the following model components into NaturalConvection model and connect them as shown in Figure 15 :
+Add the following model components into NaturalConvection model:
 </p>
 <ul>
 <li>
-<a href=\"modelica://Modelica.Fluid.System\">Modelica.Fluid.System</a>. This model provides a basic physical environment for simulation.
+<a href=\"modelica://Modelica.Fluid.System\">Modelica.Fluid.System</a>. 
+This model provides a basic physical environment for simulation.
 </li>
 <li>
-<a href=\"modelica://Buildings.Rooms.CFD\">Buildings.Rooms.CFD</a>. This model is used to implement data exchange between Modelica and FFD. Name it as <code>roo</code>.
+<a href=\"modelica://Buildings.Rooms.CFD\">Buildings.Rooms.CFD</a>. 
+This model is used to implement data exchange between Modelica and FFD. Name it as <code>roo</code>.
 </li>
 <li>
-<a href=\"modelica://Buildings.BoundaryConditions.WeatherData.ReaderTMY3\">Buildings.BoundaryConditions.WeatherData.ReaderTMY3</a>. Use weather data from OHare Intl. airport, Chicago, Illinoi, U.S.A.. Name it as <code>weaDat<code>.
+<a href=\"modelica://Buildings.BoundaryConditions.WeatherData.ReaderTMY3\">Buildings.BoundaryConditions.WeatherData.ReaderTMY3</a>. 
+Use weather data from OHare Intl. Airport, Chicago, Illinoi, U.S.A. Name it as <code>weaDat</code>.
 </li>
 <li>
-<a href=\"modelica://Buildings.HeatTransfer.Data.OpaqueConstructions.Generic\">Buildings.HeatTransfer.Data.OpaqueConstructions.Generic</a>. This model provides room construction properties. Name it as <code>matLayRoo<code>.
+<a href=\"modelica://Buildings.HeatTransfer.Data.OpaqueConstructions.Generic\">Buildings.HeatTransfer.Data.OpaqueConstructions.Generic</a>. 
+This model provides room construction properties. 
+Name it as <code>matLayRoo</code>.
 </li>
 <li>
-<a href=\"modelica://Modelica.Block.Source.Constant\">Modelica.Block.Source.Constant</a>. Three models are needed to specify that internal radiation, internal convective heat gain and internal latent heat gain as zero.
-Name these models as <code>qRadGai_flow</code>, <code>qConGai_flow</code> and <code>qLatGai_flow</code> respectively.
+<a href=\"modelica://Modelica.Blocks.Sources.Constant\">Modelica.Blocks.Sources.Constant</a>. Three models are needed to specify that internal radiation, internal convective heat gain and internal latent heat gain  zero.
+Name these models as <code>qRadGai_flow</code>, <code>qConGai_flow</code> and <code>qLatGai_flow</code>, respectively.
 </li>
 <li>
-<a href=\"modelica://Modelica.Block.Routing.MultipleX3\">Modelica.Block.Routing.MultipleX3</a>. This block is used to concentrate three number into one vector. Name it as <code>multiple_x3</code>.
+<a href=\"modelica://Modelica.Blocks.Routing.Multiplex3\">Modelica.Blocks.Routing.Multiplex3</a>. 
+This block is used to concentrate three number inputs into one vector output. Name it as <code>multiple_x3</code>.
 </li>
 <li>
-<a href=\"modelica://Buildings.HeatTransfer.Source.FixedTemperature\">Buildings.HeatTransfer.Source.FixedTemperature</a>. Two models are needed to specify the temperature on the east and west walls. 
-Name them as <code>TeasWal</code> and <code>TwesWal</code> respectively.
+<a href=\"modelica://Buildings.HeatTransfer.Source.FixedTemperature\">Buildings.HeatTransfer.Source.FixedTemperature</a>. 
+Two models are needed to specify the temperature on the east and west walls. 
+Name them as <code>TeasWal</code> and <code>TwesWal</code>, respectively.
 </li>
 <li>
-<a href=\"modelica://Buildings.HeatTransfer.Source.FixedHeatFlow\">Buildings.HeatTransfer.Source.FixedHeatFlow</a>. This model is used to specify that the other four walls are adiabatic. Please note that it is necessary
-to claim it as a vector whose number of element is 4.Name it as <code>fixedHeatFlow</code>.
+<a href=\"modelica://Buildings.HeatTransfer.Source.FixedHeatFlow\">Buildings.HeatTransfer.Source.FixedHeatFlow</a>. 
+This model is used to specify that the other four walls are adiabatic. Please note that it is necessary
+to claim it as a vector whose number of elements is 4.
+Define it as <code>fixedHeatFlow[nSurBou - 2]</code>.
 </li>
 </ul>
 </li>
-<p align=\"center\">
-<img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/NaturalConvectionTutorial24.png\" border=\"1\"> 
-</p>
-<p align=\"center\" style=\"font-size:10px\">
-Figure 24 whole picture of the model
-</P>
 <li>
 <p>
-Secondly, in Text Mode add medium and number of surfaces as below:
+In script mode, add medium and number of surfaces as below:
 </p>
 <pre>
 Buildings.Rooms.CFD roo(
@@ -193,28 +196,33 @@ Buildings.Rooms.CFD roo(
 </li>
 <li>
 <p>
-Thirdly, edit <code>roo</code> as below:
+Edit <code>roo</code> as below:
 </p>
 <pre>
- redeclare package Medium = MediumA,
- surBou(
-   name={\"East Wall\",\"West Wall\",\"North Wall\",\"South Wall\",\"Floor\",\"Ceiling\"},
-   each A=1*1,
-   til={Buildings.HeatTransfer.Types.Tilt.Wall,Buildings.HeatTransfer.Types.Tilt.Wall,
-        Buildings.HeatTransfer.Types.Tilt.Wall,Buildings.HeatTransfer.Types.Tilt.Wall,
-        Buildings.HeatTransfer.Types.Tilt.Floor,Buildings.HeatTransfer.Types.Tilt.Ceiling},
-   each absIR=1e-5,
-   each absSol=1e-5,
-   boundaryCondition={Buildings.Rooms.Types.CFDBoundaryConditions.Temperature,
-       Buildings.Rooms.Types.CFDBoundaryConditions.Temperature,Buildings.Rooms.Types.CFDBoundaryConditions.HeatFlowRate,
-       Buildings.Rooms.Types.CFDBoundaryConditions.HeatFlowRate,
-       Buildings.Rooms.Types.CFDBoundaryConditions.HeatFlowRate,
-       Buildings.Rooms.Types.CFDBoundaryConditions.HeatFlowRate}),
+redeclare package Medium = MediumA,
+surBou(
+ name={\"East Wall\",\"West Wall\",\"North Wall\",\"South Wall\",\"Ceiling\",\"Floor\"},
+ each A=1*1,
+ til={Buildings.HeatTransfer.Types.Tilt.Wall,
+      Buildings.HeatTransfer.Types.Tilt.Wall,
+      Buildings.HeatTransfer.Types.Tilt.Wall,
+      Buildings.HeatTransfer.Types.Tilt.Wall,
+      Buildings.HeatTransfer.Types.Tilt.Ceiling,
+      Buildings.HeatTransfer.Types.Tilt.Floor},
+ each absIR=1e-5,
+ each absSol=1e-5,
+ boundaryCondition={
+      Buildings.Rooms.Types.CFDBoundaryConditions.Temperature,
+      Buildings.Rooms.Types.CFDBoundaryConditions.Temperature,
+      Buildings.Rooms.Types.CFDBoundaryConditions.HeatFlowRate,
+      Buildings.Rooms.Types.CFDBoundaryConditions.HeatFlowRate,
+      Buildings.Rooms.Types.CFDBoundaryConditions.HeatFlowRate,
+      Buildings.Rooms.Types.CFDBoundaryConditions.HeatFlowRate}),
  lat = 0.012787839282646,
  AFlo = 1*1,
  hRoo = 1,
  linearizeRadiation = false,
- useCFD = true
+ useCFD = true,
  sensorName = {\"Occupied zone air temperature\", \"Velocity\"},
  cfdFilNam = \"Resources/Data/Rooms/FFD/NaturalConvection.ffd\",
  nConExt = nConExt,
@@ -228,26 +236,57 @@ Thirdly, edit <code>roo</code> as below:
 </li>
 <li>
 <p>
-Next, edit atLayRoo as below:
+Edit <code>matLayRoo</code> as below:
 </p>
 <pre>
-  parameter Buildings.HeatTransfer.Data.OpaqueConstructions.Generic matLayRoo(
-   final nLay=1, material={HeatTransfer.Data.Solids.Concrete(x=0.0001)});
+parameter Buildings.HeatTransfer.Data.OpaqueConstructions.Generic matLayRoo(
+ final nLay=1, material={HeatTransfer.Data.Solids.Concrete(x=0.0001)});
 </pre>
 </li> 
 <li>
 <p>
-Then, set <code>qRadGai_flow</code>,<code>qConGai_flow</code> and <code>qLatGai_flow</code> to Zero. Set <code>fixedHeatFlow</code> to Zero. Set <code>TeasWal</code> to Zero.
-Set <code>TwesWal</code> to 1.
-Then, use Simplified CFD Interface (SCI) to generate geometry input file for FFD. The length in X Y and Z is 1 m respectively. Use 20X20X20 uniform grrids.
-Set the time step size as 10 seconds and iteration time step size as 720. After generating the files which are by default name as <code>input.cfd</code> and 
-<code>zeroone.dat</code>, rename them as NaturalConvection.cfd and NaturalConvection.dat respectively.
+Connect components as shown in below figure.
+</p>
+<p align=\"center\">
+<img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/NaturalConvectionTutorialModel.png\"/> 
 </p>
 </li>
 <li>
-<p>
-We also need to revise the parameter input file for FFD. Carefully inspect below items:     
-</p>
+Set the values for components:
+<ul>
+<li>
+Set <code>qRadGai_flow</code>, <code>qConGai_flow</code> and <code>qLatGai_flow</code> to 0. 
+</li>
+<li>
+Set <code>fixedHeatFlow</code> to 0. 
+</li>
+<li>
+Set <code>TeasWal</code> to 273.15.
+</li>
+<li>
+Set <code>TwesWal</code> to 274.15.
+</li>
+</ul>
+</li>
+<li>
+Use Simplified CFD Interface (SCI) to generate geometry input file for FFD. 
+<ul>
+<li>
+The length in X Y and Z is 1 m respectively. Use 20X20X20 uniform grids.
+</li>
+<li>
+Set the time step size as 10 seconds. 
+</li>
+<li>
+Generate the input files which are by default name as <code>input.cfd</code> (mesh file) and <code>zeroone.dat</code> (information for obstacles).
+</li>
+<li>
+Rename the files as <code>NaturalConvection.cfd</code> and <code>NaturalConvection.dat</code>, respectively.
+</li>
+</ul>
+</li>
+<li>
+Revise the FFD parameter input file <code>NaturalConvection.ffd</code> (example file already in <code>Buildings/Resources/Data/Rooms/FFD/</code>):     
 <pre>
  inpu.parameter_file_format SCI
  inpu.parameter_file_name Resources/Data/Rooms/FFD/NaturalConvection.cfd 
@@ -262,29 +301,39 @@ We also need to revise the parameter input file for FFD. Carefully inspect below
  prob.beta 3e-3 // Thermal expansion coefficient
  prob.diff 0.00001 // Diffusivity for contaminants
  prob.alpha 2e-5 // Thermal diffusivity
+ prob.coeff_h 0.0004 // Convective heat transfer coefficient near the wall
+ prob.Temp_Buoyancy 0.0 // Reference temperature for calculating buoyance force
  init.T 0.0 // Initial condition for Temperature
  init.u 0.0 // Initial condition for velocity u
  init.v 0.0 // Initial condition for velocity v
  init.w 0.0 // Initial condition for velocity w
 </pre>
 <p>
-Please note that the physical property is fake. These parameters result in a Rayleigh Number of 1E5. Also check other items, such as the solver information.
+Please note that some of the physical properties were set to obtained the desired Rayleigh Number of 1E5.
 </p>
+</li>
+<li>
+Put <Code>NaturalConvection.ffd</code>, <Code>NaturalConvection.dat</code>, and <Code>NaturalConvection.cfd</code> at <code>Buildings/Resources/Data/Rooms/FFD/</code>.
+</li>
+<li>
+Set simulation stop time to 7200 seconds and choose Radau solver. 
+</li>
+<li>
+Translate the model and start the simulation.
+</li> 
 </ol>
-<p>
-After building the models and generating the input files, one need to set simulation stop time to 7200 seconds and choose Radua solver. Then click translationa and simulation to launch the simulation. 
 </html>",revisions="<html>
 <ul>
 <li>
-June 27, 2014, by Wangda Zuo:<br/>
+June 27, 2014, by Wei Tian, Thomas Sevilla, Wangda Zuo:<br/>
 First implementation.
 </li>
 </ul>
 </html>"),
     __Dymola_Commands(file=
-     "modelica://Buildings/Resources/Scripts/Dymola/Rooms/Examples/FFD/Tutorial/NaturalConvectionTutorial.mos"
+     "modelica://Buildings/Resources/Scripts/Dymola/Rooms/Examples/FFD/Tutorial/NaturalConvection.mos"
         "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-100,-180},{
             240,100}},
           preserveAspectRatio=false), graphics));
-end NaturalConvectionTutorial;
+end NaturalConvection;
