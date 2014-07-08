@@ -285,7 +285,7 @@ int read_cosim_data(PARA_DATA *para, REAL **var, int **BINDEX) {
   ****************************************************************************/
   // Change the flag to indicate that the data has been read
   para->cosim->modelica->flag = 0;
-  printf("para->cosim->modelica->flag=%d\n", para->cosim->modelica->flag);
+  //printf("para->cosim->modelica->flag=%d\n", para->cosim->modelica->flag);
 
   ffd_log("read_cosim_data(): Ended reading data from Modelica.",
           FFD_NORMAL);
