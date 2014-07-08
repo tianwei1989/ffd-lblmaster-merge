@@ -33,15 +33,15 @@ if not exist "%VCDIR% %VCVersion%\VC\" goto missing
 ::Install Glut
 ::*******************************************************************
 echo copy glut32.dll, glut32.lib, and glut.h to VC directory
-copy "glut32.dll" "%VCDIR% %VCVersion%\VC\bin" /-y
-copy "glut32.lib" "%VCDIR% %VCVersion%\VC\lib" /-y
+copy "..\..\bin\glut32.dll" "%VCDIR% %VCVersion%\VC\bin" /-y
+copy "..\..\bin\glut32.lib" "%VCDIR% %VCVersion%\VC\lib" /-y
 xcopy "glut.h" "%VCDIR% %VCVersion%\VC\include\GL\*" /-y
 goto :eof
 
 :InstallGlut2
 echo copy glut32.dll, glut32.lib, and glut.h to VC directory
-copy "glut32.dll" "%VCDIR%\VC\bin" /-y
-copy "glut32.lib" "%VCDIR%\VC\lib" /-y
+copy "..\..\bin\glut32.dll" "%VCDIR%\VC\bin" /-y
+copy "..\..\bin\glut32.lib" "%VCDIR%\VC\lib" /-y
 xcopy "glut.h" "%VCDIR%\VC\include\GL\*" /-y
 goto :eof
 
