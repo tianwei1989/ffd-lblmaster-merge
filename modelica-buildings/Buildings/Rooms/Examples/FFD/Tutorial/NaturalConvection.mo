@@ -51,7 +51,7 @@ model NaturalConvection "Tutorial for Natural Convection case"
    linearizeRadiation = false,
    useCFD = true,
    sensorName = {"Occupied zone air temperature", "Velocity"},
-   cfdFilNam = "Resources/Data/Rooms/FFD/NaturalConvection.ffd",
+   cfdFilNam = "Resources/Data/Rooms/FFD/Tutorial/NaturalConvection.ffd",
    nConExt = nConExt,
    nConExtWin = nConExtWin,
    nConPar = nConPar,
@@ -273,7 +273,7 @@ surBou(
  linearizeRadiation = false,
  useCFD = true,
  sensorName = {\"Occupied zone air temperature\", \"Velocity\"},
- cfdFilNam = \"Resources/Data/Rooms/FFD/NaturalConvection.ffd\",
+ cfdFilNam = \"Resources/Data/Rooms/FFD/Tutorial/NaturalConvection.ffd\",
  nConExt = nConExt,
  nConExtWin = nConExtWin,
  nConPar = nConPar,
@@ -338,8 +338,8 @@ Rename the files as <code>NaturalConvection.cfd</code> and <code>NaturalConvecti
 Revise the FFD parameter input file <code>NaturalConvection.ffd</code> (example file already in <code>Buildings/Resources/Data/Rooms/FFD/</code>):     
 <pre>
  inpu.parameter_file_format SCI
- inpu.parameter_file_name Resources/Data/Rooms/FFD/NaturalConvection.cfd 
- inpu.block_file_name Resources/Data/Rooms/FFD/NaturalConvection.dat
+ inpu.parameter_file_name Resources/Data/Rooms/FFD/Tutorial/NaturalConvection.cfd 
+ inpu.block_file_name Resources/Data/Rooms/FFD/Tutorial/NaturalConvection.dat
  prob.nu 1.5e-5 // Kinematic viscosity
  prob.rho 1 // Density
  prob.gravx 0 // Gravity in x direction

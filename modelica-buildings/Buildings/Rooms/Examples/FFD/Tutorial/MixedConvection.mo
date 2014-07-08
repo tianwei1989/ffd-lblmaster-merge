@@ -46,7 +46,7 @@ model MixedConvection "Tutorial for Mixed Convection case"
     linearizeRadiation = false,
     useCFD = true,
     sensorName = {"Occupied zone air temperature", "Velocity"},
-    cfdFilNam = "Resources/Data/Rooms/FFD/MixedConvection.ffd",
+    cfdFilNam = "Resources/Data/Rooms/FFD/Tutorial/MixedConvection.ffd",
     nConExt = nConExt,
     nConExtWin = nConExtWin,
     nConPar = nConPar,
@@ -246,7 +246,7 @@ surBou(
   linearizeRadiation = false,
   useCFD = true,
   sensorName = {\"Occupied zone air temperature\", \"Velocity\"},
-  cfdFilNam = \"Resources/Data/Rooms/FFD/MixedConvection.ffd\",
+  cfdFilNam = \"Resources/Data/Rooms/FFD/Tutorial/MixedConvection.ffd\",
   nConExt = nConExt,
   nConExtWin = nConExtWin,
   nConPar = nConPar,
@@ -339,8 +339,8 @@ Revise the FFD parameter input file <code>MixedConvection.ffd</code> (exmaple fi
 </p>
 <pre>
  inpu.parameter_file_format SCI
- inpu.parameter_file_name Resources/Data/Rooms/FFD/MixedlConvection.cfd 
- inpu.block_file_name Resources/Data/Rooms/FFD/MixedConvection.dat
+ inpu.parameter_file_name Resources/Data/Rooms/FFD/Tutorial/MixedlConvection.cfd 
+ inpu.block_file_name Resources/Data/Rooms/FFD/Tutorial/MixedConvection.dat
  prob.nu 0.000015 // Kinematic viscosity
  prob.rho 1.205 // Density
  prob.gravx 0 // Gravity in x direction
