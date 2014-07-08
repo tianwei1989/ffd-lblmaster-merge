@@ -15,7 +15,7 @@ protected
 
 equation
   connect(heaGai.qGai_flow, qGai_flow) annotation (Line(
-      points={{-222,100},{-280,100}},
+      points={{-222,100},{-252,100},{-252,80},{-280,80}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(heaGai.QRad_flow, add.u2) annotation (Line(
@@ -40,7 +40,7 @@ Room model that assumes the air to be completely mixed.
 </p>
 <p>
 See 
-<a href=\"modelica://Buildings.Rooms.UsersGuide\">Buildings.Rooms.UsersGuide</a>
+<a href=\"modelica://Buildings.Rooms.UsersGuide.MixedAir\">Buildings.Rooms.UsersGuide.MixedAir</a>
 for detailed explanations.
 </p>
 </html>",
