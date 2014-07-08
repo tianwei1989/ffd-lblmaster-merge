@@ -576,7 +576,6 @@ The heat and mass balance of the air is computed using Computational Fluid Dynam
 To match surfaces and fluid ports between the Modelica model and the CFD model,
 users must declare a unique name for each surface and for each fluid port.
 The same names must be used in the Computational Fluid Dynamics input file.
-fixme: The names of the fluid ports are not yet implemented.
 </li>
 <li>
 To get access to properties of the cells of the CFD simulation,
