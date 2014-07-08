@@ -1,7 +1,7 @@
 #!MC 1400
 # Created by Tecplot 360 build 14.0.2.35002
 $!VarSet |MFBD| = '.'
-$!READDATASET  '.\result.plt'
+$!READDATASET  '../../../../../result.plt'
   READDATAOPTION = NEW
   RESETSTYLE = YES
   INCLUDETEXT = NO
