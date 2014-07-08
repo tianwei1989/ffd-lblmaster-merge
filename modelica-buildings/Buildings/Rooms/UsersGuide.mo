@@ -560,7 +560,7 @@ Proc. of the 12th IBPSA Conference, p. 1096-1103. Sydney, Australia, November 20
 <p>
 The model <a href=\"modelica://Buildings.Rooms.CFD\">Buildings.Rooms.CFD</a> is 
 a room model in which the room air heat and mass balance is computed
-using the Computational Fluid Dynamics algorithm.
+using the Computational Fluid Dynamics (CFD).
 </p>
 <p>
 The model is identical with 
@@ -570,15 +570,15 @@ for the following points:
 </p>
 <ul>
 <li>
-The heat and mass balance of the air is computed using Computational Fluid Dynamics.
+The heat and mass balance of the air is computed using CFD.
 </li>
 <li>
 To match surfaces and fluid ports between the Modelica model and the CFD model,
 users must declare a unique name for each surface and for each fluid port.
-The same names must be used in the Computational Fluid Dynamics input file.
+The same names must be used in the CFD input file.
 </li>
 <li>
-To get access to properties of the cells of the CFD simulation,
+To get access to properties of the control volumes in the CFD simulation,
 this model allows declaring a sensor using the parameter 
 <code>sensorName</code>.
 This parameter is an array of strings. The same strings must be used
@@ -586,7 +586,7 @@ in the CFD input file when declaring the sensor in order to send the
 CFD results to the output signal of Modelica.
 </li>
 <li>
-To link the fluid ports in Modelica to the boundary conditions of the CFD,
+To link the fluid ports in Modelica to the boundary conditions of CFD,
 this model requires declaring names for the fluid ports 
 <code>ports</code> using the parameter 
 <code>portName</code>.
@@ -594,6 +594,7 @@ This parameter is an array of strings. The same strings must be used
 in the CFD input file when declaring the inlet and outlet boundary conditions.
 </li>
 </ul>
+A description of the model assumptions and the implemention and validation of this room model can be found in <a href=\"#ZuoEtAl2014\">Zuo et al. (2014)</a>.
 <-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <h4>Conventions</h4>
 <p>
@@ -799,7 +800,7 @@ There is also an array <code>AirProperty</code> that contains the properties of 
 The orders of elements in this array are as follows:
 <ol>
 <li>
-The density of air at the initial state (the CFD will accept it only when there is a mass exchange between the two programs).
+The density of air at the initial state (CFD will accept it only when there is a mass exchange between the two programs).
 </li>
 </ol> 
 </li>
@@ -917,6 +918,14 @@ The first <code>Medium.nC</code> elements are for port <i>1</i>, then for
 port <i>2</i> etc.
 </li>
 </ol>
+<h4>References</h4>
+<p>
+<a NAME=\"ZuoEtAl2014\"/> 
+Wangda Zuo, Michael Wetter, Dan Li, Mingang Jin, Wei Tian, Qingyan Chen.<br/> 
+<a href=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/Zuo2014.pdf\">
+Coupled Simulation of Indoor Environment, HVAC and Control System by Using Fast Fluid Dynamics and the Modelica Buildings Library. </a><br/>
+Proc. of the 2014 ASHRAE/IBPSA-USA Building Simulation Conference, Atlanta, GA, September 10-12, 2014.
+</p>
 </html>"));
   end CFD;
 
