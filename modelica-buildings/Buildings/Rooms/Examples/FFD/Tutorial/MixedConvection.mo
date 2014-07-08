@@ -122,17 +122,36 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(bouIn.ports[1], roo.ports[1]) annotation (Line(
-      points={{60,-44},{74,-44},{74,-30},{85,-30}},
+      points={{60,-44},{74,-44},{74,-28},{83,-28}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(bouOut.ports[1], roo.ports[2]) annotation (Line(
-      points={{60,-74},{74,-74},{74,-26},{85,-26}},
+      points={{60,-74},{74,-74},{74,-28},{87,-28}},
       color={0,127,255},
       smooth=Smooth.None));
   annotation (preferredView="info", Documentation(info="<html>
 <p>
-For the case description please refer to 
-<a href=\"modelica://Buildings.Rooms.Examples.FFD.MixedConvection\">Buildings.Rooms.Examples.FFD.MixedConvection</a>.
+This model tests the coupled simulation of 
+<a href=\"modelica://Buildings.Rooms.CFD\">
+Buildings.Rooms.CFD</a>
+with the FFD program by simulating the ventilation with mixed convection in an empty room.
+The temperature of floor is fixed at 30 degC and the temperature on other walls and ceiling are fixed at 10 degC.
+The supply air temperature is fixed at 10 degC. 
+</p>
+<p>
+Figure (a) shows the schematic of FFD simulation and Figure (b) shows the velocity vectors and temperature on the X-Z plane at Y = 0.5m simulated by the FFD. 
+</p>
+<p align=\"center\">
+<img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/Tutorial/MixedConvectionSchematic.png\" border=\"1\"/>
+</p>
+<p align=\"center\">
+Figure (a)
+</p>
+<p align=\"center\">
+<img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/Tutorial/MixedConvection.png\" border=\"1\"/>
+</p>
+<p align=\"center\">
+Figure (b)
 </p>
 <h4>Implementation</h4>
 <p>
@@ -283,7 +302,7 @@ Fluid.Sources.FixedBoundary bouOut(nPorts=1, redeclare package Medium = MediumA)
 Connect components as shown in below figure. 
 </p>
 <p align=\"center\">
-<img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/MixedConvectionTutorialModel.png\"/> 
+<img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/Tutorial/MixedConvectionModel.png\"/> 
 </p>
 </li>
 <li>

@@ -129,8 +129,57 @@ equation
       smooth=Smooth.None));
   annotation (Documentation(info="<html>
 <p>
-For the case description, please refer to 
-<a href=\"modelica://Buildings.Rooms.Examples.FFD.NaturalConvection\">Buildings.Rooms.Examples.FFD.NaturalConvection</a>.
+This model tests the cosimulation of 
+<a href=\"modelica://Buildings.Rooms.CFD\">
+Buildings.Rooms.CFD</a>
+with the FFD program by simulating the natural convection in an empty room with only surface boundaries.
+</p>
+<p>
+The Rayleigh number is a dimensionless number associated with natural convection, defined as 
+<p align=\"center\" style=\"font-style:italic;\">
+  R<sub>a</sub> = g &beta; (T<sub>w</sub>-T<sub>e</sub>)L<sup>3</sup> &frasl; (&nu; &alpha;)
+</p>
+<p>
+To get a Rayleigh number of 1E5, the flow properties are mannually set as
+acceleration due to gravity <i>g<sub>z</sub>=-0.01</i> m/s2, 
+thermal expansion coefficient <i>&beta;=3e-3</i> 1/K, 
+kinematic viscosity <i>&nu;=1.5e-5</i> m2/s, 
+thermal diffusivity <i>&alpha;=2e-5</i> m2/s,
+characteristic length <i>L=1</i> m. 
+</p>
+<p>
+Figure (a) shows the schematic of the FFD simulation. 
+The following conditions are applied at Modelica side:
+</p>
+<ul>
+<li>
+East wall: Fixed temperature at <i>T<sub>e</sub>=0</i> degC, 
+</li>
+<li>
+West wall: Fixed temperature at <i>T<sub>w</sub>=1</i> degC,
+</li>
+<li>
+North &amp; South wall, Ceiling, Floor: Fixed heat flux at 0 W/m2.
+</li>
+</ul>
+<p align=\"center\">
+<img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/Tutorial/NaturalConvectionSchematic.png\" border=\"1\"/>
+</p>
+<p align=\"center\">
+Figure (a)
+</p>
+<p>
+Figure (b) shows the velocity vectors and temperature [degC] on the X-Z plane at Y = 0.5m simulated by the FFD.
+</p>
+<p align=\"center\">
+<img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/Tutorial/NaturalConvection.png\" border=\"1\"/>
+</p>
+<p align=\"center\">
+Figure (b)
+</p>
+<p align=\"left\">
+More details of the case description can be found in 
+<a href=\"#ZuoEtAl2011\">Zuo et al. (2011)</a>.
 </p>
 <h4>Implementation</h4>
 <p>
@@ -248,7 +297,7 @@ parameter Buildings.HeatTransfer.Data.OpaqueConstructions.Generic matLayRoo(
 Connect components as shown in below figure.
 </p>
 <p align=\"center\">
-<img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/NaturalConvectionTutorialModel.png\"/> 
+<img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/Tutorial/NaturalConvectionModel.png\"/> 
 </p>
 </li>
 <li>
@@ -309,7 +358,7 @@ Revise the FFD parameter input file <code>NaturalConvection.ffd</code> (example 
  init.w 0.0 // Initial condition for velocity w
 </pre>
 <p>
-Please note that some of the physical properties were set to obtained the desired Rayleigh Number of 1E5.
+Please note that some of the physical properties were manipulated to obtained the desired Rayleigh Number of 1E5.
 </p>
 </li>
 <li>
@@ -329,6 +378,14 @@ June 27, 2014, by Wei Tian, Thomas Sevilla, Wangda Zuo:<br/>
 First implementation.
 </li>
 </ul>
+<h4>References</h4>
+<p>
+<a NAME=\"ZuoEtAl2011\"/>
+Wangda Zuo, Mingang Jin, Qingyan Chen, 2011<br/></a>
+<a href=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/2011-Zuo-EACFD.pdf\">
+Reduction of numerical viscosity in FFD model.</a><br/> 
+Journal of Engineering Applications of Computational Fluid Mechanics, 6(2), p. 234-247.
+</p>
 </html>"),
     __Dymola_Commands(file=
      "modelica://Buildings/Resources/Scripts/Dymola/Rooms/Examples/FFD/Tutorial/NaturalConvection.mos"
