@@ -328,7 +328,7 @@ Revise the FFD parameter input file <code>MixedConvection.ffd</code> (exmaple fi
  prob.gravy 0 // Gravity in y direction
  prob.gravz -9.81 // Gravity in z direction
  prob.cond 0.0257 // Conductivity
- prob.Cp 1005.0 // Specific heat capacity
+ prob.Cp 1006.0 // Specific heat capacity
  prob.beta 0.00343 // Thermal expansion coefficient
  prob.diff 0.00001 // Diffusivity for contaminants
  prob.coeff_h 0.0004 // Convective heat transfer coefficient near the wall
