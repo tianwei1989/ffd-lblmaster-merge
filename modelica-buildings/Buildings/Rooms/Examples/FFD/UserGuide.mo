@@ -8,7 +8,7 @@ package UserGuide
 For the introduction of coupled simulation and the detailed information
 of <a href=\"modelica://Buildings.Rooms.CFD\">Buildings.Rooms.CFD</a>,
 please refer to <a href=\"modelica://Buildings.Rooms.UsersGuide.CFD\">Buildings.Rooms.UsersGuide.CFD</a>.
-For the step-by-step guide on performing the coupled simulation, please refer to <a href=\"modelica://Buildings.Rooms.Examples.FFD.Tutorial\">Buildings.Rooms.Examples.FFD.Tutorial</a>.
+For the step by step guide on performing the coupled simulation, please refer to <a href=\"modelica://Buildings.Rooms.Examples.FFD.Tutorial\">Buildings.Rooms.Examples.FFD.Tutorial</a>.
 </p>
 <h4>Files for the Coupled Simulation</h4>
 <p>
