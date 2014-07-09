@@ -66,7 +66,7 @@ The heat is injected into the room through the heat port as convective heat flow
 After receving the heat flow from Modelica, the FFD uniformly distributes it into the space.
 </p>
 <p>
-Figure (a) shows the velocity vectors and temperature [degC] on the X-Z plane at Y = 0.5m simulated by the FFD 
+Figure (a) shows the velocity vectors and temperature contour [degC] on the X-Z plane at Y = 0.5m simulated by the FFD 
 </p>
 <p align=\"center\">
 <img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/NaturalConvectionWithControl.png\" border=\"1\"/>
