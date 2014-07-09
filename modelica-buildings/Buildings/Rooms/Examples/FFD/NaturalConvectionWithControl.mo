@@ -1,7 +1,7 @@
 within Buildings.Rooms.Examples.FFD;
 model NaturalConvectionWithControl
   "A case of natural convection with feedback loop control"
-  extends NaturalConvection(                matLayRoo(
+  extends Buildings.Rooms.Examples.FFD.Tutorial.NaturalConvection(                matLayRoo(
                                             material= {Buildings.HeatTransfer.Data.Solids.Concrete(x=0.0001)}), roo(
         nPorts=0,
       useCFD=true,
@@ -28,7 +28,7 @@ initial equation
 
 equation
   connect(roo.yCFD[1], conPID.u_m) annotation (Line(
-      points={{87,51.5},{90,51.5},{90,118}},
+      points={{101,-26.5},{90,-26.5},{90,118}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(const.y, conPID.u_s) annotation (Line(
@@ -36,7 +36,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(preHeatFlo.port, roo.heaPorAir) annotation (Line(
-      points={{60,90},{72,90},{72,40},{65,40}},
+      points={{60,90},{72,90},{72,-38},{79,-38}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(conPID.y, preHeatFlo.Q_flow) annotation (Line(
@@ -44,8 +44,8 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{200,
-            200}}),            graphics),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{
+            220,140}}),        graphics),
     __Dymola_Commands(file=
           "modelica://Buildings/Resources/Scripts/Dymola/Rooms/Examples/FFD/NaturalConvectionWithControl.mos"
         "Simulate and plot"),
