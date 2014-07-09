@@ -122,11 +122,11 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(bouIn.ports[1], roo.ports[1]) annotation (Line(
-      points={{60,-44},{74,-44},{74,-28},{83,-28}},
+      points={{60,-44},{74,-44},{74,-30},{85,-30}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(bouOut.ports[1], roo.ports[2]) annotation (Line(
-      points={{60,-74},{74,-74},{74,-28},{87,-28}},
+      points={{60,-74},{74,-74},{74,-26},{85,-26}},
       color={0,127,255},
       smooth=Smooth.None));
   annotation (preferredView="info", Documentation(info="<html>
@@ -135,6 +135,7 @@ This model tests the coupled simulation of
 <a href=\"modelica://Buildings.Rooms.CFD\">
 Buildings.Rooms.CFD</a>
 with the FFD program by simulating the ventilation with mixed convection in an empty room.
+<h4>Case Description</h4>
 The temperature of floor is fixed at 30 degC and the temperature on other walls and ceiling are fixed at 10 degC.
 The supply air temperature is fixed at 10 degC. 
 </p>
@@ -153,7 +154,7 @@ Figure (a)
 <p align=\"center\">
 Figure (b)
 </p>
-<h4>Implementation</h4>
+<h4>Step by Step Guide</h4>
 <p>
 This section describes step by step how we implemented the model.
 </p>
@@ -335,7 +336,7 @@ Rename the files as <code>MixedConvection.cfd</code> and <code>MixedConvection.d
 </li>
 <li>
 <p>
-Revise the FFD parameter input file <code>MixedConvection.ffd</code> (exmaple file already in <code>Buildings/Resources/Data/Rooms/FFD/</code>):   
+Revise the FFD parameter input file <code>MixedConvection.ffd</code> (exmaple file already in <code>Buildings/Resources/Data/Rooms/FFD/Tutorial/</code>):   
 </p>
 <pre>
  inpu.parameter_file_format SCI
@@ -359,14 +360,18 @@ Revise the FFD parameter input file <code>MixedConvection.ffd</code> (exmaple fi
 </pre>
 </li>
 <li>
-Put <Code>MixedConvection.ffd</code>, <Code>MixedConvection.dat</code>, and <Code>MixedConvection.cfd</code> at <code>Buildings/Resources/Data/Rooms/FFD/</code>
+Put <Code>MixedConvection.ffd</code>, <Code>MixedConvection.dat</code>, and <Code>MixedConvection.cfd</code> at <code>Buildings/Resources/Data/Rooms/FFD/Tutorial/</code>
 </li>
 <li>
 Set simulation stop time to 180 seconds and choose Radau solver. 
 </li>
 <li>
 Translate the model and start the simulation.
-</li> 
+</li>
+<li>
+Post-process: click the Tecplot macro script <code>Buildings/Resources/Image/Rooms/Examples/FFD/Tutorial/MixedConvection.mcr</code> that will generate the temperature contour and velocity vectors shown in the Figure (b). 
+Note: Tecplot is needed for this.
+</li>  
 </ol>
 </html>",revisions="<html>
 <ul>

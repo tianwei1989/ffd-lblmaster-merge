@@ -134,6 +134,7 @@ This model tests the cosimulation of
 Buildings.Rooms.CFD</a>
 with the FFD program by simulating the natural convection in an empty room with only surface boundaries.
 </p>
+<h4>Case Description</h4>
 <p>
 The Rayleigh number is a dimensionless number associated with natural convection, defined as 
 <p align=\"center\" style=\"font-style:italic;\">
@@ -181,7 +182,7 @@ Figure (b)
 More details of the case description can be found in 
 <a href=\"#ZuoEtAl2011\">Zuo et al. (2011)</a>.
 </p>
-<h4>Implementation</h4>
+<h4>Step by Step Guide</h4>
 <p>
 This section describes step by step how we implemented the model.
 </p>
@@ -310,10 +311,10 @@ Set <code>qRadGai_flow</code>, <code>qConGai_flow</code> and <code>qLatGai_flow<
 Set <code>fixedHeatFlow</code> to 0. 
 </li>
 <li>
-Set <code>TeasWal</code> to 273.15.
+Set <code>TEasWal</code> to 273.15.
 </li>
 <li>
-Set <code>TwesWal</code> to 274.15.
+Set <code>TWesWal</code> to 274.15.
 </li>
 </ul>
 </li>
@@ -321,7 +322,7 @@ Set <code>TwesWal</code> to 274.15.
 Use Simplified CFD Interface (SCI) to generate geometry input file for FFD. 
 <ul>
 <li>
-The length in X Y and Z is 1 m respectively. Use 20X20X20 uniform grids.
+The lengthes in X, Y and Z are all 1 m. Use 20 x 20 x 20 uniform grids.
 </li>
 <li>
 Set the time step size as 10 seconds. 
@@ -335,7 +336,7 @@ Rename the files as <code>NaturalConvection.cfd</code> and <code>NaturalConvecti
 </ul>
 </li>
 <li>
-Revise the FFD parameter input file <code>NaturalConvection.ffd</code> (example file already in <code>Buildings/Resources/Data/Rooms/FFD/</code>):     
+Revise the FFD parameter input file <code>NaturalConvection.ffd</code> (example file already in <code>Buildings/Resources/Data/Rooms/FFD/Tutorial/</code>):     
 <pre>
  inpu.parameter_file_format SCI
  inpu.parameter_file_name Resources/Data/Rooms/FFD/Tutorial/NaturalConvection.cfd 
@@ -362,13 +363,17 @@ Please note that some of the physical properties were manipulated to obtained th
 </p>
 </li>
 <li>
-Put <Code>NaturalConvection.ffd</code>, <Code>NaturalConvection.dat</code>, and <Code>NaturalConvection.cfd</code> at <code>Buildings/Resources/Data/Rooms/FFD/</code>.
+Put <Code>NaturalConvection.ffd</code>, <Code>NaturalConvection.dat</code>, and <Code>NaturalConvection.cfd</code> at <code>Buildings/Resources/Data/Rooms/FFD/Tutorial</code>.
 </li>
 <li>
 Set simulation stop time to 7200 seconds and choose Radau solver. 
 </li>
 <li>
 Translate the model and start the simulation.
+</li> 
+<li>
+Post-process: click the Tecplot macro script <code>Buildings/Resources/Image/Rooms/Examples/FFD/Tutorial/NaturalConvection.mcr</code> that will generate the temperature contour and velocity vectors shown in the Figure (b). 
+Note: Tecplot is needed for this.
 </li> 
 </ol>
 </html>",revisions="<html>
