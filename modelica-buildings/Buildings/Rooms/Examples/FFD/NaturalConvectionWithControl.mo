@@ -7,7 +7,7 @@ model NaturalConvectionWithControl
       useCFD=true,
       samplePeriod=30));
   HeatTransfer.Sources.PrescribedHeatFlow preHeatFlo
-    annotation (Placement(transformation(extent={{40,80},{60,100}})));
+    annotation (Placement(transformation(extent={{30,-8},{50,12}})));
   Controls.Continuous.LimPID conPID(
     yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -16,36 +16,35 @@ model NaturalConvectionWithControl
     k=0.001)                       annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
-        origin={90,130})));
-  Modelica.Blocks.Sources.Constant const(k=275.15)
-                                                annotation (Placement(
-        transformation(
+        origin={50,50})));
+  Modelica.Blocks.Sources.Constant TSet(k=275.15) "set temperature "
+    annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
-        origin={130,130})));
+        origin={90,50})));
 initial equation
   roo.air.yCFD[1]=273.15;
 
 equation
   connect(roo.yCFD[1], conPID.u_m) annotation (Line(
-      points={{101,-26.5},{90,-26.5},{90,118}},
+      points={{101,-26.5},{106,-26.5},{106,20},{50,20},{50,38}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(const.y, conPID.u_s) annotation (Line(
-      points={{119,130},{102,130}},
+  connect(TSet.y, conPID.u_s) annotation (Line(
+      points={{79,50},{62,50}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(preHeatFlo.port, roo.heaPorAir) annotation (Line(
-      points={{60,90},{72,90},{72,-38},{79,-38}},
+      points={{50,2},{76,2},{76,-38},{79,-38}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(conPID.y, preHeatFlo.Q_flow) annotation (Line(
-      points={{79,130},{20,130},{20,90},{40,90}},
+      points={{39,50},{20,50},{20,2},{30,2}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{
-            220,140}}),        graphics),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},{
+            180,80}}),         graphics),
     __Dymola_Commands(file=
           "modelica://Buildings/Resources/Scripts/Dymola/Rooms/Examples/FFD/NaturalConvectionWithControl.mos"
         "Simulate and plot"),
