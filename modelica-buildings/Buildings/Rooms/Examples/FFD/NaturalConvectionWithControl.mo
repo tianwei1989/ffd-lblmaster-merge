@@ -43,8 +43,8 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},{
-            180,80}}),         graphics),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-180},{
+            220,120}}),        graphics),
     __Dymola_Commands(file=
           "modelica://Buildings/Resources/Scripts/Dymola/Rooms/Examples/FFD/NaturalConvectionWithControl.mos"
         "Simulate and plot"),
