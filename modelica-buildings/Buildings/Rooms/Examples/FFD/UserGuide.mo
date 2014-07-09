@@ -15,7 +15,7 @@ For the step by step guide on performing the coupled simulation, please refer to
 The source code of the FFD program is located at <code>Buildings/Resources/src/FastFluidDynamics</code>.
 </p>
 <p>
-To run the coupled simulation with FFD, the following files are needed that are given in the library:
+To run the coupled simulation with FFD, the following files are needed and given in the library:
 </p>
 <ul>
 <li>
@@ -45,7 +45,7 @@ However, current version does not support the visualization feature for the coup
 In Windows: 
 <ol>
 <li>
-go to <code>Buildings/Resources/src/FastFluidDynamics/</code>. 
+go to <code>Buildings/Resources/src/FastFluidDynamics/</code>
 </li>
 <li>
 right-click <code>Install Glut.bat</code> 
