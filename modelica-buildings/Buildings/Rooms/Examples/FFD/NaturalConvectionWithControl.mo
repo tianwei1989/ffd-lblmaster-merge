@@ -73,7 +73,10 @@ Figure (a) shows the velocity vectors and temperature [degC] on the X-Z plane at
 </p>
 <p align=\"center\">
 Figure (a)
-</p>      
+</p> 
+<p>
+
+</p>
 </html>", revisions="<html>
 <ul>
 <li>
