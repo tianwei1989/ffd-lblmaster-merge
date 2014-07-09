@@ -63,9 +63,22 @@ open console
 </li>
 <li>
 type <code> sudo apt-cache search freeGLUT</code> to search latest version
+<P>
+As of 7/9/2014, the following information will show in your console:
+<pre>
+freeglut3 - OpenGL Utility Toolkit
+freeglut3-dbg - OpenGL Utility Toolkit debugging information
+freeglut3-dev - OpenGL Utility Toolkit development files
+</pre>
+This indicates the newest version is <code>freeglut3</code>.  
 </li>
 <li>
-type <code>sudo apt-get install freeglut3-dev:i386</code> to install GLUT
+Install the developer version of the newest freeGLUT. 
+If the Modelica environment is 32-bit version, we should install the 32-bit version of GLUT as follows: 
+<pre>
+sudo apt-get install freeglut3-dev:i386
+</pre>
+</p>
 </li>
 </ol>
 </li>
