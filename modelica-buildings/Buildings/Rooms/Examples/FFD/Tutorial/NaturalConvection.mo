@@ -23,13 +23,13 @@ model NaturalConvection "Tutorial for Natural Convection case"
   inner Modelica.Fluid.System system(T_ambient=283.15)
     annotation (Placement(transformation(extent={{-60,
             -120},{-40,-100}})));
-  parameter HeatTransfer.Data.OpaqueConstructions.Generic           matLayRoo1(
-      final nLay=1, material={HeatTransfer.Data.Solids.Concrete(x=0.0001)})
+  parameter HeatTransfer.Data.OpaqueConstructions.Generic matLayRoo(final nLay=
+        1, material={HeatTransfer.Data.Solids.Concrete(x=0.0001)})
     "Construction material for roof"
-    annotation (Placement(transformation(extent={{40,62},{60,82}})));
+    annotation (Placement(transformation(extent={{-20,42},{0,62}})));
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam="modelica://Buildings/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
       TDryBul=293.15)
-    annotation (Placement(transformation(extent={{120,60},{140,80}})));
+    annotation (Placement(transformation(extent={{120,40},{140,60}})));
   Buildings.Rooms.CFD roo(
    redeclare package Medium = MediumA,
    surBou(
@@ -91,11 +91,6 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(weaDat.weaBus, roo.weaBus) annotation (Line(
-      points={{140,70},{156,70},{156,-20.1},{97.9,-20.1}},
-      color={255,204,51},
-      thickness=0.5,
-      smooth=Smooth.None));
   connect(TEasWal.port, roo.surf_surBou[1])
     annotation (Line(
       points={{120,-70},{76.2,-70},{76.2,-52}},
@@ -126,6 +121,11 @@ equation
     annotation (Line(
       points={{46,-92},{76.2,-92},{76.2,-52}},
       color={191,0,0},
+      smooth=Smooth.None));
+  connect(weaDat.weaBus, roo.weaBus) annotation (Line(
+      points={{140,50},{154,50},{154,-20.1},{97.9,-20.1}},
+      color={255,204,51},
+      thickness=0.5,
       smooth=Smooth.None));
   annotation (Documentation(info="<html>
 <p>
@@ -390,7 +390,6 @@ Journal of Engineering Applications of Computational Fluid Mechanics, 6(2), p. 2
     __Dymola_Commands(file=
      "modelica://Buildings/Resources/Scripts/Dymola/Rooms/Examples/FFD/Tutorial/NaturalConvection.mos"
         "Simulate and plot"),
-    Diagram(coordinateSystem(extent={{-100,-180},{
-            240,100}},
+    Diagram(coordinateSystem(extent={{-100,-180},{240,100}},
           preserveAspectRatio=false), graphics));
 end NaturalConvection;
