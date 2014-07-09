@@ -1,5 +1,5 @@
 within Buildings.Rooms.Examples.FFD;
-package UserGuide
+package UsersGuide
   extends Modelica.Icons.Information;
   annotation (preferredView="info",
   Documentation(info="<html>
@@ -104,4 +104,4 @@ type <code>make all</code>
 The dynamic linkers are stored in <code>Buildings/Resources/bin</code>.
 </p>
 </html>"));
-end UserGuide;
+end UsersGuide;

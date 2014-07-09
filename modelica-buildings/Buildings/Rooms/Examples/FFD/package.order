@@ -1,12 +1,10 @@
-BaseClasses
-UserGuide
+UsersGuide
 Tutorial
 RoomOnlyConstructionBoundary
 RoomOnlyExteriorWallNoWindow
 RoomOnlySurfaceBoundary
-NaturalConvection
 NaturalConvectionWithControl
 ForcedConvection
-MixedConvection
 WindowWithoutShade
 WindowWithShade
+BaseClasses
