@@ -82,7 +82,7 @@ int allocate_memory (PARA_DATA *para) {
     return 1;
   }
 
-  for(i=0; i<5; i++)
+  for(i=0; i<5; i++) {
     BINDEX[i] = (int *) malloc(size*sizeof(int));
     if(BINDEX[i]==NULL) {
       sprintf(msg, 
@@ -90,7 +90,7 @@ int allocate_memory (PARA_DATA *para) {
       ffd_log(msg, FFD_ERROR);
       return 1;
     }
-
+  }
   return 0;
 } // End of allocate_memory()
 
@@ -309,11 +309,11 @@ int ffd(int cosimulation) {
     ffd_log("ffd(): Could not initialize simulation parameters.", FFD_ERROR);
     return 1;
   }
-  
+
   // Overwrite the mesh and simulation data using SCI generated file
   if(para.inpu->parameter_file_format == SCI) {
     if(read_sci_max(&para, var)!=0) {
-      ffd_log("ffd(): Could not read SCi data.", FFD_ERROR);
+      ffd_log("ffd(): Could not read SCI data.", FFD_ERROR);
       return 1;
     }
   }
