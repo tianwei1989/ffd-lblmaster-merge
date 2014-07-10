@@ -122,7 +122,8 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(bouIn.ports[1], roo.ports[1]) annotation (Line(
-      points={{60,-44},{74,-44},{74,-30},{85,-30}},
+      points={{60,-44},{74,-44},{74,-26},{84,-26},{84,-26},{84,-26},{84,-30},{85,
+          -30}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(bouOut.ports[1], roo.ports[2]) annotation (Line(
