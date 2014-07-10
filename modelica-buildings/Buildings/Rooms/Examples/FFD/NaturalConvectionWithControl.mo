@@ -57,12 +57,13 @@ with the FFD program by simulating natural convection in an empty room with a PI
 </p>
 <p>
 Configuration of the simulation is the same as 
-<a href=\"modelica://Buildings.Rooms.Examples.FFD.NaturalConvection\">
-Buildings.Rooms.Examples.FFD.NaturalConvection</a>, except that a heater with PI controller is added to maintain the desire room temperature. 
+<a href=\"modelica://Buildings.Rooms.Examples.FFD.Tutorial.NaturalConvection\">
+Buildings.Rooms.Examples.FFD.Tutorial.NaturalConvection</a>, except that a heater with PI controller is added to maintain the desired room temperature. 
 </p>
 <p>
-The temperature at the room center is provided by FFD and sent to the PI controller as measured temperature. 
-The heat is injected into the room through the heat port as convective heat flow. 
+The temperature at the central room is sent to the PI controller as measured temperature. Based on the difference of set temperature and measured temperaure PI
+controller sends signal to the heater to yield the heat flow.
+The heat flow is then injected into the room through the heat port as convective heat flow. 
 After receving the heat flow from Modelica, the FFD uniformly distributes it into the space.
 </p>
 <p>
@@ -80,7 +81,7 @@ Figure (a)
 </html>", revisions="<html>
 <ul>
 <li>
-May 7, 2014, by Tian Wei:<br/>
+May 7, 2014, by Wei Tian:<br/>
 First implementation.
 </li>
 </ul>
