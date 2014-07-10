@@ -129,7 +129,7 @@ equation
       smooth=Smooth.None));
   annotation (Documentation(info="<html>
 <p>
-This model tests the cosimulation of 
+This tutorial gives step by step instruction on building and simulating natural convection model. The model tests the coupled simulation of 
 <a href=\"modelica://Buildings.Rooms.CFD\">
 Buildings.Rooms.CFD</a>
 with the FFD program by simulating the natural convection in an empty room with only surface boundaries.
@@ -170,7 +170,7 @@ North &amp; South wall, Ceiling, Floor: Fixed heat flux at 0 W/m2.
 Figure (a)
 </p>
 <p>
-Figure (b) shows the velocity vectors and temperature [degC] on the X-Z plane at Y = 0.5m simulated by the FFD.
+Figure (b) shows the velocity vectors and temperature contour [degC] on the X-Z plane at Y = 0.5m simulated by the FFD.
 </p>
 <p align=\"center\">
 <img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/Tutorial/NaturalConvection.png\" border=\"1\"/>
@@ -184,7 +184,7 @@ More details of the case description can be found in
 </p>
 <h4>Step by Step Guide</h4>
 <p>
-This section describes step by step how we implemented the model.
+This section describes step by step how to build and simulate the model.
 </p>
 <ol>
 <li>
@@ -328,7 +328,7 @@ The lengthes in X, Y and Z are all 1 m. Use 20 x 20 x 20 uniform grids.
 Set the time step size as 10 seconds. 
 </li>
 <li>
-Generate the input files which are by default name as <code>input.cfd</code> (mesh file) and <code>zeroone.dat</code> (information for obstacles).
+Generate the input files which are by default name as <code>input.cfd</code> (mesh file) and <code>zeroone.dat</code> (obstacles file).
 </li>
 <li>
 Rename the files as <code>NaturalConvection.cfd</code> and <code>NaturalConvection.dat</code>, respectively.
@@ -366,7 +366,7 @@ Please note that some of the physical properties were manipulated to obtained th
 Put <Code>NaturalConvection.ffd</code>, <Code>NaturalConvection.dat</code>, and <Code>NaturalConvection.cfd</code> at <code>Buildings/Resources/Data/Rooms/FFD/Tutorial</code>.
 </li>
 <li>
-Set simulation stop time to 7200 seconds and choose Radau solver. 
+Set simulation stop time to <code>7200</code> seconds and choose <code>Radau solver</code>. 
 </li>
 <li>
 Translate the model and start the simulation.
