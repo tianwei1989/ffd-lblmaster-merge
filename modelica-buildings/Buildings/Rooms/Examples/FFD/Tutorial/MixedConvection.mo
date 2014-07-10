@@ -22,8 +22,8 @@ model MixedConvection "Tutorial for Mixed Convection case"
     annotation (Placement(transformation(extent={{20,-20},{40,0}})));
   inner Modelica.Fluid.System system(T_ambient=283.15)
     annotation (Placement(transformation(extent={{-40,-100},{-20,-80}})));
-  parameter HeatTransfer.Data.OpaqueConstructions.Generic matLayRoo(final nLay=
-        1, material={HeatTransfer.Data.Solids.Concrete(x=0.0001)})
+  parameter HeatTransfer.Data.OpaqueConstructions.Generic matLayRoo(final nLay=1,
+      material={HeatTransfer.Data.Solids.Concrete(x=0.0001)})
     "Construction material for roof"
     annotation (Placement(transformation(extent={{60,82},{80,102}})));
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam="modelica://Buildings/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
@@ -131,12 +131,12 @@ equation
       smooth=Smooth.None));
   annotation (preferredView="info", Documentation(info="<html>
 <p>
-This model tests the coupled simulation of 
+This tutorial gives step by step instruction on building and simulating mixed convection model. The model tests the coupled simulation of 
 <a href=\"modelica://Buildings.Rooms.CFD\">
 Buildings.Rooms.CFD</a>
 with the FFD program by simulating the ventilation with mixed convection in an empty room.
 <h4>Case Description</h4>
-The temperature of floor is fixed at 30 degC and the temperature on other walls and ceiling are fixed at 10 degC.
+The temperature of floor is fixed at 30 degC and the temperature on other walls and ceiling is fixed at 10 degC.
 The supply air temperature is fixed at 10 degC. 
 </p>
 <p>
@@ -156,7 +156,7 @@ Figure (b)
 </p>
 <h4>Step by Step Guide</h4>
 <p>
-This section describes step by step how we implemented the model.
+This section describes step by step how to build and simulate the model.
 </p>
 <ol>
 <li>
@@ -240,7 +240,7 @@ surBou(
       Buildings.HeatTransfer.Types.Tilt.Floor},
   each absIR=1e-5,
   each absSol=1e-5,
-  each boundaryCondition=Buildings.Rooms.Types.CFDBoundaryConditions.Temperature,
+  each boundaryCondition=Buildings.Rooms.Types.CFDBoundaryConditions.Temperature),
   lat = 0.012787839282646,
   AFlo = 1*1,
   hRoo = 1,
@@ -327,7 +327,7 @@ Use 20 X 20 X 20 stretched grids.
 Set the time step size as 0.1 seconds. 
 </li>
 <li>
-Generate the input files which are by default name as <code>input.cfd</code> (mesh file) and <code>zeroone.dat</code> (information for obstacles).
+Generate the input files which are by default name as <code>input.cfd</code> (mesh file) and <code>zeroone.dat</code> (obstacles file).
 </li>
 <li>
 Rename the files as <code>MixedConvection.cfd</code> and <code>MixedConvection.dat</code>, respectively.
@@ -363,7 +363,7 @@ Revise the FFD parameter input file <code>MixedConvection.ffd</code> (exmaple fi
 Put <Code>MixedConvection.ffd</code>, <Code>MixedConvection.dat</code>, and <Code>MixedConvection.cfd</code> at <code>Buildings/Resources/Data/Rooms/FFD/Tutorial/</code>
 </li>
 <li>
-Set simulation stop time to 180 seconds and choose Radau solver. 
+Set simulation stop time to <code>180</code> seconds and choose <code>Radau solver</code>. 
 </li>
 <li>
 Translate the model and start the simulation.
