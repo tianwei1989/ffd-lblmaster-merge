@@ -22,8 +22,8 @@ model MixedConvection "Tutorial for Mixed Convection case"
     annotation (Placement(transformation(extent={{20,-20},{40,0}})));
   inner Modelica.Fluid.System system(T_ambient=283.15)
     annotation (Placement(transformation(extent={{-40,-100},{-20,-80}})));
-  parameter HeatTransfer.Data.OpaqueConstructions.Generic           matLayRoo1(
-      final nLay=1, material={HeatTransfer.Data.Solids.Concrete(x=0.0001)})
+  parameter HeatTransfer.Data.OpaqueConstructions.Generic matLayRoo(final nLay=
+        1, material={HeatTransfer.Data.Solids.Concrete(x=0.0001)})
     "Construction material for roof"
     annotation (Placement(transformation(extent={{60,82},{80,102}})));
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam="modelica://Buildings/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
