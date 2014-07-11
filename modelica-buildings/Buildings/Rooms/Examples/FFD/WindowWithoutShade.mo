@@ -60,7 +60,7 @@ with the FFD program by simulating the natural convection in a room with only ex
 <p>
 Figure (a) shows the schematic of FFD simulation. 
 The walls are exposed to the ambient environment. 
-Both the wall and window are well insulated and the initial temperature of wall and windows are 20 degC.
+Both the wall and window are well insulated and the initial temperature of wall and windows is 20 degC.
 </p>
 <p align=\"center\">
 <img alt=\"image\" src=\"modelica://Buildings/Resources/Images/Rooms/Examples/FFD/WindowWithoutShadeSchematic.png\" border=\"1\"/>

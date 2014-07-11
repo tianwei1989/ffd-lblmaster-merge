@@ -55,7 +55,7 @@ with the FFD program by simulating the natural convection in an empty room with 
 </p>
 <p>
 Figure (a) shows the schematic of the FFD simulation.
-The dimensions of the room are 1m x 1m x 1m.
+The room is 1 meter in length, width and height.
 The temperature of the east wall is set to 40 degC and the rest walls are 10 degC.
 The temperature of room air is 30 degC at t = 0s.
 Two sensors are placed in the room center (0.5m, 0.5m, 0.5m) that measure the temperature and the velocity. 
