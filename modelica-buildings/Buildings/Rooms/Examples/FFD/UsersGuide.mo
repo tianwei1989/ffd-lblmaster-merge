@@ -64,7 +64,7 @@ open console
 <li>
 type <code> sudo apt-cache search freeGLUT</code> to search latest version
 <P>
-As of 7/9/2014, the following information will be shown in the console:
+As of 7/9/2014, the following information will be shown in the console:</p>
 <pre>
 freeglut3 - OpenGL Utility Toolkit
 freeglut3-dbg - OpenGL Utility Toolkit debugging information
@@ -78,12 +78,10 @@ If the Modelica environment is 32-bit version, one should install the 32-bit ver
 <pre>
 sudo apt-get install freeglut3-dev:i386
 </pre>
-</p>
 </li>
 </ol>
 </li>
 </ul>
-</p>
 <h4>Build Dynamic Linker</h4>
 <p>
 The FFD program can be compiled into a dynamic linker using Microsoft Visual Studio Express in Windows and GCC in Linux. 
@@ -114,6 +112,7 @@ type <code>make all</code>
 </ol>
 </li>
 </ul>
+</p>
 The dynamic linkers are stored in <code>Buildings/Resources/bin</code>.
 </p>
 </html>"));

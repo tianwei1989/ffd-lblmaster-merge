@@ -137,6 +137,7 @@ This tutorial gives step by step instruction on building and simulating mixed co
 Buildings.Rooms.CFD</a>
 with the FFD program by simulating the ventilation with mixed convection in an empty room.
 <h4>Case Description</h4>
+<p>
 The temperature of floor is fixed at 30 degC and the temperature on other walls and ceiling is fixed at 10 degC.
 The supply air temperature is fixed at 10 degC. 
 </p>

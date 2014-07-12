@@ -75,9 +75,7 @@ Figure (a) shows the velocity vectors and temperature contour [degC] on the X-Z 
 <p align=\"center\">
 Figure (a)
 </p> 
-<p>
-
-</p>
+<p align=\"left\">
 </html>", revisions="<html>
 <ul>
 <li>
