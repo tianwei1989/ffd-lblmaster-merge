@@ -42,7 +42,7 @@ all: clean
 	@echo "==== library generated in $(BINDIR)"
 
 clean:
-	rm -f $(OBJS) $(LIB)
+	rm -f $(OBJS) $(BINDIR)$(LIB)
 
 # To enable RootMakefile, add fellow empty targets
 doc:
