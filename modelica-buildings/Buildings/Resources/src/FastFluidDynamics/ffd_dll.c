@@ -38,7 +38,7 @@ int ffd_dll(CosimulationData *cosim) {
 #else
   void * (*foo) (void *);
   foo=&ffd_thread;
-  pthread_create( &thread1, NULL, foo, (void *)cosim);
+  pthread_create(&thread1, NULL, foo, (void *)cosim);
 #endif
 
   printf("ffd_dll(): Launched FFD simulation.\n");

@@ -31,9 +31,11 @@ int read_cosim_parameter(PARA_DATA *para, REAL **var, int **BINDEX) {
 
   ffd_log("-------------------------------------------------------------------",
           FFD_NORMAL);
-  ffd_log("read_cosim_parameter(): "
-          "Received the following cosimulation parameters:",
-           FFD_NORMAL);
+  if(para->outp->version==DEBUG) {
+    ffd_log("read_cosim_parameter(): "
+            "Received the following cosimulation parameters:",
+             FFD_NORMAL);
+  }
 
   /****************************************************************************
   | Compare number of solid surface boundaries 
@@ -217,29 +219,34 @@ int read_cosim_data(PARA_DATA *para, REAL **var, int **BINDEX) {
 
   ffd_log("-------------------------------------------------------------------",
           FFD_NORMAL);
-  ffd_log("read_cosim_data(): Start to read data from Modelica.", 
-          FFD_NORMAL);
+  if(para->outp->version==DEBUG) {
+    ffd_log("read_cosim_data(): Start to read data from Modelica.", 
+            FFD_NORMAL);
+  }
   /****************************************************************************
   | Wait for data to be updated by the other program
   ****************************************************************************/
   while(para->cosim->modelica->flag==0) {
-    sprintf(msg, 
-            "read_cosim_data(): Data is not ready with "
-            "para->cosim->modelica->flag=%d",
-            para->cosim->modelica->flag);
-    ffd_log(msg, FFD_NORMAL);
+    if(para->outp->version==DEBUG) {
+      sprintf(msg, 
+              "read_cosim_data(): Data is not ready with "
+              "para->cosim->modelica->flag=%d",
+              para->cosim->modelica->flag);
+      ffd_log(msg, FFD_NORMAL);
+    }
+
     Sleep(1000);
     if(para->outp->version==DEBUG)
       ffd_log("read_cosim_data(): Sleep for 1000.", FFD_NORMAL);
   }
 
-  if(para->outp->version==DEBUG)
+  if(para->outp->version==DEBUG) {
     ffd_log("read_cosim_data(): Modelica data is ready.", FFD_NORMAL);
-
-  sprintf(msg, 
-          "read_cosim_data(): Received the following data at t=%f[s]", 
-          para->cosim->modelica->t);
-  ffd_log(msg, FFD_NORMAL);
+    sprintf(msg, 
+            "read_cosim_data(): Received the following data at t=%f[s]", 
+            para->cosim->modelica->t);
+    ffd_log(msg, FFD_NORMAL);
+  }
 
   /****************************************************************************
   | Read and assign the thermal boundary conditions
@@ -265,7 +272,9 @@ int read_cosim_data(PARA_DATA *para, REAL **var, int **BINDEX) {
     }
   }
   else
-    ffd_log("\tNo shading devices.", FFD_NORMAL);
+    if(para->outp->version==DEBUG) {
+      ffd_log("\tNo shading devices.", FFD_NORMAL);
+    }
 
   /****************************************************************************
   | Read and assign the inlet conditions
@@ -278,7 +287,9 @@ int read_cosim_data(PARA_DATA *para, REAL **var, int **BINDEX) {
     }
   }
   else
-    ffd_log("\tNo fluid ports.", FFD_NORMAL);
+    if(para->outp->version==DEBUG) {
+       ffd_log("\tNo fluid ports.", FFD_NORMAL);
+    }
 
   /****************************************************************************
   | Post-Process after reading the data
@@ -286,9 +297,11 @@ int read_cosim_data(PARA_DATA *para, REAL **var, int **BINDEX) {
   // Change the flag to indicate that the data has been read
   para->cosim->modelica->flag = 0;
   //printf("para->cosim->modelica->flag=%d\n", para->cosim->modelica->flag);
+  if(para->outp->version==DEBUG) {
+    ffd_log("read_cosim_data(): Ended reading data from Modelica.",
+            FFD_NORMAL);
+  }
 
-  ffd_log("read_cosim_data(): Ended reading data from Modelica.",
-          FFD_NORMAL);
   return 0;
 } // End of read_cosim_data()
 
@@ -305,9 +318,11 @@ int write_cosim_data(PARA_DATA *para, REAL **var) {
   
   ffd_log("-------------------------------------------------------------------",
           FFD_NORMAL);
-  ffd_log("write_cosim_parameter(): "
-          "Start to write the following cosimulation data to Modelica:",
-           FFD_NORMAL);
+  if(para->outp->version==DEBUG) {
+    ffd_log("write_cosim_parameter(): "
+            "Start to write the following cosimulation data to Modelica:",
+             FFD_NORMAL);
+  }
 
   /****************************************************************************
   | Wait if the previosu data has not been read by Modelica
