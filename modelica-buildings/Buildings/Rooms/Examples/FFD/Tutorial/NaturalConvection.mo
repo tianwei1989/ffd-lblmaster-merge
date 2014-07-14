@@ -319,10 +319,10 @@ Set <code>TWesWal</code> to 274.15.
 </ul>
 </li>
 <li>
-Use Simplified CFD Interface (SCI) to generate geometry input file for FFD. 
+Use Simplified CFD Interface (SCI) to generate input file for FFD. 
 <ul>
 <li>
-The lengthes in X, Y and Z are all 1 m. Use 20 x 20 x 20 uniform grids.
+Use 20 x 20 x 20 uniform grids.
 </li>
 <li>
 Set the time step size as 10 seconds. 

@@ -319,7 +319,7 @@ connect(bouOut.ports[1], roo.ports[2]);
 </li>
 <li>
 <p>
-Use Simplified CFD Interface (SCI) to generate geometry input file for FFD. 
+Use Simplified CFD Interface (SCI) to generate input file for FFD. 
 </p>
 <ul>
 <li>

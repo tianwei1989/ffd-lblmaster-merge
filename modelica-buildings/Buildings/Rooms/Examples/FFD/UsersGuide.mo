@@ -113,8 +113,5 @@ type <code>make all</code>
 </ol>
 </li>
 </ul>
-<p>
-The dynamic linkers are stored in <code>Buildings/Resources/bin</code>.
-</p>
 </html>"));
 end UsersGuide;
