@@ -44,7 +44,7 @@ external"C" retVal = cfdStartCosimulation(
 
   annotation (Documentation(info="<html>
 <p>
-This function calls a C function to start cosimulation with CFD.</html>",
+This function calls a C function to start the coupled simulation with CFD.</html>",
         revisions="<html>
 <ul>
 <li>
