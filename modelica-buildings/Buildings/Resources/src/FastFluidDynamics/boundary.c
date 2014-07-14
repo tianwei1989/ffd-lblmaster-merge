@@ -587,7 +587,7 @@ int set_bnd_temp(PARA_DATA *para, REAL **var, int var_type, REAL *psi,
 ///////////////////////////////////////////////////////////////////////////////
 int set_bnd_trace(PARA_DATA *para, REAL **var, int trace_index, REAL *psi,
                  int **BINDEX) {
-  int i, j, k, it, id;
+  int i, j, k, it;
   int index=para->geom->index;
   int imax = para->geom->imax, jmax = para->geom->jmax;
   int kmax = para->geom->kmax;
@@ -608,7 +608,7 @@ int set_bnd_trace(PARA_DATA *para, REAL **var, int trace_index, REAL *psi,
     | Inlet boundary
     -------------------------------------------------------------------------*/
     if(flagp[IX(i,j,k)]==INLET) {
-      id = BINDEX[4][it]; 
+      //id = BINDEX[4][it]; 
       psi[IX(i,j,k)] = 0.1; //var[trace_index][IX(i,j,k)];
     }
     /*-------------------------------------------------------------------------

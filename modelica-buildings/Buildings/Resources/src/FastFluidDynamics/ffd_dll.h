@@ -23,6 +23,8 @@
 #include "ffd.h"
 #endif
 
+#include <pthread.h>
+
 //static PARA_DATA para;
 
 // Windows
@@ -45,5 +47,5 @@ int ffd_dll(CosimulationData *cosim);
 #ifdef _MSC_VER //Windows
 DWORD WINAPI ffd_thread(void *p);
 #else //Linux
-void ffd_thread(void *p);
+void *ffd_thread(void *p);
 #endif

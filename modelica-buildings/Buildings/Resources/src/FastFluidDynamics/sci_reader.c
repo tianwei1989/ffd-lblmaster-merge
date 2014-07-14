@@ -880,10 +880,10 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
 
   // Read simulation time settings
   fgets(string, 400, file_params);
-  sscanf(string,"%f %lf %d", &para->mytime->t_start, &para->mytime->dt,
+  sscanf(string,"%lf %lf %d", &para->mytime->t_start, &para->mytime->dt,
     &para->mytime->step_total);
 
-  sprintf(msg, "read_sci_input(): para->mytime->t_start=%lu", 
+  sprintf(msg, "read_sci_input(): para->mytime->t_start=%f", 
           para->mytime->t_start);
   ffd_log(msg, FFD_NORMAL);
 

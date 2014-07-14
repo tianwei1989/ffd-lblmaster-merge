@@ -16,7 +16,7 @@ BINDIR = ../../bin/
 CC = cc
 
 #Note that Dymola use 32bit compiler, so generated executable only support 32bit loaded library
-CC_FLAGS_32 = -Wall -I/usr/include/python2.7 -lpython2.7 -lm -m32
+CC_FLAGS_32 = -Wall -I/usr/include/python2.7 -lpython2.7 -lm -m32  
 
 
 
@@ -37,7 +37,7 @@ LIBS = -lpthread -lglut -lGLU
 
 all: clean
 	$(CC) $(CC_FLAGS_32) -fPIC -c $(SRCS)
-	$(CC) -m32 -shared -fPIC -Wl,-soname,$(LIB) -o $(LIB) $(OBJS) $(LIBS) -lc
+	$(CC) -m32 -shared -fPIC -Wl,-soname,$(LIB) -o $(LIB) $(OBJS) $(LIBS) -lc 
 	mv $(LIB) $(BINDIR)
 	@echo "==== library generated in $(BINDIR)"
 

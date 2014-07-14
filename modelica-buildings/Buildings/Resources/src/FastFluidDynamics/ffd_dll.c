@@ -35,8 +35,10 @@ int ffd_dll(CosimulationData *cosim) {
 #ifdef _MSC_VER
   workerThreadHandle = CreateThread(NULL, 0, ffd_thread, (void *)cosim, 0, &dummy);
 // Linux
-#else 
-  pthread_create( &thread1, NULL, ffd_thread, (void*)cosim);
+#else
+  void * (*foo) (void *);
+  foo=&ffd_thread;
+  pthread_create( &thread1, NULL, foo, (void *)cosim);
 #endif
 
   printf("ffd_dll(): Launched FFD simulation.\n");
@@ -54,7 +56,7 @@ int ffd_dll(CosimulationData *cosim) {
 DWORD WINAPI ffd_thread(void *p){ 
   ULONG workerID = (ULONG)(ULONG_PTR)p;
 #else //Linux
-void  ffd_thread(void* p){
+void *ffd_thread(void* p){
 #endif
 
   CosimulationData *cosim = (CosimulationData *) p;

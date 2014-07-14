@@ -21,7 +21,7 @@
 REAL **var;
 int  **BINDEX;
 REAL *locmin,*locmax;
-
+static PARA_DATA para;
 static GEOM_DATA geom;
 static PROB_DATA prob;
 static TIME_DATA mytime;
@@ -152,6 +152,18 @@ static void mouse_func(int button, int state, int x, int y) {
 } // End of mouse_func()
 
 ///////////////////////////////////////////////////////////////////////////////
+/// GLUT reshape callback routines
+///
+///\param width Width of the window
+///\param height Height of the window
+///
+///\return No return needed
+///////////////////////////////////////////////////////////////////////////////
+static void reshape_func(int width, int height) {
+  ffd_reshape_func(&para, width, height);
+} // End of reshape_func()
+
+///////////////////////////////////////////////////////////////////////////////
 /// Open_glut_window --- open a glut compatible window and set callbacks 
 ///
 ///\return No return needed
@@ -244,17 +256,7 @@ static void open_glut_window() {
   glutDisplayFunc (display_func);
 } // End of open_glut_window()
 
-///////////////////////////////////////////////////////////////////////////////
-/// GLUT reshape callback routines
-///
-///\param width Width of the window
-///\param height Height of the window
-///
-///\return No return needed
-///////////////////////////////////////////////////////////////////////////////
-static void reshape_func(int width, int height) {
-  ffd_reshape_func(&para, width, height);
-} // End of reshape_func()
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
