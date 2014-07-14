@@ -2,7 +2,7 @@
 ///
 /// \file   cfdCosimulation.h
 ///
-/// \brief  Header filer for cosimulation with CFD
+/// \brief  Header file for coupled simulation with CFD
 ///
 /// \author Wangda Zuo
 ///         University of Miami
