@@ -23,7 +23,7 @@
 #include "ffd.h"
 #endif
 
-#include <pthread.h>
+
 
 //static PARA_DATA para;
 
@@ -33,6 +33,7 @@ __declspec(dllexport)
 extern int ffd_dll(CosimulationData *cosim);
 // Linux
 #else
+#include <pthread.h>
 int ffd_dll(CosimulationData *cosim);
 #endif
 
