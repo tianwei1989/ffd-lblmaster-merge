@@ -17,7 +17,7 @@
 /// Exchange the data between Modelica and CFD
 ///
 ///\param t0 Current time of integration for Modelica
-///\param dt Time step size for next synchronization define dby Modelica
+///\param dt Time step size for next synchronization defined by Modelica
 ///\param u Pointer to the input data from Modleica to CFD
 ///\param nU Number of inputs from Modelica to CFD
 ///\param nY Number of outputs from CFD to Modelica
@@ -32,7 +32,7 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   printf("---------------------------------------------------\n");
 
   /*--------------------------------------------------------------------------
-  | Write data to FFD
+  | Write data to CFD
   | Command: 
   | -1: feak data
   |  0: data has been read by the other program
@@ -41,12 +41,12 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   // If previous data hasn't been read, wait
   while(cosim->modelica->flag==1) {
     if(cosim->para->ffdError==1) {
-      printf("FFD exited with error");
+      printf("CFD exited with error");
       return -1;
     }
     else {
       if(verbose==1)
-        printf("cfdExchangeData(): Waiting for the FFD to read my data.\n");
+        printf("cfdExchangeData(): Waiting for the CFD to read my data.\n");
       Sleep(1000);
     }
   }
@@ -63,7 +63,7 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
     printf("cfdExchangeData(): number of output variables nY=%d\n", nY);
   }
 
-  // Copy the modelica data to shared memory
+  // Copy the Modelica data to shared memory
   for(i=0; i<cosim->para->nSur; i++) {
     cosim->modelica->temHea[i] = (REAL) u[i];
     if(verbose==1)
@@ -137,7 +137,7 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   // If the data is not ready or not updated, check again
   while(cosim->ffd->flag!=1) {
     if(cosim->para->ffdError==1) {
-      printf("FFD exited with error");
+      printf("CFD exited with error");
       return -1;
     }
     else
@@ -145,7 +145,7 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   }
 
   if(verbose==1) {
-    printf("Start to get FFD Data: cosim->ffd->flag = %f\n", cosim->ffd->flag);
+    printf("Start to get CFD Data: cosim->ffd->flag = %f\n", cosim->ffd->flag);
   }
   // Get the temperature/heat flux for solid surface
   for(i=0; i<cosim->para->nSur; i++) {
@@ -192,7 +192,7 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   }
 
   if(verbose==1) {
-    printf("\n FFD: \t\ttime=%f, status=%d\n", cosim->ffd->t, cosim->ffd->flag);
+    printf("\n CFD: \t\ttime=%f, status=%d\n", cosim->ffd->t, cosim->ffd->flag);
     printf("Modelica: \ttime=%f, status=%d\n", cosim->modelica->t, cosim->modelica->flag);
   }
 
