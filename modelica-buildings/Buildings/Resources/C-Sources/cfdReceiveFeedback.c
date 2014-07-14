@@ -2,7 +2,7 @@
 ///
 /// \file   cfdReceiveFeedback.c
 ///
-/// \brief  Functions to receive the feedback from CFD about teh stop command
+/// \brief  Functions to receive the feedback from CFD about the stop command
 ///
 /// \author Wangda Zuo
 ///         University of Miami
@@ -14,7 +14,7 @@
 #include "cfdCosimulation.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Receive the feedback from CFD about teh stop command
+/// Receive the feedback from CFD about the stop command
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////
