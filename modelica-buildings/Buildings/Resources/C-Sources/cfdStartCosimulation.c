@@ -2,7 +2,7 @@
 ///
 /// \file   cfdStartCosimulation.c
 ///
-/// \brief  Function to start the cosimulation
+/// \brief  Function to start the coupled simulation
 ///
 /// \author Wangda Zuo
 ///         University of Miami
