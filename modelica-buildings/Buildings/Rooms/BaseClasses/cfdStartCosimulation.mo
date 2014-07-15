@@ -1,5 +1,5 @@
 within Buildings.Rooms.BaseClasses;
-function cfdStartCosimulation "Start the cosimulation with CFD"
+function cfdStartCosimulation "Start the coupled simulation with CFD"
   input String cfdFilNam "CFD input file name";
   input String[nSur] name "Surface names";
   input Modelica.SIunits.Area[nSur] A "Surface areas";
