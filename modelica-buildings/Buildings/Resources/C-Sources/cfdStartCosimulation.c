@@ -22,7 +22,7 @@
 ///\param name Pointer to the names of surfaces and fluid ports
 ///\param A Pointer to the area of surfaces in the same order of name
 ///\param til Pointer to the tilt of surface in the same order of name
-///\param bouCon Pointer to the type of thermal bundary condition in the 
+///\param bouCon Pointer to the type of thermal boundary condition in the 
 ///       same order of name
 ///\param nPorts Number of fluid ports
 ///\param portName Pointer to the name of fluid ports
@@ -46,7 +46,7 @@ int cfdStartCosimulation(char *cfdFilNam, char **name, double *A, double *til,
   /****************************************************************************
   | For call FFD-DLL
   ****************************************************************************/
-  //Define loaded library handel
+  //Define loaded library handle
 #ifdef _MSC_VER //Windows
   HINSTANCE hinstLib; 
 #else //Linux
@@ -56,7 +56,7 @@ int cfdStartCosimulation(char *cfdFilNam, char **name, double *A, double *til,
   typedef int (*MYPROC)(CosimulationData *);
   MYPROC ProcAdd;
 
-  printf("Start to allcoate memory for data exchange.\n");
+  printf("Start to allocate memory for data exchange.\n");
 
   cosim = (CosimulationData *) malloc(sizeof(CosimulationData));
   cosim->para = (ParameterSharedData *) malloc(sizeof(ParameterSharedData));  
@@ -150,7 +150,7 @@ int cfdStartCosimulation(char *cfdFilNam, char **name, double *A, double *til,
   if(haveShade==1) cosim->ffd->TSha = (REAL *) malloc(nConExtWin*sizeof(REAL));
   cosim->ffd->TPor = (REAL *) malloc(nPorts*sizeof(REAL));
   
-  printf("Allocated memory for cosimulation data.\n");
+  printf("Allocated memory for coupled simulation data.\n");
 
   /****************************************************************************
   | Get a handle to the DLL module.

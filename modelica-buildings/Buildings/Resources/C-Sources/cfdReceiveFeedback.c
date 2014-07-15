@@ -32,7 +32,7 @@ int cfdReceiveFeedback( ) {
     flag = 0;
   }
   else {
-    printf("stopFFD(): Could not stop the FFD simulation in reqruied time.\n");
+    printf("stopFFD(): Could not stop the FFD simulation in required time.\n");
     flag = 1;
   }
 

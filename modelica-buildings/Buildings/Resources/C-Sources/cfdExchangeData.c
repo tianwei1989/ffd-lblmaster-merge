@@ -18,7 +18,7 @@
 ///
 ///\param t0 Current time of integration for Modelica
 ///\param dt Time step size for next synchronization defined by Modelica
-///\param u Pointer to the input data from Modleica to CFD
+///\param u Pointer to the input data from Modelica to CFD
 ///\param nU Number of inputs from Modelica to CFD
 ///\param nY Number of outputs from CFD to Modelica
 ///\param y Pointer to the output data from CFD to Modelica
@@ -56,7 +56,7 @@ int cfdExchangeData(double t0, double dt, double *u, int nU, int nY,
   cosim->modelica->dt = (REAL) dt;
 
 
-  printf("cfdExchangeData(): wrtie data at %f with dt=%f\n", 
+  printf("cfdExchangeData(): write data at %f with dt=%f\n", 
          cosim->modelica->t, cosim->modelica->dt);
   if(verbose==1) {
     printf("cfdExchangeData(): number of input variables nU=%d\n", nU);
