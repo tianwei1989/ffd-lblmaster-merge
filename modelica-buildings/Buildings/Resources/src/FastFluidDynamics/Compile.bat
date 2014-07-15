@@ -10,6 +10,19 @@ set Platform=Win32
 ::Note: Two build mode, Debug or Release
 
 ::*******************************************************************
+::Delete the existing FFD-DLL.dll and FFD-DLL.lib 
+::*******************************************************************
+if exist "%DIR%\%MSbuildName%.dll" (
+  echo Going to delete %MSbuildName%.dll
+  del "%DIR%\%MSbuildName%.dll"
+  )
+  
+if exist "%DIR%\%MSbuildName%.lib" (
+  echo Going to delete %MSbuildName%.lib
+  del "%DIR%\%MSbuildName%.lib"
+  )
+
+::*******************************************************************
 ::Set Compiler Environment Variable
 ::*******************************************************************
 
@@ -129,7 +142,8 @@ msbuild %MSbuildName%.vcxproj /t:rebuild /p:PlatformToolset=%Toolset%;Configurat
 ::*******************************************************************
 echo Copy %MSbuildName%.dll and %MSbuildName%.lib to %DIR%
 copy "%BuildConfiguration%\%MSbuildName%.dll" "%DIR%" /Y
-copy "%BuildConfiguration%\%MSbuildName%.lib" "%DIR%" /Y
+::note since FFD-DLL.lib is useless for coupled simulation, block here
+::copy "%BuildConfiguration%\%MSbuildName%.lib" "%DIR%" /Y
 ::Note: /y: Suppresses prompting to confirm that you want to overwrite an existing destination file.
 
 ::*******************************************************************
