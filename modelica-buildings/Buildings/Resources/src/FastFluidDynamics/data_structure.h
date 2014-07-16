@@ -2,7 +2,7 @@
 ///
 /// \file   data_structure.h
 ///
-/// \brief  Defien the data used the FFD
+/// \brief  Define the data used the FFD
 ///
 /// \author Wangda Zuo
 ///         University of Miami
@@ -192,11 +192,11 @@ typedef struct{
   int mouse_down[3]; // Internal: Record for mouse action
   VERSION version; // DEMO, DEBUG, RUN
   int screen; // Screen for display: 1 velocity; 2: temperature; 3: contaminant
-  int tstep_display; // Number of time steps to update the visualziation
+  int tstep_display; // Number of time steps to update the visualization
 } OUTP_DATA;
 
 typedef struct{
-  FILE_FORMAT parameter_file_format; // Foramt of extra parameter file
+  FILE_FORMAT parameter_file_format; // Format of extra parameter file
   char parameter_file_name[100]; // Name of extra parameter file
   char block_file_name[100]; // Name of file stores block information
   int read_old_ffd_file; // 1: Read previous FFD file; 0: False
@@ -207,7 +207,7 @@ typedef struct{
   REAL  nu; // Kinematic viscosity
   REAL  rho; // Density
   REAL  diff; // Diffusivity for contaminants
-  REAL  alpha; // Thermal diffusity
+  REAL  alpha; // Thermal diffusivity
   REAL  coeff_h; // Convective heat transfer coefficient near the wall
   REAL  gravx; // Gravity in x direction
   REAL  gravy; // Gravity in y direction
@@ -220,11 +220,11 @@ typedef struct{
   REAL heat; // Heat to be added in demo window for contaminants when click middle button on mouse 
   REAL source; // Source to be added in demo window for contaminants when right click on mouse 
   int movie; // Output data for making animation (1:yes, 0:no)
-  int output;   // Internl: 0: have not been written; 1: done
+  int output;   // Internal: 0: have not been written; 1: done
   TUR_MODEL tur_model; // LAM, CHEN, CONSTANT
-  REAL chen_a; // Coefficeint of Chen's zero euqation turbulence model
-  REAL Prt; // Turbulent Prandl number
-  REAL Temp_Buoyancy; // Reference temperature for calucating buoyancy force
+  REAL chen_a; // Coefficient of Chen's zero equation turbulence model
+  REAL Prt; // Turbulent Prandtl number
+  REAL Temp_Buoyancy; // Reference temperature for calculating buoyancy force
 }PROB_DATA;
 
 typedef struct {
@@ -234,7 +234,7 @@ typedef struct {
   int nb_wall; // Number of wall boundaries, provided by SCI
   int nb_source; // Number of sources, provided by SCI
   int nb_bc; // Number of boundaries, provided by SCI
-  int nb_ConExtWin; // Nmber of exterior construction with windows
+  int nb_ConExtWin; // Number of exterior construction with windows
   int nb_port; // nPort = nInlet + nOutlet
   int nb_Xi; // Number of species
   int nb_C; // Number of substances
@@ -248,13 +248,13 @@ typedef struct {
   int *wallId; // wallId[nb_wall]: Modelica wall boundary ID
   //int *inletId; // Modelica inlet boundary ID
   int *portId; // portId[nb_port]: Modelica outlet boundary ID
-  REAL *AWall; // AWall[nb_wall]: Area of the solide sufaces
+  REAL *AWall; // AWall[nb_wall]: Area of the surfaces
   REAL *APort; // APort[nb_port]: Area of the outlets
   REAL *temHea; // temHea[nb_wall]: Value of thermal conditions at solid surface
   REAL *temHeaAve; // temHeaAve[nb_wall]: Surface averaged value of temHea
   REAL *temHeaMean; // temHeaMean[nb_wall]: Time averaged value of temHeaAve
   REAL *velPort; // velPort[nb_port]: Velocity of air into the room
-                      // positive: into the room; neative out of the room
+                      // positive: into the room; negative out of the room
   REAL *velPortAve; // velPortAve[nb_port]: Surface averaged value of velPort
   REAL *velPortMean; // velPortMean[nb_port]: Time averaged value of velPortAve
   REAL *TPort; // TPort[nb_port] Air temperatures that the medium has if it were flowing into the room
@@ -269,10 +269,10 @@ typedef struct {
 }BC_DATA;
 
 typedef struct {
-  int nb_sensor; // Numver of sensors
+  int nb_sensor; // Number of sensors
   char **sensorName; // *sensorName[nb_sensor]: Name of sensor in FFD
   int **senIndex; // senIndex[nb_sensor][3]: i, j, k Index of sensors
-  REAL *senVal; // senVal[nb_sensor]: Instanteniate valeu of sensor point
+  REAL *senVal; // senVal[nb_sensor]: Instantiate value of sensor point
   REAL *senValMean; // snValMean[nb_sensor]: Time averaged value of senVal;
   REAL TRoo; // Volumed averaged value of temperature in the space
   REAL TRooMean; // Time averaged value of TRoo;
@@ -286,15 +286,15 @@ typedef struct {
   int step_current; // Internal: current iteration step
   int step_mean; // Internal: steps for time average
   double t_start; // Internal: clock time when simulation starts
-  double t_end; // Internal: clock time when simulaiton ends
+  double t_end; // Internal: clock time when simulation ends
 }TIME_DATA;
 
 typedef struct {
   SOLVERTYPE solver;  // Solver type: GS, TDMA
   int check_residual; // 1: check, 0: donot check
-  ADVECTION advection_solver; // Tyep of advection solver: SEMI, LAX, UPWIND, UPWIND_NEW 
-  INTERPOLATION interpolation; // Internploation in semi-Lagrangian method: BILINEAR, FSJ, HYBRID
-  int cosimulation;  // 0: single; 1: cosimulation
+  ADVECTION advection_solver; // Type of advection solver: SEMI, LAX, UPWIND, UPWIND_NEW 
+  INTERPOLATION interpolation; // Interpolation in semi-Lagrangian method: BILINEAR, FSJ, HYBRID
+  int cosimulation;  // 0: single; 1: coupled simulation
   int nextstep; // Internal: 1: yes; 0: no, wait
 }SOLV_DATA;
 

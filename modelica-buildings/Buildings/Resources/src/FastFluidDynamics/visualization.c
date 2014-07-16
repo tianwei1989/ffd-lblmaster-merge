@@ -82,7 +82,7 @@ void ffd_display_func(PARA_DATA *para, REAL **var) {
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to all variables
-///\param BINDEX Pointer to bounary index
+///\param BINDEX Pointer to boundary index
 ///
 ///\return No return needed
 ///////////////////////////////////////////////////////////////////////////////
@@ -97,7 +97,7 @@ void ffd_idle_func(PARA_DATA *para, REAL **var, int **BINDEX) {
   if(para->outp->cal_mean == 1)
     average_time(para, var);
 
-  // Update the visualization results after a few tiem steps 
+  // Update the visualization results after a few iteration steps 
   // to save the time for visualization
   if(para->mytime->step_current%para->outp->tstep_display==0) {
     glutSetWindow(para->outp->win_id);
@@ -112,7 +112,7 @@ void ffd_idle_func(PARA_DATA *para, REAL **var, int **BINDEX) {
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to all variables
-///\param BINDEX Pointer to bounary index
+///\param BINDEX Pointer to boundary index
 ///\param key Character of the key
 ///
 ///\return No return needed
@@ -164,7 +164,7 @@ void ffd_key_func(PARA_DATA *para, REAL **var, int **BINDEX,
       para->geom->plane = XY;
       para->geom->pindex = (int) para->geom->kmax/2;
       break;
-    // Start to calcualte mean value
+    // Start to calculate mean value
     case 'm':
     case 'M':
       para->outp->cal_mean = 1;
@@ -178,12 +178,12 @@ void ffd_key_func(PARA_DATA *para, REAL **var, int **BINDEX,
         average_time(para, var);
       write_tecplot_data(para, var, "result"); 
       break;
-    // Reduce the drawed length of veloity
+    // Reduce the drawn length of velocity
     case 'k':
     case 'K':
       para->outp->v_length = para->outp->v_length*0.5;
       break;
-    // Increase the drawed length of velocity
+    // Increase the drawn length of velocity
     case 'l':
     case 'L':
       para->outp->v_length = para->outp->v_length*2;

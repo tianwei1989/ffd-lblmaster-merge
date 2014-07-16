@@ -2,7 +2,7 @@
 ///
 /// \file   visualization.c
 ///
-/// \brief  Visulization features
+/// \brief  Visualization features
 ///
 /// \author Wangda Zuo
 ///         University of Miami
@@ -73,7 +73,7 @@ void ffd_display_func(PARA_DATA *para, REAL **var);
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to all variables
-///\param BINDEX Pointer to bounary index
+///\param BINDEX Pointer to boundary index
 ///
 ///\return No return needed
 ///////////////////////////////////////////////////////////////////////////////
@@ -84,7 +84,7 @@ void ffd_idle_func(PARA_DATA *para, REAL **var, int **BINDEX);
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to all variables
-///\param BINDEX Pointer to bounary index
+///\param BINDEX Pointer to boundary index
 ///\param key Character of the key
 ///
 ///\return No return needed

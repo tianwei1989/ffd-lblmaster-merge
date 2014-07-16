@@ -68,7 +68,7 @@ int allocate_memory (PARA_DATA *para) {
   }
 
   /****************************************************************************
-  | Allocate memroy for boundary cells
+  | Allocate memory for boundary cells
   | BINDEX[0]: i of global coordinate in IX(i,j,k)
   | BINDEX[1]: j of global coordinate in IX(i,j,k)
   | BINDEX[2]: k of global coordinate in IX(i,j,k)
@@ -106,9 +106,9 @@ static void display_func(void) {
 ///////////////////////////////////////////////////////////////////////////////
 /// GLUT keyboard callback routines 
 ///
-///\param key Chararcter of the key
+///\param key Character of the key
 ///\param x X-position
-///\param y Y-Positon
+///\param y Y-Position
 ///
 ///\return No return needed
 ///////////////////////////////////////////////////////////////////////////////
@@ -130,7 +130,7 @@ static void idle_func(void) {
 /// GLUT motion callback routines  
 ///
 ///\param x X-position
-///\param y Y-Positon
+///\param y Y-Position
 ///
 ///\return No return needed
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,7 +143,7 @@ static void motion_func(int x, int y) {
 ///
 ///\param button Button of the mouse
 ///\param x X-position
-///\param y Y-Positon
+///\param y Y-Position
 ///
 ///\return No return needed
 ///////////////////////////////////////////////////////////////////////////////
@@ -200,7 +200,7 @@ static void open_glut_window() {
   glClearColor(0.0, 0.0, 0.0, 1.0);
 
   /*--------------------------------------------------------------------------
-  | clear buffers within the viewport 
+  | clear buffers within the view port 
   ---------------------------------------------------------------------------*/
   glClear(GL_COLOR_BUFFER_BIT);
 
@@ -260,9 +260,9 @@ static void open_glut_window() {
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Assign the parameter for cosimulation
+/// Assign the parameter for coupled simulation
 ///
-///\para cosim Pointer to the cosimulation parameters
+///\para cosim Pointer to the coupled simulation parameters
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////
@@ -281,7 +281,7 @@ int ffd_cosimulation(CosimulationData *cosim) {
 ///////////////////////////////////////////////////////////////////////////////
 /// Main routine of FFD
 ///
-///\para cosimulation Integer to identify the simulation type
+///\para coupled simulation Integer to identify the simulation type
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////

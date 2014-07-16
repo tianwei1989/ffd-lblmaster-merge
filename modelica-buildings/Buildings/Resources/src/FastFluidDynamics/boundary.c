@@ -14,7 +14,7 @@
 /// \date   8/3/2013
 ///
 /// This file provides functions that are used for setting the boundary 
-/// conditons. 
+/// conditions. 
 /// It starts with \c set_bnd(). Then different subroutines are called
 /// according to the properties of variables.
 ///
@@ -301,7 +301,7 @@ int set_bnd_temp(PARA_DATA *para, REAL **var, int var_type, REAL *psi,
             qflux[IX(i,j,k)] = h * (psi[IX(i+1,j,k)]-psi[IX(i,j,k)]);
           }
         } // End of if(i==0)
-        // East boundary wall and western neigbor cell is fluid
+        // East boundary wall and western neighbor cell is fluid
         else if(i==imax+1) {
           if(flagp[IX(i-1,j,k)]==FLUID) {
             D = 0.5 * length_x(para,var,i-1,j,k);
@@ -319,7 +319,7 @@ int set_bnd_temp(PARA_DATA *para, REAL **var, int var_type, REAL *psi,
             aw[IX(i+1,j,k)] = h * rhoCp_1 * ayz;
             qflux[IX(i,j,k)] = h * (psi[IX(i+1,j,k)]-psi[IX(i,j,k)]);
           }
-          // Western neigbor cell is fluid
+          // Western neighbor cell is fluid
           if(flagp[IX(i-1,j,k)]==FLUID) {
             D = 0.5 * length_x(para,var,i-1,j,k);
             h = h_coef(para,var,i-1,j,k,D);
@@ -371,7 +371,7 @@ int set_bnd_temp(PARA_DATA *para, REAL **var, int var_type, REAL *psi,
             qflux[IX(i,j,k)] = h * (psi[IX(i,j,k+1)]-psi[IX(i,j,k)]);
           }
         }
-        // Ceilling and floor neighbor is fluid
+        // Ceiling and floor neighbor is fluid
         else if(k==kmax+1) {
           if(flagp[IX(i,j,k-1)]==FLUID) {
             D = 0.5 * length_z(para,var,i,j,k-1);
@@ -397,7 +397,7 @@ int set_bnd_temp(PARA_DATA *para, REAL **var, int var_type, REAL *psi,
             qflux[IX(i,j,k)] = h * (psi[IX(i,j,k-1)]-psi[IX(i,j,k)]);
           }
         } 
-      } // End of contant temperature wall
+      } // End of constant temperature wall
       /*.......................................................................
       | Constant heat flux
       .......................................................................*/
@@ -413,7 +413,7 @@ int set_bnd_temp(PARA_DATA *para, REAL **var, int var_type, REAL *psi,
             psi[IX(i,j,k)] = qfluxbc[IX(i,j,k)]/h + psi[IX(i+1,j,k)];
           }
         } // End of if(i==0)
-        // East wall bounary and western neighbor is fluid
+        // East wall boundary and western neighbor is fluid
         else if(i==imax+1) {
           if(flagp[IX(i-1,j,k)]==FLUID) { 
             ae[IX(i-1,j,k)] = 0;
@@ -709,8 +709,7 @@ int set_bnd_pressure(PARA_DATA *para, REAL **var, REAL *p, int **BINDEX) {
   REAL *af = var[AF], *ab = var[AB];
 
   REAL *flagp = var[FLAGP];
-  // tianwei revise: add the pressure boundary for (imax,jmax,kmax)
-  //p[IX(imax,jmax,kmax)]=0;
+
   for(it=0;it<index;it++) {
     i = BINDEX[0][it];
     j = BINDEX[1][it];
@@ -769,7 +768,7 @@ int set_bnd_pressure(PARA_DATA *para, REAL **var, REAL *p, int **BINDEX) {
 ///////////////////////////////////////////////////////////////////////////////
 /// Enforce the mass conservation by adjusting the outlet flow rate
 ///
-/// The detailes was published in the paper 
+/// The details ware published in the paper 
 /// "W. Zuo, J. Hu, Q. Chen 2010. 
 /// Improvements on FFD modeling by using different numerical schemes, 
 /// Numerical Heat Transfer, Part B Fundamentals, 58(1), 1-16."
@@ -816,7 +815,7 @@ int mass_conservation(PARA_DATA *para, REAL **var, int **BINDEX) {
 ///////////////////////////////////////////////////////////////////////////////
 /// Get the mass flow difference divided by outflow area 
 ///
-/// The detailes was published in the paper 
+/// The details were published in the paper 
 /// "W. Zuo, J. Hu, Q. Chen 2010. 
 /// Improvements on FFD modeling by using different numerical schemes, 
 /// Numerical Heat Transfer, Part B Fundamentals, 58(1), 1-16."
@@ -840,7 +839,7 @@ REAL adjust_velocity(PARA_DATA *para, REAL **var, int **BINDEX) {
   REAL *flagp = var[FLAGP];
   REAL axy, ayz, azx;
 
-  // Go through all the inelt and outlets
+  // Go through all the inlets and outlets
   for(it=0; it<index; it++) {
     i = BINDEX[0][it];
     j = BINDEX[1][it];
@@ -904,13 +903,13 @@ REAL adjust_velocity(PARA_DATA *para, REAL **var, int **BINDEX) {
   } // End of for loop for going through all the inlets and outlets
   
   /*---------------------------------------------------------------------------
-  | Return the adjusted velocuty for mass conservation
+  | Return the adjusted velocity for mass conservation
   ---------------------------------------------------------------------------*/
   return (mass_in-mass_out)/area_out;
 } // End of adjust_velocity()
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Calculate convective hrat transfer coefficient divided by 
+/// Calculate convective heat transfer coefficient divided by 
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables

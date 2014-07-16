@@ -13,7 +13,7 @@
 ///
 /// \date   8/3/2013
 ///
-/// This file provides functions that write the data file in differnt formats.
+/// This file provides functions that write the data file in different formats.
 ///
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef _DATA_WRITER_H
@@ -57,7 +57,7 @@ int write_tecplot_all_data(PARA_DATA *para, REAL **var, char *name);
 ///////////////////////////////////////////////////////////////////////////////
 /// Convert the data to the format for Tecplot 
 ///
-/// FFD uses staggered grid and Tecplot data is for collogated grid. 
+/// FFD uses staggered grid and Tecplot data is for collocated grid. 
 /// This subroutine transfers the data from FFD format to Tecplot format. 
 ///
 ///\param para Pointer to FFD parameters
@@ -70,7 +70,7 @@ void convert_to_tecplot(PARA_DATA *para, REAL **var);
 ///////////////////////////////////////////////////////////////////////////////
 /// Convert the data at 8 corners to the format for Tecplot 
 ///
-/// FFD uses staggered grid and Tecplot data is for collogated grid. 
+/// FFD uses staggered grid and Tecplot data is for collocated grid. 
 /// This subroutine transfers the data from FFD format to Tecplot format. 
 ///
 ///\param para Pointer to FFD parameters

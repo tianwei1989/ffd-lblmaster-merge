@@ -18,7 +18,7 @@
 /// The advection starts with \c advect(). Then different subroutines are 
 /// called according to the properties of the variables that are sorted by
 /// the location of variables assigned in the control volume. 
-/// Velocities at X, Y and Z directions are locatted
+/// Velocities at X, Y and Z directions are located
 /// on the surface of the control volume. They are computed using 
 /// subroutines: \c trace_vx(), \c trace_vy() and \c trace_vz().
 /// Scalar variables are in the center of control volume and they are computed
@@ -164,7 +164,7 @@ int trace_vx(PARA_DATA *para, REAL **var, int var_type, REAL *d, REAL *d0,
     // Initialize the coordinates of previous step 
     OC[X] = i; 
     OC[Y] = j; 
-    OC[Z] = k; //OC is the trace back coodinates
+    OC[Z] = k; //OC is the trace back coordinates
     // Initialize the signs for track process
     // Completed: 0; In process: 1
     COOD[X] = 1; 
@@ -233,7 +233,7 @@ int trace_vx(PARA_DATA *para, REAL **var, int var_type, REAL *d, REAL *d0,
   END_FOR // End of loop for all cells
 
   /****************************************************************************
-  | define the boudnary condition
+  | define the boundary condition
   ****************************************************************************/
   set_bnd(para, var, var_type, 0, d, BINDEX);
 
@@ -547,7 +547,7 @@ int trace_scalar(PARA_DATA *para, REAL **var, int var_type, int index,
         set_z_location(para, var, flagp, z, w0, i, j, k, OL, OC, LOC, COOD); 
       if(it>itmax) {
         sprintf(msg, "trace_scalar(): Could not track the location for scalar "
-          "variable %d at cell(%d, %d,%d) after %d interations", 
+          "variable %d at cell(%d, %d,%d) after %d iterations", 
           var_type, i, j, k, it);
         ffd_log(msg, FFD_ERROR);
         return 1;
@@ -563,7 +563,7 @@ int trace_scalar(PARA_DATA *para, REAL **var, int var_type, int index,
     if(v0<0 && LOC[Y]==1) OC[Y] -=1;
     if(w0<0 && LOC[Z]==1) OC[Z] -=1;
 
-    //Store the local minium and maximum values
+    //Store the local minimum and maximum values
     var[LOCMIN][IX(i,j,k)]=check_min(para, d0, OC[X], OC[Y], OC[Z]); 
     var[LOCMAX][IX(i,j,k)]=check_max(para, d0, OC[X], OC[Y], OC[Z]); 
 
@@ -657,7 +657,7 @@ void set_x_location(PARA_DATA *para, REAL **var, REAL *flag, REAL *x, REAL u0,
     } // End of if() for inlet or outlet
   } // End of if() for previous position is on the west of new position 
   /****************************************************************************
-  | Otherwise, if previous location is on the east of the current positon
+  | Otherwise, if previous location is on the east of the current position
   ****************************************************************************/
   else {
     // If not at the east boundary
@@ -730,7 +730,7 @@ void set_y_location(PARA_DATA *para, REAL **var, REAL *flag, REAL *y, REAL v0,
   if(OL[Y]==y[IX(OC[X],OC[Y],OC[Z])]) 
     COOD[Y] = 0;
   /****************************************************************************
-  | Otherwise, if previous location is on the south of the current positon
+  | Otherwise, if previous location is on the south of the current position
   ****************************************************************************/
   else if(OL[Y]<y[IX(OC[X],OC[Y],OC[Z])]) {
     // If donot reach the boundary yet
@@ -766,7 +766,7 @@ void set_y_location(PARA_DATA *para, REAL **var, REAL *flag, REAL *y, REAL v0,
     } // End of if() for inlet or outlet
   } // End of if() for previous position is on the south of new position 
   /****************************************************************************
-  | Otherwise, if previous location is on the north of the current positon
+  | Otherwise, if previous location is on the north of the current position
   ****************************************************************************/
   else {
     // If not at the north boundary
@@ -839,7 +839,7 @@ void set_z_location(PARA_DATA *para, REAL **var, REAL *flag, REAL *z, REAL w0,
   if(OL[Z]==z[IX(OC[X],OC[Y],OC[Z])]) 
     COOD[Z] = 0;
   /****************************************************************************
-  | Otherwise, if previous location is on the floor of the current positon
+  | Otherwise, if previous location is on the floor of the current position
   ****************************************************************************/
   else if(OL[Z]<z[IX(OC[X],OC[Y],OC[Z])]) {
     // If donot reach the boundary yet
@@ -875,7 +875,7 @@ void set_z_location(PARA_DATA *para, REAL **var, REAL *flag, REAL *z, REAL w0,
     } // End of if() for inlet or outlet
   } // End of if() for previous position is on the floor of new position 
   /****************************************************************************
-  | Otherwise, if previous location is on the ceiling of the current positon
+  | Otherwise, if previous location is on the ceiling of the current position
   -***************************************************************************/
   else {
     // If not at the ceiling boundary

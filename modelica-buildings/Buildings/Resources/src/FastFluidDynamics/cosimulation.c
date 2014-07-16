@@ -2,7 +2,7 @@
 ///
 /// \file   cosimulation.c
 ///
-/// \brief  Functions for cosimulation
+/// \brief  Functions for coupled simulation
 ///
 /// \author Wangda Zuo
 ///         University of Miami
@@ -10,7 +10,7 @@
 ///
 /// \date   8/3/2013
 ///
-/// This file provides functions that are used for conducting the cosimulaiton 
+/// This file provides functions that are used for conducting the coupled simulation 
 /// with Modelica
 ///
 ///////////////////////////////////////////////////////////////////////////////
@@ -18,11 +18,11 @@
 #include "cosimulation.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Read the cosimulation parameters defined by Modelica
+/// Read the coupled simulation parameters defined by Modelica
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables
-///\param BINDEX pointer to boudnary index
+///\param BINDEX pointer to boundary index
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////
@@ -33,13 +33,13 @@ int read_cosim_parameter(PARA_DATA *para, REAL **var, int **BINDEX) {
           FFD_NORMAL);
   if(para->outp->version==DEBUG) {
     ffd_log("read_cosim_parameter(): "
-            "Received the following cosimulation parameters:",
+            "Received the following coupled simulation parameters:",
              FFD_NORMAL);
   }
 
   /****************************************************************************
-  | Compare number of solid surface boundaries 
-  | (Wall, Window Glass with and withour shading, and Window Frame)
+  | Compare number of solid surface boundaries
+  | (Wall, Window Glass with and without shading, and Window Frame)
   ****************************************************************************/
   if(para->cosim->para->nSur==para->bc->nb_wall) {
     sprintf(msg, "\tnSur=%d", para->cosim->para->nSur);
@@ -145,7 +145,7 @@ int read_cosim_parameter(PARA_DATA *para, REAL **var, int **BINDEX) {
     ffd_log(msg, FFD_NORMAL);
     switch (para->cosim->para->bouCon[i]) {
       case 1:
-        ffd_log("\t\tThermal boundary: Fixed tempearture", FFD_NORMAL);
+        ffd_log("\t\tThermal boundary: Fixed temperature", FFD_NORMAL);
         break;
       case 2:
         ffd_log("\t\tThermal boundary: Fixed heat flux", FFD_NORMAL);
@@ -252,7 +252,7 @@ int read_cosim_data(PARA_DATA *para, REAL **var, int **BINDEX) {
   | Read and assign the thermal boundary conditions
   ****************************************************************************/
   if(assign_thermal_bc(para,var,BINDEX)!=0) {
-     ffd_log("read_cosim_data(): Could not assign the Modelicathermal data to FFD",
+     ffd_log("read_cosim_data(): Could not assign the Modelica thermal data to FFD",
             FFD_ERROR);
     return 1;
   }
@@ -262,7 +262,7 @@ int read_cosim_data(PARA_DATA *para, REAL **var, int **BINDEX) {
   | Warning: This is not been used in current version
   ****************************************************************************/
   if(para->cosim->para->sha==1) {
-    ffd_log("Shading control signal and absorded radiation by the shade:",
+    ffd_log("Shading control signal and adsorbed radiation by the shade:",
             FFD_NORMAL);
     for(i=0; i<para->cosim->para->nConExtWin; i++) {
       sprintf(msg, "Surface[%d]: %f,\t%f\n",
@@ -320,15 +320,15 @@ int write_cosim_data(PARA_DATA *para, REAL **var) {
           FFD_NORMAL);
   if(para->outp->version==DEBUG) {
     ffd_log("write_cosim_parameter(): "
-            "Start to write the following cosimulation data to Modelica:",
+            "Start to write the following coupled simulation data to Modelica:",
              FFD_NORMAL);
   }
 
   /****************************************************************************
-  | Wait if the previosu data has not been read by Modelica
+  | Wait if the previous data has not been read by Modelica
   ****************************************************************************/
   while(para->cosim->ffd->flag==1) {
-    ffd_log("write_cosim_data(): Wait since previosu data is not taken "
+    ffd_log("write_cosim_data(): Wait since previous data is not taken "
             "by Modelica", FFD_NORMAL);
     Sleep(1000);
   }
@@ -581,7 +581,7 @@ int compare_boundary_names(PARA_DATA *para) {
 /// Compare the area of boundaries
 ///
 ///\param para Pointer to FFD parameters
-///\param var Pointer to the FFD simulaiton variables
+///\param var Pointer to the FFD simulation variables
 ///\param BINDEX Pointer to boundary index
 ///
 ///\return 0 if no error occurred
@@ -617,7 +617,7 @@ int compare_boundary_area(PARA_DATA *para, REAL **var, int **BINDEX) {
 /// Assign the Modelica solid surface thermal boundary condition data to FFD
 ///
 ///\param para Pointer to FFD parameters
-///\param var Pointer to the FFD simulaiton variables
+///\param var Pointer to the FFD simulation variables
 ///\param BINDEX Pointer to boundary index
 ///
 ///\return 0 if no error occurred
@@ -632,7 +632,7 @@ int assign_thermal_bc(PARA_DATA *para, REAL **var, int **BINDEX) {
   REAL *temHea, celVol;
 
   /****************************************************************************
-  | Assign the boundary conditon if there is a solid surface
+  | Assign the boundary condition if there is a solid surface
   ****************************************************************************/
   if(para->bc->nb_wall>0) {
     ffd_log("assign_thermal_bc(): Thermal conditions for solid surfaces:",
@@ -745,7 +745,7 @@ int assign_thermal_bc(PARA_DATA *para, REAL **var, int **BINDEX) {
 /// var[FLAGP][IX(i,j,k)] to apply the change of boundary conditions.
 ///
 ///\param para Pointer to FFD parameters
-///\param var Pointer to the FFD simulaiton variables
+///\param var Pointer to the FFD simulation variables
 ///\param BINDEX Pointer to boundary index
 ///
 ///\return 0 if no error occurred
@@ -840,7 +840,7 @@ int assign_port_bc(PARA_DATA *para, REAL **var, int **BINDEX) {
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Integrate the cosimulation exchange data over the surfaces 
+/// Integrate the coupled simulation exchange data over the surfaces 
 ///
 /// Fluid port: 
 ///   - T/Xi/C: sum(u*T*dA)
@@ -921,7 +921,7 @@ int surface_integrate(PARA_DATA *para, REAL **var, int **BINDEX) {
     if(var[FLAGP][IX(i,j,k)]==SOLID) {
       switch(BINDEX[3][it]) {
         // FFD uses heat flux as BC to compute temperature
-        // Then send Modelica the tempearture
+        // Then send Modelica the temperature
         case 0: 
           para->bc->temHeaAve[bcid] += var[TEMP][IX(i,j,k)] * A_tmp;
           break;

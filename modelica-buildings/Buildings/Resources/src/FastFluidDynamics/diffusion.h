@@ -63,7 +63,7 @@ int diffusion(PARA_DATA *para, REAL **var, int var_type, int index,
                REAL *psi, REAL *psi0, int **BINDEX);
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Calcuate coefficients for difussion equation solver
+/// Calculate coefficients for diffusion equation solver
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables
@@ -79,7 +79,7 @@ int coef_diff(PARA_DATA *para, REAL **var, REAL *psi, REAL *psi0,
                int var_type, int index, int **BINDEX);
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Calcuate source term in the difussion equation
+/// Calculate source term in the diffusion equation
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables

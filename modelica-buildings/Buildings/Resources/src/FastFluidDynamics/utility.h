@@ -46,7 +46,7 @@ REAL check_residual(PARA_DATA *para, REAL **var, REAL *x);
 /// Write the log file
 ///
 ///\param message Pointer the message
-///\param msg_type Type ogf message
+///\param msg_type Type of message
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ void ffd_log(char *message, FFD_MSG_TYPE msg_type);
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables
 ///\param psi Pointer to the variable
-///\param BINDEX Pointer to the boudnary index
+///\param BINDEX Pointer to the boundary index
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@ REAL outflow(PARA_DATA *para, REAL **var, REAL *psi, int **BINDEX);
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables
 ///\param psi Pointer to the variable
-///\param BINDEX Pointer to the boudnary index
+///\param BINDEX Pointer to the boundary index
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////
@@ -166,7 +166,7 @@ int add_time_averaged_data (PARA_DATA *para, REAL **var);
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables
-///\param BINDEX Pointer to the boudnary index
+///\param BINDEX Pointer to the boundary index
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////
@@ -175,7 +175,7 @@ REAL qwall(PARA_DATA *para, REAL **var,int **BINDEX);
 ///////////////////////////////////////////////////////////////////////////////
 /// Free memory for BINDEX
 ///
-///\param BINDEX Pointer to the boudnary index
+///\param BINDEX Pointer to the boundary index
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////

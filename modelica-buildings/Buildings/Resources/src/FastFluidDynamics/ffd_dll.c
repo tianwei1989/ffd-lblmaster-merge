@@ -10,14 +10,14 @@
 ///
 /// \date   8/3/2013
 ///
-/// This file provides functions as entry for the cosimulation
+/// This file provides functions as entry for the coupled simulation
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "ffd_dll.h"
 /******************************************************************************
 | DLL interface to launch a separated thread for FFD. 
-| Called by the the other program
+| Called by the other program
 ******************************************************************************/
 int ffd_dll(CosimulationData *cosim) {
 // Windows
@@ -46,9 +46,9 @@ int ffd_dll(CosimulationData *cosim) {
 } // End of ffd_dll()
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Lanuch the FFD simulation through a thread
+/// Launch the FFD simulation through a thread
 ///
-///\param p Pointer to the cosimulaiton data
+///\param p Pointer to the coupled simulation data
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////

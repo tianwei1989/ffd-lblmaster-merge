@@ -60,9 +60,9 @@
 
 //static PARA_DATA para;
 ///////////////////////////////////////////////////////////////////////////////
-/// Assign the parameter for cosimulation
+/// Assign the parameter for coupled simulation
 ///
-///\para cosim Pointer to the cosimulation parameters
+///\para cosim Pointer to the coupled simulation parameters
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////
@@ -71,14 +71,14 @@ int ffd_cosimulation(CosimulationData *cosim);
 ///////////////////////////////////////////////////////////////////////////////
 /// Main routine of FFD
 ///
-///\para cosimulation Integer to identify the simulation type
+///\para coupled simulation Integer to identify the simulation type
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////
 int ffd(int cosimulation);
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Allcoate memory for variables
+/// Allocate memory for variables
 ///
 ///\param para Pointer to FFD parameters
 ///
@@ -103,9 +103,9 @@ int allocate_memory (PARA_DATA *para);
 ///////////////////////////////////////////////////////////////////////////////
 /// GLUT keyboard callback routines 
 ///
-///\param key Chararcter of the key
+///\param key Character of the key
 ///\param x X-position
-///\param y Y-Positon
+///\param y Y-Position
 ///
 ///\return No return needed
 ///////////////////////////////////////////////////////////////////////////////
@@ -115,7 +115,7 @@ int allocate_memory (PARA_DATA *para);
 /// GLUT motion callback routines  
 ///
 ///\param x X-position
-///\param y Y-Positon
+///\param y Y-Position
 ///
 ///\return No return needed
 ///////////////////////////////////////////////////////////////////////////////
@@ -126,7 +126,7 @@ int allocate_memory (PARA_DATA *para);
 ///
 ///\param button Button of the mouse
 ///\param x X-position
-///\param y Y-Positon
+///\param y Y-Position
 ///
 ///\return No return needed
 ///////////////////////////////////////////////////////////////////////////////

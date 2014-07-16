@@ -41,7 +41,7 @@ REAL fluid_volume(PARA_DATA *para, REAL **var) {
 }// End of fluid_volume( )
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Calculate the volume of of control volume (i,j,k)
+/// Calculate the volume of control volume (i,j,k)
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables
@@ -212,7 +212,7 @@ int bounary_area(PARA_DATA *para, REAL **var, int **BINDEX) {
     }
     */
     //-------------------------------------------------------------------------
-    // Calcuate wall or windows
+    // Calculate wall or windows
     //-------------------------------------------------------------------------
     if(flagp[IX(i,j,k)]==SOLID) {
       // West or East Boundary
@@ -239,7 +239,7 @@ int bounary_area(PARA_DATA *para, REAL **var, int **BINDEX) {
     } // End of Wall boudary
 
     //-------------------------------------------------------------------------
-    // Calcuate inlets and outlets
+    // Calculate inlets and outlets
     //-------------------------------------------------------------------------
     if(flagp[IX(i,j,k)]==INLET||flagp[IX(i,j,k)]==OUTLET) {
       // West or East Boundary
@@ -249,7 +249,7 @@ int bounary_area(PARA_DATA *para, REAL **var, int **BINDEX) {
         //ffd_log(msg, FFD_NORMAL);
         APort[id] += tmp;
       }
-      // South and Norht Boundary
+      // South and North Boundary
       if(j==0 || j==jmax+1) {
         tmp = area_zx(para, var, i, j, k);
         //sprintf(msg, "Cell(%d,%d,%d):\t %f", i, j, k, tmp);
@@ -266,7 +266,7 @@ int bounary_area(PARA_DATA *para, REAL **var, int **BINDEX) {
     }
   } // End of for(it=0; it<index; it++)
 
-  ffd_log("bounary_area(): Calculated surface area for FFD boundaryies are:",
+  ffd_log("bounary_area(): Calculated surface area for FFD boundaries are:",
     FFD_NORMAL);
 
   if(para->bc->nb_wall>0) {

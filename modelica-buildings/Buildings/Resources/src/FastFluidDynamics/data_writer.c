@@ -13,7 +13,7 @@
 ///
 /// \date   8/3/2013
 ///
-/// This file provides functions that write the data file in differnt formats.
+/// This file provides functions that write the data file in different formats.
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -134,7 +134,7 @@ int write_tecplot_all_data(PARA_DATA *para, REAL **var, char *name) {
 
   fprintf(dataFile, "TITLE = ");
 
-  // Print simulation, diemension and mesh information
+  // Print simulation, dimension and mesh information
   fprintf(dataFile, "\"dt=%fs, t=%fs, nu=%f, Lx=%f, Ly=%f, Lz%f, ",
           para->mytime->dt, para->mytime->t, para->prob->nu, 
           para->geom->Lx, para->geom->Ly, para->geom->Lz);
@@ -171,7 +171,7 @@ int write_tecplot_all_data(PARA_DATA *para, REAL **var, char *name) {
     // Gravity
     fprintf(dataFile, "%f\t%f\t%f\t",
             var[GX][IX(i,j,k)], var[GY][IX(i,j,k)], var[GZ][IX(i,j,k)]);
-    // Flags for simulaiton
+    // Flags for simulation
     fprintf(dataFile, "%f\t%f\t%f\t%f\t",
             var[FLAGU][IX(i,j,k)], var[FLAGV][IX(i,j,k)], 
             var[FLAGW][IX(i,j,k)], var[FLAGP][IX(i,j,k)]);
@@ -206,7 +206,7 @@ int write_tecplot_all_data(PARA_DATA *para, REAL **var, char *name) {
 ///////////////////////////////////////////////////////////////////////////////
 /// Convert the data to the format for Tecplot 
 ///
-/// FFD uses staggered grid and Tecplot data is for collogated grid. 
+/// FFD uses staggered grid and Tecplot data is for collocated grid. 
 /// This subroutine transfers the data from FFD format to Tecplot format. 
 ///
 ///\param para Pointer to FFD parameters
@@ -270,7 +270,7 @@ void convert_to_tecplot(PARA_DATA *para, REAL **var) {
 ///////////////////////////////////////////////////////////////////////////////
 /// Convert the data at 8 corners to the format for Tecplot 
 ///
-/// FFD uses staggered grid and Tecplot data is for collogated grid. 
+/// FFD uses staggered grid and Tecplot data is for collocated grid. 
 /// This subroutine transfers the data from FFD format to Tecplot format. 
 ///
 ///\param para Pointer to FFD parameters
@@ -409,7 +409,7 @@ int write_SCI(PARA_DATA *para, REAL **var, char *name) {
   }
 
   /****************************************************************************
-  | Identify the output varaible: 1 Yes; 0 No.
+  | Identify the output variable: 1 Yes; 0 No.
   | IPR: Pressure; IU,IV,IW: velocity in x,y,z direction; 
   | IT: Temperature; IC1,IC2,IC3,IC4,IC5,IC6,IC6: other scalars
   ****************************************************************************/
@@ -427,7 +427,7 @@ int write_SCI(PARA_DATA *para, REAL **var, char *name) {
   IC7 = 0;
 
   /****************************************************************************
-  | Convert varaible value from cell surface to cell center
+  | Convert variable value from cell surface to cell center
   ****************************************************************************/
   for(j=0; j<=jmax+1; j++) {
     for(k=0; k<=kmax+1; k++) {
@@ -463,7 +463,7 @@ int write_SCI(PARA_DATA *para, REAL **var, char *name) {
   }
 
   /****************************************************************************
-  | Compute pressure value for the cornor of the domian
+  | Compute pressure value for the corner of the domain
   ****************************************************************************/
   //W-S-B
   p[IX(0,0,0)] = (p[IX(0,1,0)]+p[IX(1,0,0)]+p[IX(0,0,1)]) / (REAL) 3.0;
@@ -499,13 +499,13 @@ int write_SCI(PARA_DATA *para, REAL **var, char *name) {
   ****************************************************************************/
   fprintf(dataFile, "%d\t%d\t%d\n", imax, jmax, kmax);
   /****************************************************************************
-  | Output the varaibles needs to be exported
+  | Output the variables needs to be exported
   ****************************************************************************/
   fprintf(dataFile, "%d\t%d\t%d\t%d\t%d\t%d\n", IPR, IU, IV, IW, IT, IC1);
   fprintf(dataFile, "%d\t%d\t%d\t%d\t%d\t%d\n", IC2, IC3, IC4, IC5, IC6, IC7);
 
    /****************************************************************************
-  | Output the cooridates of cell center in x, y, z direction
+  | Output the coordinates of cell center in x, y, z direction
   ****************************************************************************/ 
   for(i=1; i<=imax; i++)
     fprintf(dataFile, "%e\t", x[IX(i,j,k)]);

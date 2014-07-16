@@ -70,16 +70,16 @@ int FFD_solver(PARA_DATA *para, REAL **var, int **BINDEX) {
     timing(para);
 
     //-------------------------------------------------------------------------
-    // Process for Cosimulation
+    // Process for Coupled simulation
     //-------------------------------------------------------------------------
     if(para->solv->cosimulation == 1) {
       /*.......................................................................
-      | Conditon 1: If synchronization point is reached, 
+      | Condition 1: If synchronization point is reached, 
       | Action:     Do data exchange
       .......................................................................*/
       if(fabs(para->mytime->t - t_cosim)<SMALL) {
         if(para->outp->version==DEBUG)
-          ffd_log("FFD_solver(): Cosimulation, reached synchronization point", 
+          ffd_log("FFD_solver(): Coupled simulation, reached synchronization point", 
                   FFD_NORMAL);
 
         // Average the FFD simulation data
@@ -90,16 +90,16 @@ int FFD_solver(PARA_DATA *para, REAL **var, int **BINDEX) {
           return flag;
         }
 
-        // the data for cosimulation
+        // the data for coupled simulation
         flag = read_cosim_data(para, var, BINDEX);
         if(flag != 0) {
-          ffd_log("FFD_solver(): Could not read cosimulation data.", FFD_ERROR);
+          ffd_log("FFD_solver(): Could not read coupled simulation data.", FFD_ERROR);
           return flag;
         }
 
         flag =  write_cosim_data(para, var);
         if(flag != 0) {
-          ffd_log("FFD_solver(): Could not write cosimulation data.", FFD_ERROR);
+          ffd_log("FFD_solver(): Could not write coupled simulation data.", FFD_ERROR);
           return flag;
         }
 
@@ -133,9 +133,9 @@ int FFD_solver(PARA_DATA *para, REAL **var, int **BINDEX) {
         }
 
         continue;
-      } // End of Conditon 1
+      } // End of Condition 1
       /*.......................................................................
-      | Conditon 2: synchronization point is not reached , 
+      | Condition 2: synchronization point is not reached , 
       |             but already miss the synchronization point
       | Action:     Stop simulation
       .......................................................................*/
@@ -149,15 +149,15 @@ int FFD_solver(PARA_DATA *para, REAL **var, int **BINDEX) {
         sprintf(msg, "para->mytime->t - t_cosim=%lf", para->mytime->t - t_cosim);
         ffd_log(msg, FFD_ERROR);
         return 1;
-      } // end of Conditon 2
+      } // end of Condition 2
       /*.......................................................................
-      | Conditon 3: synchronization point is not reached
+      | Condition 3: synchronization point is not reached
       |             and not miss the synchronization point
       | Action:     Do FFD internal simulation and add data for future average
       .......................................................................*/
       else {
         if(para->outp->version==DEBUG)
-          ffd_log("FFD_solver(): Cosimulation, prepare next step for FFD", 
+          ffd_log("FFD_solver(): Coupled simulation, prepare next step for FFD", 
                   FFD_NORMAL);
 
         // Integrate the data on the boundary surface
@@ -184,7 +184,7 @@ int FFD_solver(PARA_DATA *para, REAL **var, int **BINDEX) {
                   FFD_NORMAL);
 
       } // End of Condition 3
-    } // End of cosimulation
+    } // End of coupled simulation
     //-------------------------------------------------------------------------
     // Process for single simulation
     //-------------------------------------------------------------------------

@@ -38,11 +38,11 @@ int diffusion(PARA_DATA *para, REAL **var, int var_type, int index,
   int flag = 0;
 
   /****************************************************************************
-  | Define the coeffcients for diffusion euqation
+  | Define the coefficients for diffusion equation
   ****************************************************************************/
   flag = coef_diff(para, var, psi, psi0, var_type, index, BINDEX);
   if(flag!=0) {
-    ffd_log("diffsuion(): Could not calculate coefficents for "
+    ffd_log("diffsuion(): Could not calculate coefficients for "
             "diffusion equation.", FFD_ERROR);
     return flag;
   }
@@ -91,7 +91,7 @@ int diffusion(PARA_DATA *para, REAL **var, int var_type, int index,
                 index, check_residual(para, var, psi));
         ffd_log(msg, FFD_NORMAL);
       default:
-        sprintf(msg, "diffusion(): No sovler for varibale type %d", 
+        sprintf(msg, "diffusion(): No solver for variable type %d", 
                 var_type);
         ffd_log(msg, FFD_ERROR);
         flag = 1;
@@ -102,7 +102,7 @@ int diffusion(PARA_DATA *para, REAL **var, int var_type, int index,
 } // End of diffusion( )
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Calcuate coefficients for difussion equation solver
+/// Calculate coefficients for diffusion equation solver
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables
@@ -319,7 +319,7 @@ int coef_diff(PARA_DATA *para, REAL **var, REAL *psi, REAL *psi0,
 }// End of coef_diff( )
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Calcuate source term in the difussion equation
+/// Calculate source term in the diffusion equation
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables

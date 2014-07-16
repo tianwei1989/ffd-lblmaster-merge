@@ -14,7 +14,7 @@
 /// \date   8/3/2013
 ///
 /// This file provides functions that are used for setting the boundary 
-/// conditons. 
+/// conditions. 
 /// It starts with \c set_bnd(). Then different subroutines are called
 /// according to the properties of variables.
 ///
@@ -119,7 +119,7 @@ int set_bnd_pressure(PARA_DATA *para, REAL **var, REAL *p,int **BINDEX);
 ///////////////////////////////////////////////////////////////////////////////
 /// Enforce the mass conservation by adjusting the outlet flow rate
 ///
-/// The detailes was published in the paper 
+/// The details was published in the paper 
 /// "W. Zuo, J. Hu, Q. Chen 2010. 
 /// Improvements on FFD modeling by using different numerical schemes, 
 /// Numerical Heat Transfer, Part B Fundamentals, 58(1), 1-16."
@@ -135,7 +135,7 @@ int mass_conservation(PARA_DATA *para, REAL **var, int **BINDEX);
 ///////////////////////////////////////////////////////////////////////////////
 /// Get the mass flow difference divided by outflow area 
 ///
-/// The detailes was published in the paper 
+/// The details was published in the paper 
 /// "W. Zuo, J. Hu, Q. Chen 2010. 
 /// Improvements on FFD modeling by using different numerical schemes, 
 /// Numerical Heat Transfer, Part B Fundamentals, 58(1), 1-16."
@@ -149,7 +149,7 @@ int mass_conservation(PARA_DATA *para, REAL **var, int **BINDEX);
 REAL adjust_velocity(PARA_DATA *para, REAL **var, int **BINDEX);
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Calculate convective hrat transfer coefficient
+/// Calculate convective heat transfer coefficient
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables

@@ -97,14 +97,14 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
           para->inpu->parameter_file_name);
   ffd_log(msg, FFD_NORMAL);
 
-  // Ingore the first and second lines
+  // Ignore the first and second lines
   fgets(string, 400, file_params);
   fgets(string, 400, file_params);
 
   /*****************************************************************************
   | Convert the cell dimensions defined by SCI to coordinates in FFD
   *****************************************************************************/
-  // Allocate temporary memory for diemension of each cell  
+  // Allocate temporary memory for dimension of each cell  
   delx = (REAL *) malloc ((imax+2)*sizeof(REAL));
   dely = (REAL *) malloc ((jmax+2)*sizeof(REAL));
   delz = (REAL *) malloc ((kmax+2)*sizeof(REAL));
@@ -151,7 +151,7 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
   }
 
   /*****************************************************************************
-  | Convert the coordinates for cell furfaces to 
+  | Convert the coordinates for cell surfaces to 
   | the coordinates for the cell center
   *****************************************************************************/
   FOR_ALL_CELL
@@ -582,7 +582,7 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
       fgets(string, 400, file_params);
       // X_index_start, Y_index_Start, Z_index_Start, 
       // X_index_End, Y_index_End, Z_index_End, 
-      // Thermal Codition (0: Flux; 1:Temperature), Value of thermal conditon
+      // Thermal Condition (0: Flux; 1:Temperature), Value of thermal condition
       sscanf(string,"%d%d%d%d%d%d%d%lf", &SI, &SJ, &SK, &EI, &EJ, &EK, 
                                         &FLTMP, &TMP);
       sprintf(msg, "read_sci_input(): VX=%f, VY=%f, VX=%f, ThermalBC=%d, T/q_dot=%f, Xi=%f", 
@@ -732,7 +732,7 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
       .......................................................................*/
       // X_index_start, Y_index_Start, Z_index_Start, 
       // X_index_End, Y_index_End, Z_index_End, 
-      // Thermal Codition (0: Flux; 1:Temperature), Value of thermal conditon
+      // Thermal Condition (0: Flux; 1:Temperature), Value of thermal condition
       fgets(string, 400, file_params);
       sscanf(string,"%d%d%d%d%d%d%d%lf", &SI, &SJ, &SK, &EI, 
              &EJ, &EK, &FLTMP, &TMP);
@@ -829,7 +829,7 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
   fgets(string, 400, file_params); //fts value
   fgets(string, 400, file_params); //under relaxation
   fgets(string, 400, file_params); //reference point
-  fgets(string, 400, file_params); //monitering point
+  fgets(string, 400, file_params); //monitoring point
 
   // Discard setting for restarting the old FFD simulation
   fgets(string, 400, file_params);
@@ -913,7 +913,7 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Read the file to indentify the block cells in space
+/// Read the file to identify the block cells in space
 ///
 /// The default name used by SCi is zeroone.dat. The user can change the file 
 /// name and give the new name in the FFD input file *.ffd.

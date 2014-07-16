@@ -17,7 +17,7 @@
 /// The advection starts with \c advect(). Then different subroutines are 
 /// called according to the properties of the variables that are sorted by
 /// the location of variables assigned in the control volume. 
-/// Velocities at X, Y and Z directions are locatted
+/// Velocities at X, Y and Z directions are located
 /// on the surface of the control volume. They are computed using 
 /// subroutines: \c trace_vx(), \c trace_vy() and \ctrace_vz().
 /// Scalar variables are in the center of control volume and they are computed

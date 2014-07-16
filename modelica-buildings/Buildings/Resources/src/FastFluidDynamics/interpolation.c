@@ -43,7 +43,7 @@ REAL interpolation(PARA_DATA *para, REAL *d0, REAL x_1, REAL y_1, REAL z_1,
      break;
     default:
       sprintf(msg, 
-        "interpolation(): the requried interpolation method %d is not available.",
+        "interpolation(): the required interpolation method %d is not available.",
         para->solv->interpolation);
       ffd_log(msg, FFD_ERROR);
       return -1;

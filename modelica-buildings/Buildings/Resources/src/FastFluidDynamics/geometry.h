@@ -36,7 +36,7 @@
 REAL fluid_volume(PARA_DATA *para, REAL **var);
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Calculate the volume of of control volume (i,j,k)
+/// Calculate the volume of control volume (i,j,k)
 ///
 ///\param para Pointer to FFD parameters
 ///\param var Pointer to FFD simulation variables

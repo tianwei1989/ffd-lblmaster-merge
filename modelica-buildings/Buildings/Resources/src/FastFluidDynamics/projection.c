@@ -41,7 +41,7 @@ int project(PARA_DATA *para, REAL **var, int **BINDEX) {
   REAL *flagu = var[FLAGU],*flagv = var[FLAGV],*flagw = var[FLAGW];
   
   /****************************************************************************
-  | Calculate all coefficents
+  | Calculate all coefficients
   ****************************************************************************/
   FOR_EACH_CELL
     dxe =  x[IX(i+1,j,  k)]   -  x[IX(i,  j,  k)];

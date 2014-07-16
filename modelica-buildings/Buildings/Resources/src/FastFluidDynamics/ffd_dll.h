@@ -10,7 +10,7 @@
 ///
 /// \date   8/3/2013
 ///
-/// This file provides functions as entry for the cosimulation
+/// This file provides functions as entry for the coupled simulation
 ///
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef _DATA_STRUCTURE_H
@@ -39,9 +39,9 @@ int ffd_dll(CosimulationData *cosim);
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Lanuch the FFD simulation through a thread
+/// Launch the FFD simulation through a thread
 ///
-///\param p Pointer to the cosimulaiton data
+///\param p Pointer to the coupled simulation data
 ///
 ///\return 0 if no error occurred
 ///////////////////////////////////////////////////////////////////////////////
