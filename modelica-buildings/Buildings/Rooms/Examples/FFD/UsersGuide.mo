@@ -22,7 +22,7 @@ To run the coupled simulation with FFD, the following files are needed and given
 dynamic linker files located at <code>Buildings/Resources/bin/</code>: 
 <ul>
 <li>
-Windows: <code>FFD-DLL.dll</code> and <code>FFD-DLL.lib</code>
+Windows: <code>FFD-DLL.dll</code>
 </li>
 <li>
 Linux: <code>FFD-DLL.so</code>
