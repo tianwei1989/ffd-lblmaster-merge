@@ -733,3 +733,38 @@ REAL V_global_min(PARA_DATA *para, REAL **var) {
   
   return sqrt(Vmin);
 } // End of V_global_min()
+
+///////////////////////////////////////////////////////////////////////////////
+/// Determine the index of the sensor after inputting the coordinates of sensor
+///
+///\param para Pointer to FFD parameters
+///\param var Pointer to FFD simulation variables
+///
+///\return index of the sensor
+///////////////////////////////////////////////////////////////////////////////
+int sensor_index(PARA_DATA *para, REAL **var) {
+  int i, j, k;
+  int imax = para->geom->imax, jmax = para->geom->jmax;
+  int kmax = para->geom->kmax;
+  int IMAX = imax+2, IJMAX = (imax+2)*(jmax+2);
+  int index[3];
+  REAL senx=para->sens->senX, seny=para->sens->senY;
+  REAL senz=para->sens->senZ;
+  REAL x, y, z;
+  REAL min=1000000;
+  FOR_ALL_CELL
+	x=var[X][IX(i,j,k)];
+    y=var[Y][IX(i,j,k)];
+	z=var[Z][IX(i,j,k)];
+	if (sqrt((senx-x)*(senx-x)+(seny-y)*(seny-y)+(senz-z)*(senz-z))<=min) {
+		min=sqrt((senx-x)*(senx-x)+(seny-y)*(seny-y)+(senz-z)*(senz-z));
+		index[0]=i;
+		index[1]=j;
+		index[2]=k;
+	}
+  END_FOR
+  para->sens->seni=index[0];
+  para->sens->senj=index[1];
+  para->sens->senk=index[2];
+  return 0;
+}

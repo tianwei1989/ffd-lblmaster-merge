@@ -535,115 +535,7 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
     }
   }
 
-  /*****************************************************************************
-  | Read the internal solid block boundary conditions
-  *****************************************************************************/
-  fgets(string, 400, file_params);
-  sscanf(string, "%d", &para->bc->nb_block); 
-  sprintf(msg, "read_sci_input(): para->bc->nb_block=%d", para->bc->nb_block);
-  ffd_log(msg, FFD_NORMAL);
-
-  if(para->bc->nb_block!=0) {
-    para->bc->blockName = (char**) malloc(para->bc->nb_block*sizeof(char*));
-    if(para->bc->blockName==NULL) {
-      ffd_log("read_sci_input(): Could not allocate memory for para->bc->blockName.",
-      FFD_ERROR);
-      return 1;
-    }
-
-    for(i=0; i<para->bc->nb_block; i++) {
-      /*.......................................................................
-      | Get the names of boundary
-      .......................................................................*/
-      fgets(string, 400, file_params);
-      // Get the length of name (The name may contain white space)
-      for(j=0; string[j] != '\n'; j++) {
-        continue;
-      }
-
-      para->bc->blockName[i] = (char*)malloc((j+1)*sizeof(char));
-      if(para->bc->blockName[i]==NULL) {
-        sprintf(msg,"read_sci_input(): Could not allocate memory for "
-          "para->bc->blockName[%d].", i);
-        ffd_log(msg, FFD_ERROR);
-        return 1;
-      }
-
-      strncpy(para->bc->blockName[i], (const char*)string, j);
-      // Add an ending
-      para->bc->blockName[i][j] = '\0';
-      sprintf(msg, "read_sci_input(): para->bc->blockName[%d]=%s",
-              i, para->bc->blockName[i]);
-      ffd_log(msg, FFD_NORMAL);
-
-      /*.......................................................................
-      | Get the boundary conditions
-      .......................................................................*/
-      fgets(string, 400, file_params);
-      // X_index_start, Y_index_Start, Z_index_Start, 
-      // X_index_End, Y_index_End, Z_index_End, 
-      // Thermal Condition (0: Flux; 1:Temperature), Value of thermal condition
-      sscanf(string,"%d%d%d%d%d%d%d%lf", &SI, &SJ, &SK, &EI, &EJ, &EK, 
-                                        &FLTMP, &TMP);
-      sprintf(msg, "read_sci_input(): VX=%f, VY=%f, VX=%f, ThermalBC=%d, T/q_dot=%f, Xi=%f", 
-              U, V, W, FLTMP, TMP, MASS);
-      ffd_log(msg, FFD_NORMAL);
-
-      if(SI==1) {   
-        SI=0;
-        if(EI>=imax) EI=EI+SI+1;
-        else EI=EI+SI;
-      }
-      else 
-        EI=EI+SI-1;
-
-      if(SJ==1) {
-        SJ=0;
-        if(EJ>=jmax) EJ=EJ+SJ+1;
-        else EJ=EJ+SJ;
-      }
-      else 
-        EJ=EJ+SJ-1;
-
-      if(SK==1) {
-        SK=0;
-        if(EK>=kmax) EK=EK+SK+1;
-        else EK=EK+SK;
-      }
-      else 
-        EK=EK+SK-1;
-
-      for(ii=SI; ii<=EI; ii++)
-        for(ij=SJ; ij<=EJ; ij++)
-          for(ik=SK; ik<=EK; ik++) {
-            BINDEX[0][index] = ii;
-            BINDEX[1][index] = ij;
-            BINDEX[2][index] = ik;
-            BINDEX[3][index] = FLTMP;
-            BINDEX[4][index] = i;
-            index++;
-
-            switch(FLTMP) {
-              case 1: 
-                var[TEMPBC][IX(ii,ij,ik)] = TMP;
-                break;
-              case 0:
-                var[QFLUXBC][IX(ii,ij,ik)] = TMP;
-                break;
-              default:
-                sprintf(msg, "read_sci_input(): Thermal BC (%d)"
-                  "for cell(%d,%d,%d) was not defined",
-                  FLTMP, ii, ij, ik);
-                ffd_log(msg, FFD_ERROR);
-                return 1;
-            }
-
-            flagp[IX(ii,ij,ik)] = SOLID; // Flag for solid
-          } // End of assigning value for internal solid block
-    }
-  }
-
-  /*****************************************************************************
+    /*****************************************************************************
   | Read the wall boundary conditions
   *****************************************************************************/
   fgets(string, 400, file_params);
@@ -791,6 +683,115 @@ int read_sci_input(PARA_DATA *para, REAL **var, int **BINDEX) {
           } // End of assigning value for each wall cell
     } // End of assigning value for each wall surface
   } // End of assigning value for wall boundary 
+
+	/*****************************************************************************
+  | Read the internal solid block boundary conditions
+  *****************************************************************************/
+  fgets(string, 400, file_params);
+  sscanf(string, "%d", &para->bc->nb_block); 
+  sprintf(msg, "read_sci_input(): para->bc->nb_block=%d", para->bc->nb_block);
+  ffd_log(msg, FFD_NORMAL);
+
+  if(para->bc->nb_block!=0) {
+    para->bc->blockName = (char**) malloc(para->bc->nb_block*sizeof(char*));
+    if(para->bc->blockName==NULL) {
+      ffd_log("read_sci_input(): Could not allocate memory for para->bc->blockName.",
+      FFD_ERROR);
+      return 1;
+    }
+
+    for(i=0; i<para->bc->nb_block; i++) {
+      /*.......................................................................
+      | Get the names of boundary
+      .......................................................................*/
+      fgets(string, 400, file_params);
+      // Get the length of name (The name may contain white space)
+      for(j=0; string[j] != '\n'; j++) {
+        continue;
+      }
+
+      para->bc->blockName[i] = (char*)malloc((j+1)*sizeof(char));
+      if(para->bc->blockName[i]==NULL) {
+        sprintf(msg,"read_sci_input(): Could not allocate memory for "
+          "para->bc->blockName[%d].", i);
+        ffd_log(msg, FFD_ERROR);
+        return 1;
+      }
+
+      strncpy(para->bc->blockName[i], (const char*)string, j);
+      // Add an ending
+      para->bc->blockName[i][j] = '\0';
+      sprintf(msg, "read_sci_input(): para->bc->blockName[%d]=%s",
+              i, para->bc->blockName[i]);
+      ffd_log(msg, FFD_NORMAL);
+
+      /*.......................................................................
+      | Get the boundary conditions
+      .......................................................................*/
+      fgets(string, 400, file_params);
+      // X_index_start, Y_index_Start, Z_index_Start, 
+      // X_index_End, Y_index_End, Z_index_End, 
+      // Thermal Condition (0: Flux; 1:Temperature), Value of thermal condition
+      sscanf(string,"%d%d%d%d%d%d%d%lf", &SI, &SJ, &SK, &EI, &EJ, &EK, 
+                                        &FLTMP, &TMP);
+      sprintf(msg, "read_sci_input(): VX=%f, VY=%f, VX=%f, ThermalBC=%d, T/q_dot=%f, Xi=%f", 
+              U, V, W, FLTMP, TMP, MASS);
+      ffd_log(msg, FFD_NORMAL);
+
+      if(SI==1) {   
+        SI=0;
+        if(EI>=imax) EI=EI+SI+1;
+        else EI=EI+SI;
+      }
+      else 
+        EI=EI+SI-1;
+
+      if(SJ==1) {
+        SJ=0;
+        if(EJ>=jmax) EJ=EJ+SJ+1;
+        else EJ=EJ+SJ;
+      }
+      else 
+        EJ=EJ+SJ-1;
+
+      if(SK==1) {
+        SK=0;
+        if(EK>=kmax) EK=EK+SK+1;
+        else EK=EK+SK;
+      }
+      else 
+        EK=EK+SK-1;
+
+      for(ii=SI; ii<=EI; ii++)
+        for(ij=SJ; ij<=EJ; ij++)
+          for(ik=SK; ik<=EK; ik++) {
+            BINDEX[0][index] = ii;
+            BINDEX[1][index] = ij;
+            BINDEX[2][index] = ik;
+            BINDEX[3][index] = FLTMP;
+            BINDEX[4][index] = i+para->bc->nb_wall;
+            index++;
+
+            switch(FLTMP) {
+              case 1: 
+                var[TEMPBC][IX(ii,ij,ik)] = TMP;
+                break;
+              case 0:
+                var[QFLUXBC][IX(ii,ij,ik)] = TMP;
+                break;
+              default:
+                sprintf(msg, "read_sci_input(): Thermal BC (%d)"
+                  "for cell(%d,%d,%d) was not defined",
+                  FLTMP, ii, ij, ik);
+                ffd_log(msg, FFD_ERROR);
+                return 1;
+            }
+
+            flagp[IX(ii,ij,ik)] = SOLID; // Flag for solid
+          } // End of assigning value for each internal solid block
+    }
+  }//End of assigning value for blockage
+
 
   /*****************************************************************************
   | Read the boundary conditions for contaminant source

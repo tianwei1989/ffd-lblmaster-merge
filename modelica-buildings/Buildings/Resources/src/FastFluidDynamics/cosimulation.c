@@ -678,26 +678,29 @@ int assign_thermal_bc(PARA_DATA *para, REAL **var, int **BINDEX) {
       j = BINDEX[1][it];
       k = BINDEX[2][it];
       id = BINDEX[4][it];
-      modelicaId = para->bc->wallId[id];
+	  //deleteme:tianwei add since id may larger than number of walls, filter that one
+	  if (id<para->bc->nb_wall) {
+        modelicaId = para->bc->wallId[id];
 
-      if(var[FLAGP][IX(i,j,k)]==SOLID) 
-        switch(para->cosim->para->bouCon[modelicaId]) {
-          case 1: 
-            var[TEMPBC][IX(i,j,k)] = temHea[id];
-            BINDEX[3][it] = 1; // Specified temperature
-            break;
-          case 2:
-            var[QFLUXBC][IX(i,j,k)] = temHea[id];
-            BINDEX[3][it] = 0; // Specified heat flux 
-            break;
-          default:
-            sprintf(msg,
-              "assign_thermal_bc(): Thermal bc value BINDEX[3][%d]=%d "
-              "at [%d,%d,%d] was not valid.",
-              it, BINDEX[3][it], i, j, k);
-            ffd_log(msg, FFD_ERROR);
+        if(var[FLAGP][IX(i,j,k)]==SOLID) 
+          switch(para->cosim->para->bouCon[modelicaId]) {
+            case 1: 
+              var[TEMPBC][IX(i,j,k)] = temHea[id];
+              BINDEX[3][it] = 1; // Specified temperature
+              break;
+            case 2:
+              var[QFLUXBC][IX(i,j,k)] = temHea[id];
+              BINDEX[3][it] = 0; // Specified heat flux 
+              break;
+            default:
+              sprintf(msg,
+                "assign_thermal_bc(): Thermal bc value BINDEX[3][%d]=%d "
+                "at [%d,%d,%d] was not valid.",
+                it, BINDEX[3][it], i, j, k);
+              ffd_log(msg, FFD_ERROR);
             return 1;
-      } // End of switch(BINDEX[3][it])
+        } // End of switch(BINDEX[3][it])
+	  }//deleteme: tianwei add end of if
     }
 
     free(temHea);
@@ -919,26 +922,29 @@ int surface_integrate(PARA_DATA *para, REAL **var, int **BINDEX) {
     | Solid Wall
     --------------------------------------------------------------------------*/
     if(var[FLAGP][IX(i,j,k)]==SOLID) {
-      switch(BINDEX[3][it]) {
-        // FFD uses heat flux as BC to compute temperature
-        // Then send Modelica the temperature
-        case 0: 
-          para->bc->temHeaAve[bcid] += var[TEMP][IX(i,j,k)] * A_tmp;
-          break;
-        // FFD uses temperature as BC to compute heat flux
-        // Then send Modelica the heat flux
-        case 1: 
-          para->bc->temHeaAve[bcid] += var[QFLUX][IX(i,j,k)] * A_tmp;
-          //sprintf(msg, "Cell(%d,%d,%d):\tQFLUX=%f,\tA=%f", i,j,k,var[QFLUX][IX(i,j,k)], A_tmp);
-          //ffd_log(msg, FFD_NORMAL);
-          break;
-        default:
-          sprintf(msg, "average_bc_area(): Thermal boundary (%d)"
-                 "for cell (%d,%d,%d) was not defined",
-                 BINDEX[3][it], i, j, k);
-          ffd_log(msg, FFD_ERROR);
-          return 1;
-      }
+	  //deleteme: tianwei add : filter the ID that is larger than number of wall
+		if (bcid < para->bc->nb_wall) {
+			switch(BINDEX[3][it]) {
+				// FFD uses heat flux as BC to compute temperature
+				// Then send Modelica the temperature
+			case 0: 
+				para->bc->temHeaAve[bcid] += var[TEMP][IX(i,j,k)] * A_tmp;
+				break;
+				// FFD uses temperature as BC to compute heat flux
+				// Then send Modelica the heat flux
+			case 1: 
+				para->bc->temHeaAve[bcid] += var[QFLUX][IX(i,j,k)] * A_tmp;
+				//sprintf(msg, "Cell(%d,%d,%d):\tQFLUX=%f,\tA=%f", i,j,k,var[QFLUX][IX(i,j,k)], A_tmp);
+				//ffd_log(msg, FFD_NORMAL);
+				break;
+			default:
+				sprintf(msg, "average_bc_area(): Thermal boundary (%d)"
+					"for cell (%d,%d,%d) was not defined",
+					BINDEX[3][it], i, j, k);
+				ffd_log(msg, FFD_ERROR);
+				return 1;
+			}
+		}//deleteme: tianwei add, end of if
     }
     /*-------------------------------------------------------------------------
     | Outlet
@@ -995,9 +1001,9 @@ int set_sensor_data(PARA_DATA *para, REAL **var) {
   int imax = para->geom->imax, jmax = para->geom->jmax,
       kmax = para->geom->kmax;
   int IMAX = imax+2, IJMAX = (imax+2)*(jmax+2);
-  REAL u = var[VX][IX(imax/2,jmax/2,kmax/2)],
-       v = var[VY][IX(imax/2,jmax/2,kmax/2)],
-       w = var[VZ][IX(imax/2,jmax/2,kmax/2)];
+  REAL u = var[VX][IX(para->sens->seni,para->sens->senj,para->sens->senk)],
+       v = var[VY][IX(para->sens->seni,para->sens->senj,para->sens->senk)],
+       w = var[VZ][IX(para->sens->seni,para->sens->senj,para->sens->senk)];
 
   // Averaged room temperature
   para->sens->senVal[0] = para->cosim->ffd->TRoo;

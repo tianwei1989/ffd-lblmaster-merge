@@ -276,6 +276,13 @@ typedef struct {
   REAL *senValMean; // snValMean[nb_sensor]: Time averaged value of senVal;
   REAL TRoo; // Volumed averaged value of temperature in the space
   REAL TRooMean; // Time averaged value of TRoo;
+  REAL senX; //place of sensor in x;
+  REAL senY; //place of sensor in y;
+  REAL senZ; //place of sensor in z;
+  int seni; //index of sensor in x;
+  int senj; //index of sensor in y;
+  int senk; //index of sensor in z;
+  int selLoc;// if user set the location of sensor or not: 1:yes;0:no.
 } SENSOR_DATA;
 
 typedef struct {

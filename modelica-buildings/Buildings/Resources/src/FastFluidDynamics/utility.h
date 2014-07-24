@@ -229,3 +229,13 @@ REAL V_global_max(PARA_DATA *para, REAL **var);
 ///\return Vmin Minimum velocity in the simulated domain
 ///////////////////////////////////////////////////////////////////////////////
 REAL V_global_min(PARA_DATA *para, REAL **var);
+
+///////////////////////////////////////////////////////////////////////////////
+/// Determine the index of the sensor after inputting the coordinates of sensor
+///
+///\param para Pointer to FFD parameters
+///\param var Pointer to FFD simulation variables
+///
+///\return index of the sensor
+///////////////////////////////////////////////////////////////////////////////
+int sensor_index(PARA_DATA *para, REAL **var);
