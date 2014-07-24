@@ -12,6 +12,8 @@ model MixedConvection "Tutorial for Mixed Convection case"
   parameter Integer nConExt=0
     "Number of exterior constructions withour a window";
   parameter Integer nConPar=0 "Number of partition constructions";
+  parameter Integer nOthWal=nSurBou-1
+    "Number of walls that have same temperature";
   Modelica.Blocks.Sources.Constant qRadGai_flow(k=0) "Radiative heat gain"
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   Modelica.Blocks.Sources.Constant qConGai_flow(k=0) "Convective heat gain"
@@ -57,7 +59,7 @@ model MixedConvection "Tutorial for Mixed Convection case"
     samplePeriod = 6)
   annotation (Placement(transformation(extent={{80,-38},{120,2}})));
 
-  HeatTransfer.Sources.FixedTemperature TOthWal[nSurBou-1](each T=283.15)
+  HeatTransfer.Sources.FixedTemperature TOthWal[nOthWal](each T=283.15)
     "Temperature for other walls"          annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -101,29 +103,15 @@ equation
       points={{140,-90},{96.2,-90},{96.2,-32}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(TOthWal[1].port, roo.surf_surBou[1]) annotation (Line(
+  for i in 1: size(TOthWal,1) loop
+    connect(TOthWal[i].port, roo.surf_surBou[i]) annotation (Line(
       points={{140,-50},{96.2,-50},{96.2,-32}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(TOthWal[2].port, roo.surf_surBou[2]) annotation (Line(
-      points={{140,-50},{96.2,-50},{96.2,-32}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(TOthWal[3].port, roo.surf_surBou[3]) annotation (Line(
-      points={{140,-50},{96.2,-50},{96.2,-32}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(TOthWal[4].port, roo.surf_surBou[4]) annotation (Line(
-      points={{140,-50},{96.2,-50},{96.2,-32}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(TOthWal[5].port, roo.surf_surBou[5]) annotation (Line(
-      points={{140,-50},{96.2,-50},{96.2,-32}},
-      color={191,0,0},
-      smooth=Smooth.None));
+  end for;
+
   connect(bouIn.ports[1], roo.ports[1]) annotation (Line(
-      points={{60,-44},{74,-44},{74,-26},{84,-26},{84,-26},{84,-26},{84,-30},{85,
-          -30}},
+      points={{60,-44},{74,-44},{74,-26},{84,-26},{84,-30},{85,-30}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(bouOut.ports[1], roo.ports[2]) annotation (Line(
